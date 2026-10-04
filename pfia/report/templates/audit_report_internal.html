@@ -1,0 +1,574 @@
+{#
+  audit_report_internal.html - carried over from the earlier HSAM build.
+
+  Adaptations made when wiring it to the PFIA control register, all of them additive:
+
+  1. Empty-table guards on every index table. An index that renders as an empty
+     tbody reads as "nothing to report" when it actually means "not assessed".
+     Each table now states which it is. This is the single most consequential
+     change: the GTOT register is not loaded in this pipeline, and a silently
+     empty certification table would imply a clean certification result.
+  2. The Governance Maturity Index and GTOT figures are rendered as "not
+     assessed" rather than as zeros, for the same reason.
+  3. Nothing else in the markup or the styling has been altered.
+
+  The view model in pfia/report/viewmodel.py supplies this context. Where this
+  pipeline has no equivalent for a field the template expects, the view model
+  fills it with an explicit statement that the step was not performed - never
+  with a plausible default.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    /* ==================================================================
+       HSAM POLICY HEALTH SCREEN
+       Page one runs full bleed for the header band, so it takes its own
+       @page rule with zero margin. Interior pages carry the running
+       marking in the top margin box.
+       ================================================================== */
+    @page {
+        size: letter portrait;
+        margin: 0.62in 0.6in 0.68in;
+        @top-left {
+            content: "INTERNAL WORKING PAPER \2014 NOT FOR CLIENT DELIVERY";
+            font-family: Carlito, "DejaVu Sans", sans-serif;
+            font-size: 7pt; font-weight: 700; letter-spacing: 0.7px; color: #DC2626;
+        }
+        @top-right { content: string(reportmeta); font-family: "DejaVu Sans Mono", monospace;
+                     font-size: 6.2pt; color: #A1A1AA; }
+        @bottom-left { content: string(docid); font-family: "DejaVu Sans Mono", monospace;
+                       font-size: 6pt; color: #A1A1AA; }
+        @bottom-right { content: counter(page) " / " counter(pages);
+                        font-family: "DejaVu Sans Mono", monospace; font-size: 6.4pt;
+                        font-weight: 700; color: #71717A; }
+    }
+    @page :first { margin: 0;
+        @top-left { content: ""; } @top-right { content: ""; }
+        @bottom-left { content: ""; } @bottom-right { content: ""; } }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Carlito, "DejaVu Sans", sans-serif; color: #0A0A0B;
+           font-size: 8.4pt; line-height: 1.4;
+           -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; }
+    .page-break { page-break-before: always; break-before: page; }
+    .docid-carrier { string-set: docid content(); position: absolute; visibility: hidden; height: 0; }
+    .meta-carrier { string-set: reportmeta content(); position: absolute; visibility: hidden; height: 0; }
+
+    /* ---------------- PAGE ONE ---------------- */
+    .band { background: #0A0A0B; color: #FFFFFF; padding: 26px 44px 22px; }
+    .band-top { display: table; width: 100%; }
+    .band-top .l, .band-top .r { display: table-cell; vertical-align: top; }
+    .band-top .r { text-align: right; }
+    .eyebrow { font-size: 6.6pt; font-weight: 700; letter-spacing: 3.4px;
+               color: #22D3EE; text-transform: uppercase; }
+    /* The internal marking is the most consequential line on the page. Solid
+       red against near-black: unmissable, and it survives photocopying. */
+    .chip-internal { display: inline-block; background: #DC2626; color: #FFFFFF;
+        font-size: 6.4pt; font-weight: 700; letter-spacing: 1.1px;
+        text-transform: uppercase; padding: 4px 9px; }
+    .entity { font-size: 25pt; font-weight: 700; letter-spacing: -0.9px;
+              margin-top: 9px; line-height: 1.02; }
+    .band-meta { font-size: 7.2pt; color: #71717A; margin-top: 6px; }
+    .band-grid { display: table; width: 100%; margin-top: 22px; }
+    .band-grid .c { display: table-cell; vertical-align: bottom; }
+    .score-l { font-size: 6.4pt; font-weight: 700; letter-spacing: 3px;
+               color: #22D3EE; text-transform: uppercase; margin-bottom: 5px; }
+    .score { font-size: 52pt; font-weight: 700; line-height: 0.82; letter-spacing: -3px; }
+    .score .pt { font-size: 24pt; color: #71717A; }
+    .score-none { font-size: 22pt; font-weight: 700; color: #A1A1AA; }
+    .score-b { font-size: 8.6pt; font-weight: 700; letter-spacing: 1.6px;
+               text-transform: uppercase; margin-top: 5px; color: #E4E4E7; }
+    .score-cap { font-size: 6.4pt; color: #FCA5A5; margin-top: 3px; }
+    .vd { font-size: 15pt; font-weight: 700; line-height: 1.05; }
+    .vd-clear { color: #4ADE80; } .vd-improve { color: #FB923C; }
+    .vd-fail { color: #F87171; } .vd-blocked { color: #FCA5A5; }
+    .vd2 { font-size: 7.2pt; font-weight: 700; color: #A1A1AA;
+           text-transform: uppercase; letter-spacing: 1.6px; margin-top: 3px; }
+    .vd3 { font-size: 7.4pt; color: #A1A1AA; margin-top: 7px; line-height: 1.45; }
+
+    .body { padding: 0 44px; }
+    .sec { font-size: 6.4pt; font-weight: 700; letter-spacing: 2.6px;
+           color: #0A0A0B; text-transform: uppercase; margin-bottom: 8px; }
+    .split { display: table; width: 100%; margin-top: 20px; }
+    .split .l, .split .r { display: table-cell; vertical-align: top; }
+    .split .l { width: 285px; padding-right: 30px; }
+    .key { font-size: 6.2pt; color: #71717A; margin-top: 8px; }
+    .dot { display: inline-block; width: 7px; height: 7px; vertical-align: -1px; margin-right: 3px; }
+    table.gmi { width: 100%; border-collapse: collapse; }
+    table.gmi td { padding: 5px 0; font-size: 7.8pt; border-bottom: 1px solid #F4F4F5; }
+    .track { background: #F4F4F5; height: 4px; }
+    .fill { background: #0A0A0B; height: 4px; }
+
+    /* PFIA / GTOT figures - largest numerals after the score */
+    .figs { display: table; width: 100%; margin-top: 16px;
+            border-top: 2px solid #0A0A0B; padding-top: 12px; }
+    .figs .f { display: table-cell; width: 33.3%; }
+    .figs .fl { font-size: 6.4pt; font-weight: 700; letter-spacing: 1.8px;
+                color: #71717A; text-transform: uppercase; }
+    .figs .fv { font-size: 27pt; font-weight: 700; letter-spacing: -1.2px;
+                margin-top: 3px; line-height: 1; }
+    .figs .fv span { font-size: 14pt; color: #A1A1AA; font-weight: 400; letter-spacing: -0.4px; }
+    .figs .fs { font-size: 6.2pt; color: #A1A1AA; margin-top: 3px; line-height: 1.3; }
+
+    table.pri { width: 100%; border-collapse: collapse; border-top: 2px solid #0A0A0B; }
+    table.pri td { padding: 5px 0; font-size: 7.8pt; border-bottom: 1px solid #F4F4F5;
+                   vertical-align: top; }
+    .pbar { width: 4px; }
+    .pbar-critical { background: #BE123C; } .pbar-high { background: #FB923C; }
+    .pbar-moderate { background: #A1A1AA; } .pbar-enhancement { background: #22D3EE; }
+    .pbar-unrated { background: #E4E4E7; }
+
+    /* ---------------- NOTICES ---------------- */
+    /* Flat footer per the approved mockup rather than a boxed notice. The
+       operative phrase carries the only colour, which is what makes it read. */
+    .disclosure { margin-top: 18px; border-top: 1px solid #E4E4E7; padding-top: 9px;
+                  font-size: 6.4pt; color: #A1A1AA; line-height: 1.55; }
+    .disclosure b { color: #0A0A0B; letter-spacing: 1.2px; }
+    .disclosure .nfcd { color: #DC2626; }
+    .withheld { font-size: 7.2pt; color: #92400E; background: #FFFBEB;
+                border-left: 3px solid #F59E0B; padding: 6px 9px; margin-top: 12px;
+                line-height: 1.45; }
+    .unverified-banner { border-left: 3px solid #F59E0B; background: #FFFBEB;
+        padding: 7px 10px; margin-top: 10px; font-size: 7pt; color: #78350F; line-height: 1.4; }
+    .blocked-banner { border: 2px solid #B91C1C; background: #FEE2E2;
+                      padding: 10px 12px; margin-top: 12px; }
+    .blocked-title { font-size: 10pt; font-weight: 900; color: #7F1D1D;
+                     text-transform: uppercase; margin-bottom: 4px; }
+    .blocked-list { margin: 4px 0 0 15px; font-size: 7.2pt; color: #7F1D1D; }
+
+    /* ---------------- INTERIOR PAGES ---------------- */
+    .section-header-banner { border-bottom: 2px solid #0A0A0B; padding-bottom: 6px;
+                             margin-bottom: 14px; }
+    .section-header-title { font-size: 13pt; font-weight: 700; letter-spacing: -0.4px; }
+    .index-label { display: none; }
+    .finding-card { page-break-inside: avoid; break-inside: avoid;
+        border: none; border-left: 4px solid #E4E4E7; padding: 9px 0 9px 12px;
+        margin-bottom: 13px; }
+    .finding-card.sev-critical { border-left-color: #BE123C; }
+    .finding-card.sev-high { border-left-color: #FB923C; }
+    .finding-card.sev-moderate { border-left-color: #A1A1AA; }
+    .finding-card.sev-enhancement { border-left-color: #22D3EE; }
+    .finding-card.sev-unrated { border-left-color: #E4E4E7; }
+    .finding-meta { font-size: 6.8pt; font-weight: 700; color: #71717A; }
+    .badge-severity { display: inline-block; font-size: 6.2pt; font-weight: 800;
+                      color: #FFF; padding: 2px 6px; letter-spacing: 0.6px; }
+    .badge-critical { background: #BE123C; } .badge-high { background: #FB923C; }
+    .badge-moderate { background: #A1A1AA; } .badge-enhancement { background: #22D3EE; }
+    .badge-unrated { background: #D4D4D8; }
+    .finding-title { font-size: 10pt; font-weight: 700; margin: 5px 0; letter-spacing: -0.2px; }
+    .finding-block-label { font-size: 6.2pt; font-weight: 700; color: #A1A1AA;
+        text-transform: uppercase; letter-spacing: 1.4px; margin-top: 7px; margin-bottom: 2px; }
+    .finding-citation { font-size: 7.8pt; background: #FAFAFA;
+        border-left: 2px solid #E4E4E7; padding: 5px 8px; font-style: italic; }
+    .finding-citation.absent { font-style: normal; color: #71717A; }
+    .finding-analysis { font-size: 7.8pt; }
+    .finding-remediation { font-size: 7.8pt; background: #ECFEFF;
+        border-left: 2px solid #22D3EE; padding: 6px 8px; margin-top: 6px; }
+    .remediation-label { font-size: 6.2pt; font-weight: 800; color: #0E7490;
+        text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .remediation-error { font-size: 6.8pt; color: #A16207; font-style: italic; margin-top: 5px; }
+    .confidence-low { color: #B45309; font-weight: 700; }
+
+    .element-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .element-table th { text-align: left; font-size: 6.2pt; font-weight: 700;
+        color: #A1A1AA; text-transform: uppercase; letter-spacing: 1px;
+        border-bottom: 1px solid #E4E4E7; padding-bottom: 3px; }
+    .element-table td { font-size: 7.4pt; padding: 3px 4px 3px 0;
+        border-bottom: 1px solid #F4F4F5; vertical-align: top; }
+    .element-critical { font-weight: 800; color: #BE123C; }
+    .element-divergence { font-size: 6.8pt; color: #A16207; font-style: italic; margin-top: 5px; }
+
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 4px; margin-bottom: 10px; }
+    .data-table th { text-align: left; font-size: 6.4pt; font-weight: 700; color: #A1A1AA;
+        text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid #0A0A0B;
+        padding-bottom: 4px; }
+    .data-table td { font-size: 7.8pt; padding: 4px 4px 4px 0;
+        border-bottom: 1px solid #F4F4F5; vertical-align: top; }
+    .gov-track { width: 100%; height: 4px; background: #F4F4F5; }
+    .gov-fill { height: 4px; background: #0A0A0B; }
+
+    .status-pass { color: #15803D; font-weight: 700; }
+    .status-partial { color: #C2410C; font-weight: 700; }
+    .status-fail, .status-not-found { color: #BE123C; font-weight: 700; }
+    .status-not-applicable { color: #A1A1AA; font-weight: 600; }
+    .status-applicability-unresolved, .status-unable-to-determine { color: #A16207; font-weight: 700; }
+
+    .footnote { font-size: 6.6pt; color: #71717A; margin-top: 6px; line-height: 1.45; }
+    .provenance { margin-top: 18px; border-top: 2px solid #0A0A0B; padding-top: 9px; }
+    .provenance table { width: 100%; border-collapse: collapse; }
+    .provenance td { font-size: 6.8pt; color: #71717A; padding: 2px 8px 2px 0; border: none; }
+    .provenance td.k { font-weight: 700; color: #52525B; width: 24%; }
+</style>
+</head>
+<body>
+
+<span class="docid-carrier">{{ doc_id }}</span>
+<span class="meta-carrier">{{ report.provenance.register_version }} / {{ report.provenance.critic_status | upper }}</span>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="band">
+    <div class="band-top">
+        <div class="l"><div class="eyebrow">HSAM Policy Health Screen</div></div>
+        <div class="r"><span class="chip-internal">Internal use only</span></div>
+    </div>
+    <div class="entity">{{ report.entity_name }}</div>
+    <div class="band-meta">
+        {% if report.provenance.entity_class_label %}{{ report.provenance.entity_class_label }}{% else %}Entity class not supplied{% endif %}
+        &nbsp;/&nbsp; policy {{ report.provenance.policy_version or 'version not specified' }}
+        &nbsp;/&nbsp; screened {{ report.review_date.isoformat() }}
+    </div>
+    <div class="band-grid">
+        <div class="c" style="width: 215px;">
+            <div class="score-l">Review Result</div>
+            <div class="score-b">{{ overall_label }}</div>
+            <div class="score-cap">Set by fixed rules on the items reviewed; no score or weighting is applied.</div>
+        </div>
+        <div class="c">
+            {% if report.statutory_verdict.value == 'Conclusion Blocked' %}
+            <div class="vd vd-blocked">CONCLUSION BLOCKED</div>
+            <div class="vd2">No statutory result reached</div>
+            <div class="vd3">Document completeness or applicability is unresolved. The figures below are partial and must not be relied on.</div>
+            {% elif report.statutory_verdict.value == 'Revisions Recommended' %}
+            <div class="vd vd-fail">REVISIONS RECOMMENDED</div>
+            <div class="vd2">Stated terms differ from the Act</div>
+            <div class="vd3">One or more provisions of the Public Funds Investment Act are stated in terms the Act does not permit. Set by fixed rules; no score is applied.</div>
+            {% elif report.statutory_verdict.value == 'Additions Recommended' %}
+            <div class="vd vd-improve">ADDITIONS RECOMMENDED</div>
+            <div class="vd2">Required provisions not expressly addressed</div>
+            <div class="vd3">No stated term conflicts with the Act; {{ report.mandatory_partial_count }} mandatory control(s) are addressed in part. Set by fixed rules; no score is applied.</div>
+            {% else %}
+            <div class="vd vd-clear">NO MANDATORY GAPS</div>
+            <div class="vd2">Statutory controls addressed</div>
+            <div class="vd3">No deficiency identified in any mandatory PFIA control, based on the policy text alone. Conditional controls may still require attention.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="body">
+    <div class="split">
+        <div class="l">
+            <div class="sec">Policy Health Scorecard &mdash; all {{ all_controls }} controls</div>
+            {{ scorecard }}
+            <div class="key">
+                <span class="dot" style="background:#15803D"></span>Pass
+                &nbsp;<span class="dot" style="background:#C2410C"></span>Partial
+                &nbsp;<span class="dot" style="background:#BE123C"></span>Deficient
+                &nbsp;<span class="dot" style="background:#94A3B8"></span>Enhancement
+                &nbsp;<span class="dot" style="background:#A16207"></span>Unresolved
+                &nbsp;<span class="dot" style="background:#D4D4D8"></span>N/A
+            </div>
+        </div>
+        <div class="r">
+            <div class="sec">Governance Maturity Index</div>
+            <table class="gmi">
+                {% for item in report.quality_scores %}
+                <tr>
+                    <td style="width: 50%;">{{ item.name }}</td>
+                    <td style="width: 9%; font-size: 6.4pt; color: #A1A1AA;">{{ "%.0f"|format(item.weight * 100) }}%</td>
+                    <td style="width: 27%;"><div class="track"><div class="fill" style="width: {{ [item.raw_score / 5.0 * 100, 100] | min }}%;"></div></div></td>
+                    <td style="text-align: right; font-weight: 700;">{{ "%.1f"|format(item.raw_score) }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" style="color:#A16207;">Not assessed &mdash; no governance
+                    maturity register is loaded in this run.</td></tr>
+                {% endfor %}
+            </table>
+            <div class="figs">
+                <div class="f">
+                    <div class="fl">Texas PFIA / PFCA</div>
+                    <div class="fv">{{ statutory.passed }}<span>/{{ statutory.reviewed }}</span></div>
+                    <div class="fs">statutory controls addressed</div>
+                </div>
+                <div class="f">
+                    <div class="fl">GTOT Criteria</div>
+                    {% if gtot.reviewed %}
+                    <div class="fv" style="font-size:15pt;">{{ gtot.label }}</div>
+                    <div class="fs">{{ gtot.reviewed }} criteria reviewed</div>
+                    {% else %}
+                    <div class="fv" style="color:#A1A1AA;font-size:15pt;">Not assessed</div>
+                    <div class="fs">no certification register loaded in this run</div>
+                    {% endif %}
+                </div>
+                <div class="f">
+                    <div class="fl">Element Coverage</div>
+                    <div class="fv">{{ report.element_control_count }}<span>/{{ all_controls }}</span></div>
+                    <div class="fs">controls tested sub-requirement by sub-requirement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if report.is_conclusion_blocked %}
+    <div class="blocked-banner">
+        <div class="blocked-title">Conclusion Blocked</div>
+        <div style="font-size: 7.4pt; color: #7F1D1D;">No statutory conclusion has been reached.</div>
+        <ul class="blocked-list">{% for reason in report.blocking_reasons %}<li>{{ reason }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    {% if deficiency_count > 0 %}
+    <div class="sec" style="margin-top: 18px;">Priority Attention &mdash; {{ deficiency_count }} item(s)</div>
+    <table class="pri">
+        {% for finding in deficiencies %}
+        <tr>
+            <td class="pbar pbar-{{ finding.severity.value | lower }}"></td>
+            <td style="width: 19%; font-size: 6.8pt; color: #71717A; padding-left: 8px;">{% if finding.framework.value in ['PFIA', 'PFCA'] %}{{ finding.section }}{% else %}{{ finding.control_id }}{% endif %}</td>
+            <td><b>{{ finding.title }}</b>
+                <div style="font-size: 6.8pt; color: #71717A; margin-top: 1px;">{{ finding.display_status }} &middot; {{ finding.requirement_class.value | replace('_', ' ') }}</div></td>
+            <td style="width: 14%; text-align: right; font-size: 6.8pt; color: #71717A;">
+                {% if finding.elements %}{{ finding.elements | selectattr('status.value', 'equalto', 'Pass') | list | length }} of {{ finding.elements | length }}{% else %}&mdash;{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if report.applicability_review_required %}
+    <div class="unverified-banner">
+        <b>APPLICABILITY CONFIRMATION REQUIRED</b> &mdash;
+        {{ report.applicability_review_required | length }} conditional control(s) could not be
+        resolved from the document text: <span class="mono">{{ report.applicability_review_required | join(', ') }}</span>.
+        Excluded from section statuses. Confirm against the entity class before relying on the statutory result.
+    </div>
+    {% endif %}
+
+    {% if report.provenance.critic_status != 'approved' %}
+    <div class="unverified-banner">
+        <b>VERIFICATION {{ report.provenance.critic_status | upper }}</b> &mdash; quotes were not
+        confirmed against the source document by the verification pass.
+    </div>
+    {% endif %}
+
+    <div class="disclosure">
+        <b>INTERNAL WORKING PAPER &mdash; <span class="nfcd">NOT FOR CLIENT DELIVERY</span>.</b>
+        {{ report.internal_use_notice }}
+        {% for disclosure in report.required_disclosures %}{{ disclosure }}{% if not loop.last %} &middot; {% endif %}{% endfor %}.
+    </div>
+
+    {% if 'TMPL-001' not in report.blocked_templates %}
+    <div style="font-size: 7.4pt; color: #52525B; margin-top: 12px; line-height: 1.5;">{{ report.executive_summary_text }}</div>
+    {% else %}
+    <div class="withheld">
+        Executive summary withheld.
+        {% if report.unverified_quotes %}{{ report.unverified_quotes | length }} quoted
+        passage(s) could not be matched against the text extracted from this PDF.
+        {% elif not report.citations_validated %}No text could be extracted from this PDF,
+        so quotes were not checked against the source.
+        {% endif %}See citation verification under run provenance.
+    </div>
+    {% endif %}
+    {% if 'TMPL-003' not in report.blocked_templates %}
+    <div style="font-size: 7pt; color: #A1A1AA; margin-top: 6px;">{{ report.priority_action_text }}</div>
+    {% endif %}
+</div>
+
+<!-- ================= DEFICIENCIES ================= -->
+<div class="page-break"></div>
+<div class="section-header-banner">
+    <div class="section-header-title">Deficiency Register &mdash; {{ deficiency_count }} item(s)</div>
+</div>
+
+{% for finding in deficiencies %}
+<div class="finding-card sev-{{ finding.severity.value | lower }}">
+    <div class="finding-meta">
+        <span class="badge-severity badge-{{ finding.severity.value | lower }}">{{ finding.severity.value | upper }}</span>
+        <span class="mono">&nbsp;[{{ finding.control_id }}]</span>
+        <span class="mono">&nbsp;&middot;&nbsp;{{ finding.requirement_class.value | upper }}</span>
+        <span class="mono">&nbsp;&middot;&nbsp;{% if finding.framework.value == 'GTOT' %}ALIGNMENT{% else %}STATUS{% endif %}: {{ finding.display_status | upper }}</span>
+        <span class="mono {% if finding.confidence.value == 'Low' %}confidence-low{% endif %}">&nbsp;&middot;&nbsp;CONFIDENCE: {{ finding.confidence.value | upper }}</span>
+    </div>
+
+    <div class="finding-title">{{ finding.title }}</div>
+
+    <div class="finding-block-label">Authority</div>
+    <div class="mono" style="font-size:8pt;">{{ finding.rubric_citation }}</div>
+
+    <div class="finding-block-label">Policy Evidence</div>
+    {# v1 referenced `finding.citation`, which does not exist on the model.
+       Jinja resolved it to Undefined, so the fallback string printed on EVERY
+       card and the extracted quote never appeared. #}
+    <div class="finding-citation {% if not finding.raw_quote %}absent{% endif %}">{{ finding.evidence }}</div>
+
+    {% if finding.elements %}
+    <div class="finding-block-label">Statutory Elements &mdash; {{ finding.elements | selectattr('status.value', 'equalto', 'Pass') | list | length }} of {{ finding.elements | length }} satisfied</div>
+    <table class="element-table">
+        <thead>
+            <tr>
+                <th style="width: 18%;">Citation</th>
+                <th style="width: 20%;">Result</th>
+                <th>Requirement</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in finding.elements %}
+            <tr>
+                <td class="mono {% if element.critical %}element-critical{% endif %}">{{ element.citation }}{% if element.critical %} *{% endif %}</td>
+                <td class="mono status-{{ element.status.value | lower | replace(' ', '-') }}">{{ element.status.value | upper }}</td>
+                <td>{{ element.requirement }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if finding.elements | selectattr('critical') | list %}
+    <div style="font-size:6.5pt;color:#64748b;margin-top:2px;">* Critical element. If unsatisfied, the control takes that element's result regardless of the others.</div>
+    {% endif %}
+    {% if finding.model_status and finding.model_status.value != finding.status.value %}
+    <div class="element-divergence">
+        Element rollup returned {{ finding.status.value }}; the model's holistic
+        judgement on this control was {{ finding.model_status.value }}. Recorded for
+        calibration, not a defect in itself.
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="finding-block-label">Analysis</div>
+    <div class="finding-analysis">{{ finding.analysis }}</div>
+
+    {% if finding.review_limitations and finding.review_limitations | lower not in ['none', 'n/a', ''] %}
+    <div class="finding-block-label">Review Limitations</div>
+    <div class="finding-analysis" style="color:#78350f;">{{ finding.review_limitations }}</div>
+    {% endif %}
+
+    {% if finding.recommendation %}
+    <div class="finding-remediation">
+        <div class="remediation-label">Unreviewed Draft Language &mdash; Requires Professional Review</div>
+        <div>{{ finding.recommendation }}</div>
+    </div>
+    {% endif %}
+    {% if finding.remediation_error %}
+    <div class="remediation-error">Draft language unavailable for this finding (generation failed).</div>
+    {% endif %}
+</div>
+{% else %}
+<div style="padding:16px;text-align:center;color:#64748b;">No items identified in the controls reviewed.</div>
+{% endfor %}
+
+<!-- ================= PAGE 3: STATUTORY INDEX ================= -->
+<div class="page-break"></div>
+<div class="section-header-banner">
+    <div class="section-header-title">Statutory Controls &mdash; Texas PFIA &amp; PFCA</div>
+</div>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Section</th>
+            <th style="width: 13%;">Class</th>
+            <th style="width: 15%;">Status</th>
+            <th style="width: 13%;">Severity</th>
+            <th>Control</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for finding in report.statutory_findings %}
+        <tr>
+            <td class="mono">{{ finding.section }}</td>
+            <td class="mono" style="font-size:7.5pt;">{{ finding.requirement_class.value | upper }}</td>
+            <td class="mono status-{{ finding.status.value | lower | replace(' ', '-') }}">{{ finding.status.value | upper }}</td>
+            <td class="mono">{{ finding.severity.value | upper }}</td>
+            <td>{{ finding.title }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" style="color:#A16207;font-weight:700;">
+            No statutory controls were evaluated. This is not a finding of compliance.
+        </td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- ================= PAGE 4: GTOT INDEX ================= -->
+<div class="page-break"></div>
+<div class="section-header-banner">
+    <div class="section-header-title">Certification Criteria &mdash; GTOT</div>
+</div>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Control</th>
+            <th style="width: 15%;">Status</th>
+            <th style="width: 13%;">Severity</th>
+            <th>Criterion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for finding in report.gtot_findings %}
+        <tr>
+            <td class="mono">{{ finding.control_id }}</td>
+            <td class="mono status-{{ finding.status.value | lower | replace(' ', '-') }}">{{ finding.display_status | upper }}</td>
+            <td class="mono">{{ finding.severity.value | upper }}</td>
+            <td>{{ finding.title }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" style="color:#A16207;font-weight:700;">
+            PAUSED &mdash; GTOT certification analysis is paused (ADR 0011); the register is kept for a later release.
+            An empty table here means the framework was not evaluated, not that the
+            policy satisfies it.
+        </td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="footnote">
+    GTOT criteria measure alignment with a certification checklist. An absent
+    criterion is an enhancement opportunity, not a statutory conclusion.
+</div>
+
+<!-- ================= HSAM ADVISORY INDEX ================= -->
+<div class="page-break"></div>
+<div class="section-header-banner">
+    <div class="section-header-title">Provisions Commonly Restated (Advisory)</div>
+</div>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Item</th>
+            <th style="width: 28%;">Result</th>
+            <th>Practice</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for finding in report.hsam_findings %}
+        <tr>
+            <td class="mono">{{ finding.control_id }}</td>
+            <td class="mono status-{{ finding.status.value | lower | replace(' ', '-') }}">{{ finding.display_status | upper }}</td>
+            <td>{{ finding.title }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" style="color:#A1A1AA;">
+            No advisory-band items were applicable to this entity.
+        </td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="footnote">
+    These provisions bind the entity whether or not the policy restates them. They are
+    reported for completeness and never set a section's status. Item identifiers retain
+    their register prefix for traceability.
+</div>
+
+<div class="provenance">
+    <div style="font-size:7.5pt;font-weight:800;color:#475569;text-transform:uppercase;margin-bottom:4px;">Run Provenance</div>
+    <table>
+        <tr><td class="k">Source file</td><td class="mono">{{ report.provenance.source_filename }}</td></tr>
+        <tr><td class="k">Source SHA-256</td><td class="mono">{{ report.provenance.source_sha256 }}</td></tr>
+        <tr><td class="k">Policy version</td><td class="mono">{{ report.provenance.policy_version or 'NOT SPECIFIED' }}</td></tr>
+        <tr><td class="k">Entity class</td><td class="mono">{% if report.provenance.entity_class_label %}{{ report.provenance.entity_class_label }} &mdash; supplied by reviewer; class register {{ report.provenance.entity_class_register_status }}{% else %}NOT SUPPLIED &mdash; entity-dependent controls unresolved{% endif %}</td></tr>
+        <tr><td class="k">Generated (UTC)</td><td class="mono">{{ report.provenance.generated_at.isoformat() }}</td></tr>
+        <tr><td class="k">Extraction model</td><td class="mono">{{ report.provenance.extraction_model }}</td></tr>
+        <tr><td class="k">Critic model</td><td class="mono">{{ report.provenance.critic_model }}</td></tr>
+        <tr><td class="k">Element evaluation</td><td class="mono">{% if report.element_mode %}ENABLED &mdash; {{ report.element_control_count }} control(s) decomposed{% else %}DISABLED &mdash; all controls evaluated holistically{% endif %}</td></tr>
+        <tr><td class="k">Remediation drafting</td><td class="mono">{% if report.provenance.remediation_model %}ENABLED &mdash; {{ report.provenance.remediation_model }}{% else %}DISABLED &mdash; no suggested language generated{% endif %}</td></tr>
+        <tr><td class="k">Citation verification</td><td class="mono">{% if report.unverified_quotes %}{{ report.unverified_quotes | length }} UNMATCHED &mdash; {{ report.unverified_quotes | join(', ') }}{% elif report.citations_validated %}VERIFIED &mdash; every quoted passage matched against the extracted text{% else %}NOT PERFORMED &mdash; no text could be extracted from this PDF{% endif %}</td></tr>
+        <tr><td class="k">Verification</td><td class="mono">{{ report.provenance.critic_status | upper }} after {{ report.provenance.revision_count }} pass(es)</td></tr>
+        <tr><td class="k">Knowledge base</td><td class="mono">{{ report.provenance.kb_banner }}</td></tr>
+        <tr><td class="k">Register version</td><td class="mono">{{ report.provenance.register_version }}</td></tr>
+        <tr><td class="k">Statute text coverage</td><td class="mono">{{ report.provenance.source_text_coverage }} statutory controls carry verbatim statute; the remainder rest on a section reference and a paraphrase</td></tr>
+        <tr><td class="k">Prompt version</td><td class="mono">{{ report.provenance.prompt_version }}</td></tr>
+        <tr><td class="k">Schema version</td><td class="mono">{{ report.provenance.schema_version }}</td></tr>
+    </table>
+</div>
+
+
+</body>
+</html>

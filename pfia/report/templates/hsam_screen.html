@@ -1,0 +1,653 @@
+{#
+  hsam_screen.html - report template built to the supplied design concepts.
+
+  Palette and type come from the concepts and nothing else is introduced: navy #1F3E7C
+  for structure and headings, red #DA291C for statutory failure and internal marking,
+  #232323 for body text, #E8E8E8 for rules and fills, #71717A for metadata, white ground,
+  Arial Nova with Arial and Helvetica as fallbacks.
+
+  Two-colour discipline is deliberate. Severity is carried by badge weight rather than by
+  a fourth or fifth hue: critical is solid red, high is solid navy, moderate is outlined,
+  enhancement is grey. A report a board reads should not need a colour key.
+
+  Page one is the only page built from `client_safe`. It carries no control identifiers, no
+  draft remediation language, no confidence labels and no extraction internals, because a
+  page intended for distribution should describe the policy rather than the tool. Every
+  later page is internal and says so on its own face, so a detached page one cannot be
+  mistaken for the whole document and the internal sections cannot be mistaken for a
+  client deliverable.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ client_safe.entity_name }} - Policy Health Screen</title>
+<style>
+  @page {
+    size: Letter;
+    margin: 20mm 16mm 18mm 16mm;
+    @top-left {
+      content: "HSAM Policy Health Screen";
+      font-family: 'Arial Nova', Arial, Helvetica, sans-serif;
+      font-size: 7.5pt; font-weight: 700; letter-spacing: 1.4px;
+      color: #1F3E7C; text-transform: uppercase;
+    }
+    @top-right {
+      content: "{{ client_safe.entity_name }}";
+      font-family: 'Arial Nova', Arial, Helvetica, sans-serif;
+      font-size: 7.5pt; color: #71717A;
+    }
+    @bottom-left {
+      content: "{{ doc_id }}";
+      font-family: 'Courier New', monospace; font-size: 7pt; color: #71717A;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font-family: 'Arial Nova', Arial, Helvetica, sans-serif;
+      font-size: 7.5pt; color: #71717A;
+    }
+  }
+  @page :first { margin-top: 14mm; @top-left { content: ""; } @top-right { content: ""; } }
+
+  * { box-sizing: border-box; }
+  body {
+    background: #FFFFFF; color: #232323;
+    font-family: 'Arial Nova', Arial, Helvetica, sans-serif;
+    font-size: 9.5pt; line-height: 1.5; margin: 0;
+  }
+  h1, h2, h3 { margin: 0; }
+  .eyebrow {
+    font-size: 7.5pt; font-weight: 700; letter-spacing: 2px;
+    color: #1F3E7C; text-transform: uppercase;
+  }
+  .muted { color: #71717A; }
+
+  /* ---------- cover ---------- */
+  .cover { border-top: 8px solid #1F3E7C; padding-top: 14px; page-break-after: always; }
+  .cover-top { display: flex; justify-content: space-between; align-items: center; }
+  .chip {
+    background: #DA291C; color: #FFFFFF; font-size: 7.5pt; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; padding: 5px 10px; border-radius: 2px;
+  }
+  .chip-draft { background: #1F3E7C; }
+  .entity-title {
+    font-size: 25pt; font-weight: 700; color: #232323; line-height: 1.08;
+    letter-spacing: -0.6px; margin: 11px 0 5px 0;
+  }
+  .meta-data { font-size: 9pt; color: #71717A; }
+  .cover-rule { border-bottom: 2px solid #E8E8E8; margin: 14px 0 0 0; }
+
+  .score-grid { display: flex; gap: 30px; margin-top: 18px; }
+  .score-block { border-left: 4px solid #E8E8E8; padding-left: 14px; }
+  .score-block.primary { border-left-color: #1F3E7C; }
+  .score-block.alert { border-left-color: #DA291C; }
+  .score-label {
+    font-size: 8pt; font-weight: 700; letter-spacing: 1.5px;
+    color: #1F3E7C; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .score-value {
+    font-size: 38pt; font-weight: 700; line-height: 1; color: #1F3E7C; letter-spacing: -2px;
+  }
+  .score-decimal { font-size: 21pt; color: #232323; letter-spacing: -1px; }
+  .score-not-scored { font-size: 17pt; font-weight: 700; color: #71717A; line-height: 1.1; }
+  .score-foot { font-size: 8pt; color: #71717A; margin-top: 6px; }
+  .verdict-title {
+    font-size: 16pt; font-weight: 700; color: #DA291C; margin: 4px 0 4px 0; line-height: 1.1;
+  }
+  .verdict-title.clear { color: #1F3E7C; }
+  .verdict-subtitle {
+    font-size: 8.5pt; font-weight: 700; color: #232323;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .figure-row { display: flex; gap: 0; margin-top: 18px; border-top: 1px solid #E8E8E8; }
+  .figure {
+    flex: 1; padding: 11px 13px 9px 13px; border-right: 1px solid #E8E8E8;
+  }
+  .figure:last-child { border-right: none; }
+  .figure-label {
+    font-size: 7.5pt; font-weight: 700; letter-spacing: 1.4px;
+    color: #1F3E7C; text-transform: uppercase;
+  }
+  .figure-value { font-size: 19pt; font-weight: 700; color: #232323; line-height: 1.2; }
+  .figure-value span { font-size: 11pt; color: #71717A; font-weight: 400; }
+  .figure-note { font-size: 7.5pt; color: #71717A; line-height: 1.35; }
+
+  /* ---------- generic blocks ---------- */
+  .section-header { border-bottom: 2px solid #1F3E7C; padding-bottom: 6px; margin: 16px 0 10px 0; }
+  .section-title { font-size: 13.5pt; font-weight: 700; color: #1F3E7C; letter-spacing: -0.4px; }
+  .section-lede { font-size: 9pt; color: #71717A; margin-top: 5px; }
+  .section-label {
+    font-size: 7.5pt; font-weight: 700; color: #1F3E7C; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 5px; border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 3px;
+  }
+  .callout {
+    border-left: 4px solid #DA291C; background: #FAFAFA; padding: 12px 14px;
+    font-size: 9pt; margin: 14px 0;
+  }
+  .callout.neutral { border-left-color: #1F3E7C; }
+  .callout-title {
+    font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+    color: #DA291C; margin-bottom: 4px;
+  }
+  .callout.neutral .callout-title { color: #1F3E7C; }
+  .prose { font-size: 9pt; line-height: 1.5; }
+  .fineprint { font-size: 7.5pt; color: #71717A; line-height: 1.45; }
+  .limits {
+    border: 1px solid #E8E8E8; border-left: 4px solid #1F3E7C; background: #FAFAFA;
+    padding: 11px 13px; margin-top: 16px; font-size: 7.6pt; line-height: 1.5;
+    color: #232323; page-break-inside: avoid;
+  }
+  .limits-title {
+    font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
+    color: #1F3E7C; margin-bottom: 5px;
+  }
+  .limits-sep { color: #1F3E7C; font-weight: 700; padding: 0 3px; }
+  ul.tight { margin: 6px 0 0 0; padding-left: 16px; }
+  ul.tight li { margin-bottom: 2px; }
+
+  /* ---------- tables ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  table.data th {
+    background: #1F3E7C; color: #FFFFFF; text-align: left; font-size: 7.5pt;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 8px 10px;
+  }
+  table.data td {
+    font-size: 8.5pt; padding: 5px 9px; border-bottom: 1px solid #E8E8E8;
+    vertical-align: top;
+  }
+  table.data tr:nth-child(even) td { background: #FAFAFA; }
+  .mono { font-family: 'Courier New', monospace; font-size: 8pt; }
+  .status-pass { color: #1F3E7C; font-weight: 700; }
+  .status-fail { color: #DA291C; font-weight: 700; }
+  .status-neutral { color: #71717A; font-weight: 700; }
+  /* Cover-page emphasis. Named for what it marks - an open item - rather than borrowing
+     the internal vocabulary: a class name is markup a client can read in a saved page. */
+  .status-open { color: #DA291C; font-weight: 700; }
+
+  /* ---------- finding cards ---------- */
+  .finding-card {
+    border: 1px solid #E8E8E8; border-top: 4px solid #DA291C; padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .finding-card.sev-high { border-top-color: #1F3E7C; }
+  .finding-card.sev-moderate { border-top-color: #71717A; }
+  .finding-card.sev-enhancement { border-top-color: #E8E8E8; }
+  .finding-meta {
+    display: flex; align-items: center; gap: 9px; font-size: 7.5pt;
+    font-weight: 700; color: #232323; margin-bottom: 9px;
+  }
+  .badge {
+    padding: 3px 7px; letter-spacing: 1px; font-size: 7pt; text-transform: uppercase;
+  }
+  .badge-critical { background: #DA291C; color: #FFFFFF; }
+  .badge-high { background: #1F3E7C; color: #FFFFFF; }
+  .badge-moderate { background: #FFFFFF; color: #1F3E7C; border: 1px solid #1F3E7C; }
+  .badge-enhancement { background: #E8E8E8; color: #232323; }
+  .mono-tag { font-family: 'Courier New', monospace; background: #E8E8E8; padding: 2px 5px; }
+  .finding-title {
+    font-size: 12.5pt; font-weight: 700; color: #1F3E7C; margin-bottom: 12px;
+    line-height: 1.25; page-break-after: avoid;
+  }
+  .finding-meta { page-break-after: avoid; }
+  .finding-section { margin-bottom: 12px; page-break-inside: avoid; }
+  .citation-box {
+    background: #E8E8E8; padding: 10px 12px; font-style: italic; font-size: 8.5pt;
+    color: #232323; border-left: 3px solid #1F3E7C;
+  }
+  .analysis-text { font-size: 8.5pt; line-height: 1.55; }
+  .draft-language {
+    border: 1px dashed #71717A; padding: 10px 12px; font-size: 8.5pt; background: #FFFFFF;
+  }
+  .draft-label {
+    font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+    color: #DA291C; margin-bottom: 4px;
+  }
+  table.elements { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  table.elements th {
+    text-align: left; font-size: 7pt; text-transform: uppercase; letter-spacing: 1px;
+    color: #1F3E7C; border-bottom: 1px solid #1F3E7C; padding: 4px 8px 4px 0;
+  }
+  table.elements td {
+    font-size: 8pt; padding: 5px 8px 5px 0; border-bottom: 1px solid #E8E8E8;
+    vertical-align: top;
+  }
+
+  /* ---------- internal divider ---------- */
+  .divider { page-break-before: always; border-top: 8px solid #DA291C; padding-top: 20px; }
+  .divider-title { font-size: 22pt; font-weight: 700; color: #232323; letter-spacing: -0.6px; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+{# =================== PAGE ONE - the only client-candidate page =================== #}
+<div class="cover">
+  <div class="cover-top">
+    <div class="eyebrow">HSAM Policy Health Screen</div>
+    <div class="chip {{ 'chip-draft' if distribution == 'client-draft' else '' }}">
+      {{ 'Draft - pending compliance review' if distribution == 'client-draft' else 'Internal use only' }}
+    </div>
+  </div>
+
+  <h1 class="entity-title">{{ client_safe.entity_name }}</h1>
+  <div class="meta-data">
+    {% if client_safe.entity_class %}{{ client_safe.entity_class }} / {% endif %}
+    {% if client_safe.policy_version %}Policy {{ client_safe.policy_version }} / {% endif %}
+    Screened {{ client_safe.review_date }}
+  </div>
+  <div class="cover-rule"></div>
+
+  <div class="score-grid">
+    <div class="score-block {{ 'primary' if 'NO ITEMS' in client_safe.verdict else 'alert' }}">
+      <div class="score-label">Result</div>
+      <div class="verdict-title {{ 'clear' if 'NO ITEMS' in client_safe.verdict else '' }}">{{ client_safe.verdict }}</div>
+      <div class="verdict-subtitle">{{ client_safe.verdict_subtitle }}</div>
+      <div class="score-foot">{{ client_safe.gate_note }}</div>
+    </div>
+    <div class="score-block primary">
+      <div class="score-label">By section</div>
+      {% for s in client_safe.section_list %}
+      <div class="score-foot"><b>{{ s.label }}:</b> {{ s.status }}</div>
+      {% endfor %}
+      <div class="score-foot"><i>{{ client_safe.scope_statement }}</i></div>
+    </div>
+  </div>
+
+  <div class="figure-row">
+    <div class="figure">
+      <div class="figure-label">Provisions addressed</div>
+      <div class="figure-value">{{ client_safe.statutory_passed }}<span>/{{ client_safe.statutory_reviewed }}</span></div>
+      <div class="figure-note">expressly addressed, of those applicable to this entity</div>
+    </div>
+    <div class="figure">
+      <div class="figure-label">Restatement items</div>
+      <div class="figure-value">{{ client_safe.advisory_reviewed }}</div>
+      <div class="figure-note">provisions the Act does not require the policy to restate, reported separately</div>
+    </div>
+    <div class="figure">
+      <div class="figure-label">Subchapter coverage</div>
+      {% if client_safe.sections_testable %}
+      <div class="figure-value">{{ client_safe.sections_covered }}<span>/{{ client_safe.sections_testable }}</span></div>
+      <div class="figure-note">testable sections of Subchapter A examined for this entity class</div>
+      {% else %}
+      <div class="figure-value">&mdash;</div>
+      <div class="figure-note">coverage not computed for this run</div>
+      {% endif %}
+    </div>
+    <div class="figure">
+      <div class="figure-label">Confirmation required</div>
+      <div class="figure-value">{{ client_safe.unresolved_count }}</div>
+      <div class="figure-note">provisions set aside pending confirmation of entity facts</div>
+    </div>
+  </div>
+
+  {% if client_safe.blocking %}
+  <div class="callout">
+    <div class="callout-title">Review incomplete</div>
+    {% for reason in client_safe.blocking %}<div>{{ reason }}</div>{% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="section-header">
+    <div class="section-title">Summary</div>
+  </div>
+  <div class="prose">{{ client_safe.summary }}</div>
+
+  {% if client_safe.priority %}
+  <div class="section-header">
+    <div class="section-title">Items for consideration</div>
+    <div class="section-lede">{{ client_safe.priority_lede }}</div>
+  </div>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:22%">Section</th>
+        <th style="width:50%">Requirement</th>
+        <th style="width:13%">Priority</th>
+        <th style="width:15%">Policy text</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in client_safe.priority[:4] %}
+      <tr>
+        <td class="mono">{{ item.section }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.severity }}</td>
+        <td class="{{ 'status-open' if item.status == 'Not expressly addressed' else 'status-neutral' }}">{{ item.status }}</td>
+      </tr>
+      {% endfor %}
+      {% if client_safe.priority|length > 4 %}
+      <tr>
+        <td colspan="4" class="muted" style="font-size:8pt;">
+          {{ client_safe.priority|length - 4 }} further item(s) relating to Subchapter A are
+          itemised in the working sections of this paper.
+        </td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <div class="limits">
+    <div class="limits-title">Basis and limits of this screen</div>
+    This screen compares the adopted investment policy against a machine-readable register
+    of Tex. Gov&#39;t Code ch. 2256, Subchapter A. Every finding rests on a passage located and
+    verified in the document itself.
+    <span class="limits-sep">&middot;</span>
+    It reads the policy document only. It does not examine the entity's investment
+    practices, holdings or management controls, and it is not an audit.
+    <span class="limits-sep">&middot;</span>
+    Sections of the subchapter not covered by the register are not examined, and their
+    absence from these observations says nothing about them either way.
+    <span class="limits-sep">&middot;</span>
+    A policy more restrictive than the chapter is conforming: Sec. 2256.024 makes the
+    subchapter cumulative, and stricter internal limits are recorded as such.
+    <span class="limits-sep">&middot;</span>
+    Observations are generated by software, have not been reviewed by a licensed
+    professional, and do not constitute legal advice or a determination of compliance.
+    {% if client_safe.coverage_statement %}
+    <span class="limits-sep">&middot;</span>
+    {{ client_safe.coverage_statement }}
+    {% endif %}
+  </div>
+
+{# =================== INTERNAL SECTIONS =================== #}
+<div class="divider">
+  <div class="eyebrow" style="color:#DA291C;">Internal working paper</div>
+  <h2 class="divider-title">Internal sections &mdash; not for client distribution</h2>
+  <div class="prose" style="margin-top:12px;">
+    Everything from here on is working material: control identifiers, element-level results,
+    extraction evidence, unreviewed draft language, run provenance and the reviewer work
+    queue. It is retained for internal review and adjudication. Page one is the only page
+    written to be shareable, and it is marked accordingly.
+  </div>
+  <div class="callout neutral" style="margin-top:18px;">
+    <div class="callout-title">How to work this document</div>
+    Start with the reviewer work queue. Each finding names the kind of check it needs, and
+    those are different jobs: confirming an absence is not the same as reading a flagged
+    passage, and neither is the same as a judgment call on contested text. Resolve each item
+    as <strong>control wrong</strong>, <strong>reviewer wrong</strong> or
+    <strong>evidence missed</strong> &mdash; only the first changes the register.
+  </div>
+</div>
+
+{% if review_by_action %}
+<div class="section-header">
+  <div class="section-title">Reviewer work queue</div>
+  <div class="section-lede">
+    {{ review_queue|length }} item(s) grouped by the kind of attention each needs.
+  </div>
+</div>
+{% for action, items in review_by_action.items() %}
+<div class="finding-section">
+  <div class="section-label">{{ action|replace('_', ' ') }} &mdash; {{ items|length }} item(s)</div>
+  <div class="fineprint" style="margin-bottom:6px;">{{ review_action_text.get(action, '') }}</div>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:26%">Control</th>
+        <th style="width:20%">Section</th>
+        <th style="width:14%">Severity</th>
+        <th style="width:14%">Band</th>
+        <th style="width:26%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td class="mono">{{ item.control_id }}</td>
+        <td class="mono">{{ item.citation }}</td>
+        <td>{{ item.severity }}</td>
+        <td>{{ item.band }}</td>
+        <td class="{{ 'status-fail' if item.verdict in ['DEFICIENT', 'ABSENT'] else 'status-neutral' }}">{{ item.verdict|replace('_', ' ') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if instruments %}
+<div class="section-header">
+  <div class="section-title">Authorized-investment set</div>
+  <div class="section-lede">
+    Read out of the policy, not supplied. Every instrument control gates on this set, so a
+    type missing here means its control never ran.
+  </div>
+</div>
+<table class="data">
+  <thead><tr><th style="width:24%">Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Resolution state</td><td class="mono">{{ instruments.state }}{% if instruments.unresolved %} &mdash; set not closed{% endif %}</td></tr>
+    <tr><td>Authorized</td><td class="mono">{{ instruments.authorized|join(', ') or '&mdash;' }}</td></tr>
+    {% if instruments.restricted %}<tr><td>Authorized but fund-restricted</td><td class="mono">{{ instruments.restricted|join(', ') }}</td></tr>{% endif %}
+    {% if instruments.excluded %}<tr><td>Expressly excluded</td><td class="mono">{{ instruments.excluded|join(', ') }}</td></tr>{% endif %}
+    {% if instruments.contradictions %}<tr><td>Authorized and excluded</td><td class="mono">{{ instruments.contradictions|join(', ') }}</td></tr>{% endif %}
+    {% if instruments.incorporation %}
+    <tr><td>Conditions incorporated by reference</td><td>
+      <em>{{ instruments.incorporation.cue }}</em> &mdash; scope {{ instruments.incorporation.scope }}{% if not instruments.incorporation.get('applies', True) %}, recorded but not applied{% endif %}
+      <div class="fineprint" style="margin-top:5px;">{{ instruments.incorporation.effect }}</div>
+      <div class="fineprint" style="margin-top:4px;">{{ instruments.incorporation.limit }}</div>
+    </td></tr>
+    {% endif %}
+    <tr><td>Detector</td><td class="mono">{{ instruments.detector }} / lexicon {{ instruments.lexicon_version }} / package {{ instruments.package_version }}</td></tr>
+  </tbody>
+</table>
+{% for reason in instruments.reasons %}<div class="fineprint" style="margin-top:6px;">{{ reason }}</div>{% endfor %}
+{% endif %}
+
+{% if unresolved %}
+<div class="section-header">
+  <div class="section-title">Undetermined controls</div>
+  <div class="section-lede">
+    Excluded from both results. Not a finding of compliance and not a finding of breach:
+    a question the profile or the document left open.
+  </div>
+</div>
+<table class="data">
+  <thead>
+    <tr><th style="width:26%">Control</th><th style="width:16%">Section</th><th style="width:12%">Severity</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    {% for item in unresolved %}
+    <tr>
+      <td class="mono">{{ item.control_id }}</td>
+      <td class="mono">{{ item.citation }}</td>
+      <td>{{ item.severity }}</td>
+      <td>
+        {{ item.reasons|join('; ') }}
+        {% if item.unanswered_facts %}<div class="fineprint">unanswered: {{ item.unanswered_facts|join(', ') }}</div>{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<div class="section-header page-break">
+  <div class="section-title">Deficiency register &mdash; {{ deficiency_count }} item(s)</div>
+  <div class="section-lede">
+    Ordered worst first. Each card carries the evidence the finding rests on and, where the
+    register holds it, unreviewed draft language.
+  </div>
+</div>
+{% for finding in deficiencies %}
+<div class="finding-card sev-{{ finding.severity.value|lower }}">
+  <div class="finding-meta">
+    <span class="badge badge-{{ finding.severity.value|lower }}">{{ finding.severity.value }}</span>
+    <span class="mono-tag">{{ finding.control_id }}</span>
+    <span>{{ finding.requirement_class.value }}</span>
+    <span class="{{ 'status-fail' if finding.status.value in ['Fail', 'Not Found'] else 'status-neutral' }}">{{ finding.status.value|upper }}</span>
+    <span class="muted">{{ finding.band }} &middot; CONFIDENCE {{ finding.confidence.value|upper }}</span>
+  </div>
+  <div class="finding-title">{{ finding.title }}</div>
+
+  <div class="finding-section">
+    <div class="section-label">Authority</div>
+    <div class="analysis-text mono">{{ finding.rubric_citation }}</div>
+  </div>
+
+  <div class="finding-section">
+    <div class="section-label">Policy evidence</div>
+    <div class="citation-box">{{ finding.evidence }}</div>
+  </div>
+
+  {% if finding.elements %}
+  <div class="finding-section">
+    <div class="section-label">
+      Statutory elements &mdash;
+      {{ finding.elements|selectattr('status.value', 'equalto', 'Pass')|list|length }}
+      of {{ finding.elements|length }} satisfied
+    </div>
+    <table class="elements">
+      <thead><tr><th style="width:22%">Citation</th><th style="width:10%">Result</th><th>Requirement</th></tr></thead>
+      <tbody>
+        {% for element in finding.elements %}
+        <tr>
+          <td class="mono">{{ element.citation }}</td>
+          <td class="{{ 'status-pass' if element.status.value == 'Pass' else 'status-fail' }}">{{ element.status.value|upper }}</td>
+          <td>{{ element.requirement }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <div class="finding-section">
+    <div class="section-label">Analysis</div>
+    <div class="analysis-text">{{ finding.analysis }}</div>
+  </div>
+
+  {% if finding.review_limitations %}
+  <div class="finding-section">
+    <div class="section-label">Review limitations</div>
+    <div class="analysis-text">{{ finding.review_limitations }}</div>
+  </div>
+  {% endif %}
+
+  {% if finding.recommendation %}
+  <div class="draft-language">
+    <div class="draft-label">Unreviewed draft language &mdash; requires professional review</div>
+    {{ finding.recommendation }}
+  </div>
+  {% endif %}
+</div>
+{% else %}
+<div class="prose">No deficiency items were recorded.</div>
+{% endfor %}
+
+<div class="section-header page-break">
+  <div class="section-title">Statutory controls &mdash; Texas PFIA</div>
+  <div class="section-lede">Every control the register applied to this entity, in citation order.</div>
+</div>
+<table class="data">
+  <thead>
+    <tr>
+      <th style="width:15%">Section</th>
+      <th style="width:14%">Class</th>
+      <th style="width:14%">Status</th>
+      <th style="width:11%">Severity</th>
+      <th style="width:46%">Control</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for finding in report.statutory_findings %}
+    <tr>
+      <td class="mono">{{ finding.section }}</td>
+      <td class="mono">{{ finding.requirement_class.value }}</td>
+      <td class="{{ 'status-pass' if finding.status.value == 'Pass' else 'status-fail' if finding.status.value in ['Fail', 'Not Found'] else 'status-neutral' }}">{{ finding.status.value|upper }}</td>
+      <td>{{ finding.severity.value }}</td>
+      <td>{{ finding.title }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="status-neutral">
+      No statutory controls were evaluated. This is not a finding of compliance.
+    </td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="section-header">
+  <div class="section-title">Practice items</div>
+  <div class="section-lede">
+    Duties the statute does not require the policy to restate.
+    Excluded from the statutory result and never attributable to the Public Funds
+    Investment Act as a requirement.
+  </div>
+</div>
+<table class="data">
+  <thead>
+    <tr><th style="width:26%">Item</th><th style="width:16%">Result</th><th>Practice</th></tr>
+  </thead>
+  <tbody>
+    {% for finding in report.hsam_findings %}
+    <tr>
+      <td class="mono">{{ finding.control_id }}</td>
+      <td class="{{ 'status-pass' if finding.status.value == 'Pass' else 'status-neutral' }}">{{ finding.status.value|upper }}</td>
+      <td>{{ finding.title }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3" class="status-neutral">No practice items were applicable.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if coverage and coverage.uncovered %}
+<div class="section-header">
+  <div class="section-title">Sections not evaluated</div>
+  <div class="section-lede">{{ coverage.statement }}</div>
+</div>
+<table class="data">
+  <thead><tr><th style="width:18%">Section</th><th>Title</th></tr></thead>
+  <tbody>
+    {% for section in coverage.uncovered %}
+    <tr><td class="mono">{{ section.section }}</td><td>{{ section.title }}{% if section.note %}<div class="fineprint">{{ section.note }}</div>{% endif %}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<div class="section-header page-break">
+  <div class="section-title">Run provenance</div>
+  <div class="section-lede">
+    Everything needed to reproduce this result, and every difference between the document
+    as received and the text this review ran against.
+  </div>
+</div>
+<table class="data">
+  <tbody>
+    <tr><td style="width:26%">Source file</td><td class="mono">{{ report.provenance.source_filename }}</td></tr>
+    <tr><td>Source SHA-256</td><td class="mono" style="word-break:break-all;">{{ report.provenance.source_sha256 }}</td></tr>
+    <tr><td>Policy version</td><td>{{ report.provenance.policy_version or 'not stated' }}</td></tr>
+    <tr><td>Entity class</td><td>{{ report.provenance.entity_class_label or 'not stated' }} &mdash; supplied by reviewer; class register {{ report.provenance.entity_class_register_status }}</td></tr>
+    <tr><td>Generated (UTC)</td><td class="mono">{{ report.provenance.generated_at.isoformat() }}</td></tr>
+    <tr><td>Extraction</td><td class="mono">{{ report.provenance.extraction_model }}</td></tr>
+    <tr><td>Verification</td><td>{{ report.provenance.critic_model }} &mdash; {{ report.provenance.critic_status }}</td></tr>
+    <tr><td>Element evaluation</td><td>{{ report.element_control_count }} control(s) decomposed sub-requirement by sub-requirement</td></tr>
+    <tr><td>Text extraction</td><td>{{ report.provenance.source_text_coverage }}</td></tr>
+    <tr><td>Citation verification</td>
+      <td>{% if report.citations_validated %}All quoted passages located in the source text{% else %}
+        <span class="status-fail">{{ report.unverified_quotes|length }} unmatched</span> &mdash;
+        <span class="mono">{{ report.unverified_quotes|join(', ') }}</span>{% endif %}</td></tr>
+    <tr><td>Register version</td><td class="mono">{{ report.provenance.register_version }}</td></tr>
+    <tr><td>Knowledge base</td><td>{{ report.provenance.kb_banner }}</td></tr>
+    <tr><td>Prompt</td><td>{{ report.provenance.prompt_version }}</td></tr>
+    <tr><td>Schema</td><td class="mono">{{ report.provenance.schema_version }}</td></tr>
+    <tr><td>Ledger</td><td class="mono">{{ doc_id }}</td></tr>
+  </tbody>
+</table>
+
+<div class="callout neutral" style="margin-top:20px;">
+  <div class="callout-title">Internal working paper</div>
+  <div class="fineprint">
+    {{ report.internal_use_notice }}
+    {% for disclosure in report.required_disclosures %}<br>&middot; {{ disclosure }}{% endfor %}
+  </div>
+</div>
+
+</body>
+</html>

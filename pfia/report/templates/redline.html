@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Proposed amendments - {{ entity }}</title>
+<style>
+@page { size: Letter; margin: 20mm 16mm 18mm 16mm;
+  @top-left { content: "Investment Policy Review · Proposed Amendments"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 1.4px; color: #1F3E7C; text-transform: uppercase; }
+  @top-right { content: "{{ entity }}"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; }
+  @bottom-left { content: "DRAFT · UNREVIEWED · LEDGER {{ ledger_id }}"; font-family: 'Courier New', 'Liberation Mono', monospace; font-size: 7pt; color: #71717A; }
+  @bottom-right { content: counter(page) " / " counter(pages); font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; } }
+@page :first { margin-top: 14mm; @top-left { content: ""; } @top-right { content: ""; } }
+{% include "outputs.css" %}
+</style></head><body>
+
+<section class="cover">
+  <div class="cover-top">
+    <div class="eyebrow">Investment Policy Review</div>
+    <div>{% if example %}<span class="chip alt">Example · synthetic policy, offline reader</span> {% endif %}<span class="chip" style="background:#DA291C">Draft · pending reviewer approval</span></div>
+  </div>
+  <h1 class="entity-title">{{ entity }}</h1>
+  <div class="subtitle">Proposed amendments to the Investment Policy, for governing body consideration</div>
+  <div class="meta"><b>Policy reviewed:</b> {{ policy_file }}{% if pages %} ({{ pages }} pages){% endif %} &nbsp;·&nbsp; <b>Review run:</b> {{ reviewed_on }} &nbsp;·&nbsp; <b>Prepared:</b> {{ generated }}</div>
+  <div class="meta"><b>Review result by section:</b> {% for s in sections %}{{ s.label }}: {{ s.status }}{% if not loop.last %} · {% endif %}{% endfor %}</div>
+  <div class="rule"></div>
+
+  <div class="eyebrow">What this package contains</div>
+  <div class="tiles">
+    <div class="tile flag"><div class="label">Proposed amendments</div>
+      <div class="status">{{ amendments|length }} amendment{{ '' if amendments|length == 1 else 's' }}</div>
+      <div class="foot">{{ counts.revisions }} revision(s) of stated terms · {{ counts.additions }} addition(s) the Act requires</div></div>
+    <div class="tile"><div class="label">Optional restatements</div>
+      <div class="status">{{ counts.optional }}</div>
+      <div class="foot">Core provisions the Act binds whether or not the policy repeats them{% if statutory_only %} (excluded){% endif %}</div></div>
+    <div class="tile"><div class="label">Held for verification</div>
+      <div class="status">{{ counts.held }}</div>
+      <div class="foot">Readings to confirm before any language is proposed</div></div>
+    <div class="tile"><div class="label">Decisions for the entity</div>
+      <div class="status">{{ counts.blanks }} blank{{ '' if counts.blanks == 1 else 's' }}</div>
+      <div class="foot">Bracketed text the entity completes (figures, names, lists)</div></div>
+  </div>
+
+  {% if reliability %}<div class="box" style="border-left:4px solid #DA291C"><h3>Read before relying on the authorized-investment amendments</h3>{% for r in reliability %}<p>{{ r }}</p>{% endfor %}</div>{% endif %}
+  <div class="box">
+    <h3>How to read the redline</h3>
+    <div class="legend policy" style="margin:2px 0 6px 0">
+      <span><ins>Proposed text</ins></span><span><del>Text to delete or revise</del></span>
+      <span class="context">Policy text quoted for context</span><span><span class="blank">[&nbsp;&nbsp;]</span> for the entity to complete</span>
+    </div>
+    <p>Each amendment carries a numbered note giving the reason, the provision it aligns with and the review item behind it. Proposed text follows the Act's wording; brackets mark what the Act leaves to the entity. The review records where conflicting text appears, not where new text belongs: the drafter places each insertion. {{ source_note }} Governance provisions are summarized in the review and are not amended here.</p>
+  </div>
+
+  {% if amendments or optional %}
+  <div class="eyebrow" style="margin-top:12px">Amendment index</div>
+  <table class="check" style="margin-top:4px">
+    <thead><tr><th style="width:5%">No.</th><th style="width:20%">Provision</th><th style="width:13%">Type</th><th>Summary</th><th style="width:18%">Review item</th></tr></thead>
+    <tbody>
+    {% for a in amendments + optional %}
+      <tr><td><span class="amend-no {{ 'rev' if a.kind == 'Revision' else '' }}">{{ a.no }}</span></td><td class="small">{{ a.cite }}</td>
+          <td><span class="pill {{ 'p-rev' if a.kind == 'Revision' else 'p-add' }}">{{ a.kind }}</span>{% if a in optional %}<span class="pill-sub">Optional</span>{% endif %}</td>
+          <td>{{ a.title }}</td><td class="ref small">{{ a.ids|join(', ') }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="box"><h3>No amendments proposed</h3><p>The review found no Core provision or authorized-investment term to revise or add.</p></div>
+  {% endif %}
+</section>
+
+{% macro card(a) %}
+<tr>
+  <td class="text policy">
+    {% for c in a.context %}<div class="context">"{{ c.text }}"{% if c.page %} <span class="page-ref">(page {{ c.page }})</span>{% endif %}</div>{% endfor %}
+    {% for d in a.delete %}<div><del>{{ d.text }}</del>{% if d.page %} <span class="page-ref">(page {{ d.page }})</span>{% endif %}</div>{% endfor %}
+    {% if a.proposed %}<div style="margin-top:4px"><ins>{{ a.proposed }}</ins></div>{% endif %}
+    {% if not a.proposed_is_text %}<div class="page-ref">Drafting instruction from the register (no policy text held for this item).</div>{% endif %}
+  </td>
+  <td class="note"><span class="amend-no {{ 'rev' if a.kind == 'Revision' else '' }}">{{ a.no }}</span><span class="pill {{ 'p-rev' if a.kind == 'Revision' else 'p-add' }}">{{ a.kind }}</span>
+    <div class="note-title">{{ a.title }}</div>
+    <div class="note-body">{{ a.status }}.{% if a.detail %} {{ a.detail|capitalize }}.{% endif %}</div>
+    {% if a.missing %}<ul class="missing">{% for m in a.missing %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+    {% if a.decisions %}<div class="decision">Entity to complete</div>{% endif %}
+    <div class="note-basis">{{ a.basis }} · {{ a.source }} · {{ a.ids|join(', ') }}</div></td>
+</tr>
+{% endmacro %}
+
+{% if amendments %}
+<section class="pagebreak">
+  <h2 class="section">Redline · Amendments</h2>
+  <div class="section-lede">Revisions of stated terms first, then additions the Act requires.</div>
+  <div class="sheet"><div class="sheet-head"><span>{{ entity }} · Investment Policy</span><span>{{ amendments|length }} amendment(s)</span></div>
+    <table class="redline">{% for a in amendments %}{{ card(a) }}{% endfor %}</table></div>
+</section>
+{% endif %}
+
+{% if optional %}
+<section class="pagebreak">
+  <h2 class="section">Optional restatements</h2>
+  <div class="section-lede">Core provisions that bind the entity whether or not the policy repeats them, such as the quarterly report the firm prepares. Restating them is recommended, not required.</div>
+  <div class="sheet"><table class="redline">{% for a in optional %}{{ card(a) }}{% endfor %}</table></div>
+</section>
+{% endif %}
+
+{% if held %}
+<section class="pagebreak">
+  <h2 class="section">Held for verification</h2>
+  <div class="section-lede">No language is proposed for these until a reviewer has read the passage.</div>
+  <table class="check"><thead><tr><th style="width:24%">Provision</th><th>Why it is held</th><th style="width:22%">Review item</th></tr></thead>
+  <tbody>{% for h in held %}<tr><td>{{ h.cite }}<span class="cite">{{ h.title }}</span></td><td class="comment">{{ h.hold_reason }}</td><td class="ref small">{{ h.ids|join(', ') }}</td></tr>{% endfor %}</tbody></table>
+</section>
+{% endif %}
+
+<section class="pagebreak">
+  <h2 class="section">Draft resolution</h2>
+  <div class="section-lede">For review by the entity's counsel. Bracketed text is completed by the entity.</div>
+  <div class="sheet resolution">
+    <h3>RESOLUTION NO. [____]</h3>
+    <p style="text-align:center"><b>A RESOLUTION OF THE [GOVERNING BODY] OF {{ entity|upper }} REVIEWING THE INVESTMENT POLICY AND INVESTMENT STRATEGIES AND ADOPTING AMENDMENTS THERETO</b></p>
+    <p><b>WHEREAS,</b> Chapter 2256, Texas Government Code (the "Public Funds Investment Act"), requires the [Governing Body] to adopt by rule, order, ordinance or resolution a written investment policy and investment strategies; and</p>
+    <p><b>WHEREAS,</b> Section 2256.005(e) of the Act requires the [Governing Body] to review its investment policy and investment strategies not less than annually and to adopt a written instrument stating that it has done so and recording any changes made to either; and</p>
+    <p><b>WHEREAS,</b> the [Governing Body] has reviewed the Investment Policy and Investment Strategies and the proposed amendments set out in Exhibit A;</p>
+    <p><b>NOW, THEREFORE, BE IT RESOLVED BY THE [GOVERNING BODY] OF {{ entity|upper }}:</b></p>
+    <p><b>Section 1.</b> The [Governing Body] has reviewed the Investment Policy and Investment Strategies as required by Section 2256.005(e) of the Act.</p>
+    <p><b>Section 2.</b> The amendments set out in Exhibit A are adopted, and the Investment Policy as so amended is the investment policy of {{ entity }}.</p>
+    <p><b>Section 3.</b> This resolution takes effect on [date].</p>
+    <p>PASSED, APPROVED AND ADOPTED this [__] day of [Month], [YYYY].</p>
+    <div class="sig"><div><div class="line"></div>[Presiding Officer]</div><div><div class="line"></div>ATTEST: [Secretary]</div></div>
+  </div>
+  <div class="box"><h3>About this document</h3>
+    <p>Prepared from review ledger {{ ledger_id }} (package {{ package_version }}, reader {{ reader }}). Proposed language is drawn from the statute and the review's findings; no amendment is proposed without a finding behind it. This draft has not been reviewed by a licensed professional and is not legal advice. Ch. 2257 collateral was outside the review's scope.</p></div>
+</section>
+</body></html>

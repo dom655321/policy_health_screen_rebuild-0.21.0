@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Mandate fit - {{ entity }}</title>
+<style>
+@page { size: Letter; margin: 20mm 16mm 18mm 16mm;
+  @top-left { content: "Investment Policy Review · Mandate Fit"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 1.4px; color: #1F3E7C; text-transform: uppercase; }
+  @top-right { content: "{{ entity }}"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; }
+  @bottom-left { content: "INTERNAL · NOT FOR CLIENT DISTRIBUTION · LEDGER {{ ledger_id }}"; font-family: 'Courier New', 'Liberation Mono', monospace; font-size: 7pt; color: #71717A; }
+  @bottom-right { content: counter(page) " / " counter(pages); font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; } }
+@page :first { margin-top: 14mm; @top-left { content: ""; } @top-right { content: ""; } }
+{% include "outputs.css" %}
+table.check td { padding: 4px 6px; font-size: 8.2pt; }
+</style></head><body>
+{% set pill = {'Fits': 'p-fit', 'Constrains': 'p-con', 'Blocks': 'p-blk', 'Cannot determine': 'p-na', 'Not used': 'p-na', 'Not reviewed': 'p-na'} %}
+<section class="cover">
+  <div class="eyebrow">Investment Policy Review · Mandate Fit</div>
+  <div style="margin-top:6px"><span class="chip" style="background:#DA291C">Internal · onboarding</span></div>
+  <h1 class="entity-title">{{ entity }}</h1>
+  <div class="subtitle">Can the {{ strategy_name }} strategy run under this policy?</div>
+  <div class="meta"><b>Policy reviewed:</b> {{ policy_file }} · review run {{ reviewed_on }} &nbsp;·&nbsp; <b>Strategy parameters:</b> {{ strategy_name }}{% if strategy_version %} v{{ strategy_version }}{% endif %}{% if strategy_approved %}, approved {{ strategy_approved }}{% endif %}</div>
+  <div class="rule"></div>
+
+  <div class="tiles">
+    <div class="tile {{ 'flag' if tally['Blocks'] else '' }}"><div class="label">Blocks</div><div class="status">{{ tally['Blocks'] }} instrument(s)</div><div class="foot">The strategy uses it; the policy does not authorize it</div></div>
+    <div class="tile"><div class="label">Constraints</div><div class="status">{{ tally['Constrains'] + tally['portfolio_constrains'] }} limit(s)</div><div class="foot">The policy is narrower than the strategy; the strategy must adapt</div></div>
+    <div class="tile"><div class="label">Fits</div><div class="status">{{ tally['Fits'] }} instrument(s)</div><div class="foot">The strategy runs as designed{% if tally['Cannot determine'] %} · {{ tally['Cannot determine'] }} to confirm{% endif %}</div></div>
+    <div class="tile"><div class="label">From the PFIA review</div><div class="status">{{ act_conflicts }} term(s) to align</div><div class="foot">Policy terms that conflict with the Act (see the redline)</div></div>
+  </div>
+
+  {% if reliability %}<div class="box" style="border-left:4px solid #DA291C"><h3>Read before relying on this fit</h3>{% for r in reliability %}<p>{{ r }}</p>{% endfor %}</div>{% endif %}
+  {% if not has_v2 %}<div class="box" style="border-left:4px solid #DA291C"><h3>Terms not compared</h3><p>This ledger has no authorized-investment condition block, so only authorization is compared. Re-run <span class="mono">pfia review ... --schedule-b-v2</span>.</p></div>{% endif %}
+
+  <div class="box" style="border-left:4px solid {{ '#1F3E7C' if can_run_as_designed else '#DA291C' }}">
+    <h3>Investment Policy Summary</h3>
+    {% if notes %}<ol class="items">{% for n in notes %}<li>{{ n }}</li>{% endfor %}</ol>
+    {% else %}<p>The strategy runs as designed under this policy.</p>{% endif %}
+  </div>
+
+  {% if portfolio %}
+  <h2 class="section" style="margin-top:12px">Portfolio-level parameters</h2>
+  <div class="section-lede">Limits that apply across the account. The review does not extract these figures yet; a reviewer enters the policy's figure in the policy limits file.</div>
+  <table class="check">
+    <thead><tr><th style="width:30%">Parameter</th><th style="width:18%">Strategy</th><th style="width:20%">Policy</th><th style="width:14%">Fit</th><th>Source</th></tr></thead>
+    <tbody>{% for p in portfolio %}
+      <tr><td>{{ p.label }}{% if p.cite %}<span class="cite">{{ p.cite }}</span>{% endif %}</td><td class="num">{{ p.strategy }}</td><td class="num">{{ p.policy }}</td>
+          <td><span class="pill {{ pill[p.fit] }}">{{ p.fit }}</span></td><td class="small">{{ p.note }}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+  {% endif %}
+</section>
+
+<section class="pagebreak">
+  <h2 class="section">Authorized Investment Review</h2>
+  <div class="section-lede">Each instrument the strategy uses or the policy authorizes, compared term by term with the binding term (the stricter of the policy and the Act).</div>
+  <table class="check">
+    <thead><tr><th style="width:22%">Instrument</th><th style="width:20%">Strategy uses</th><th style="width:21%">Policy permits</th><th style="width:15%">Act</th><th style="width:11%">Fit</th><th>Policy vs Act</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr><td>{{ r.label }}<span class="cite">Sec. {{ r.cite }}</span></td><td class="num">{{ r.strategy }}</td><td class="num">{% for x in r.policy %}{{ x }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td><td class="num">{% for x in r.act %}{{ x }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+          <td><span class="pill {{ pill[r.fit] }}">{{ r.fit }}</span></td>
+          <td class="small">{{ r.vs_act }}{% for d in r.details %}<span class="pill-sub">{{ d }}</span>{% endfor %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h2 class="section" style="margin-top:14px">How this is produced</h2>
+  <div class="flow">
+    <div class="node"><b>Strategy parameters</b>maintained once per strategy by the firm</div><div class="arrow">+</div>
+    <div class="node"><b>Policy terms</b>extracted and verified by the PFIA review (Schedule B v2)</div><div class="arrow">→</div>
+    <div class="node solid"><b>Comparison</b>the review's own comparators</div><div class="arrow">→</div>
+    <div class="node"><b>Investment policy summary</b>for the portfolio manager and relationship team</div>
+  </div>
+  <div class="box"><h3>Reading the fit</h3>
+    <p><span class="pill p-blk">Blocks</span> the strategy uses an instrument the policy does not authorize. <span class="pill p-con">Constrains</span> the policy's binding term is narrower than the strategy's. <span class="pill p-fit">Fits</span> the strategy runs as designed. <span class="pill p-na">Cannot determine</span> the review could not read the policy's term with certainty. <span class="pill p-na">Not used</span> the policy permits something the strategy does not use. The binding term is the stricter of the policy and the Act; where the policy is silent or conflicts, the Act's term applies.</p></div>
+  <div class="box"><h3>What this is not</h3>
+    <p>An internal onboarding aid built from review ledger {{ ledger_id }} (package {{ package_version }}). It is not a compliance opinion, it is not sent to the client, and it is not loaded into a trading or compliance system.</p></div>
+</section>
+</body></html>

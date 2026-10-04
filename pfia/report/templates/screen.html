@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Policy screen - {{ entity }}</title>
+<style>
+@page { size: Letter; margin: 20mm 16mm 18mm 16mm;
+  @top-left { content: "Investment Policy Review · Policy Screen"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 1.4px; color: #1F3E7C; text-transform: uppercase; }
+  @top-right { content: "{{ entity }}"; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; }
+  @bottom-left { content: "{{ 'INTERNAL WORKING PAPER' if distribution == 'internal' else 'DRAFT · PENDING REVIEW' }} · LEDGER {{ ledger_id }}"; font-family: 'Courier New', 'Liberation Mono', monospace; font-size: 7pt; color: #71717A; }
+  @bottom-right { content: counter(page) " / " counter(pages); font-family: Arial, 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #71717A; } }
+@page :first { margin-top: 14mm; @top-left { content: ""; } @top-right { content: ""; } }
+{% include "outputs.css" %}
+table.check td { padding: 4px 6px; font-size: 8.2pt; }
+.verdict { font-family: Arial, 'Liberation Sans', sans-serif; font-size: 15pt; font-weight: 700; color: #1F3E7C; margin: 4px 0 2px 0; }
+.verdict-sub { font-size: 9pt; color: #232323; margin-bottom: 6px; }
+.el-yes { color: #1F3E7C; font-weight: 700; } .el-no { color: #DA291C; font-weight: 700; }
+.card { border: 1px solid #E8E8E8; padding: 8px 10px; margin: 0 0 8px 0; page-break-inside: avoid; }
+.card h4 { margin: 0 0 2px 0; font-family: Arial, 'Liberation Sans', sans-serif; font-size: 9.5pt; color: #232323; }
+.card .meta-line { font-size: 7.6pt; color: #71717A; margin-bottom: 4px; }
+.quote { font-family: Georgia, 'Times New Roman', serif; font-size: 8.6pt; color: #4A4A4A; margin: 3px 0; }
+</style></head><body>
+
+<section class="cover">
+  <div class="eyebrow">Investment Policy Review · Policy Screen</div>
+  <div style="margin-top:6px">{% if distribution == 'internal' %}<span class="chip" style="background:#DA291C">Internal use only</span>{% else %}<span class="chip" style="background:#DA291C">Draft · pending compliance review</span>{% endif %}</div>
+  <h1 class="entity-title">{{ entity }}</h1>
+  <div class="meta">{% if entity_class %}{{ entity_class }} · {% endif %}<b>Policy reviewed:</b> {{ policy_file }}{% if policy_version %} ({{ policy_version }}){% endif %}{% if pages %}, {{ pages }} pages{% endif %} · <b>Review run:</b> {{ reviewed_on }}</div>
+  <div class="rule"></div>
+
+  <div class="eyebrow">Result</div>
+  <div class="verdict">{{ headline }}</div>
+  <div class="verdict-sub">{{ headline_sub }} The result follows fixed rules on the items beneath it; no score or weighting is applied.</div>
+
+  {% if reliability %}<div class="box" style="border-left:4px solid #DA291C"><h3>Read before relying on the authorized-investment results</h3>{% for r in reliability %}<p>{{ r }}</p>{% endfor %}</div>{% endif %}
+
+  <div class="tiles">
+    {% for t in tiles %}<div class="tile {{ 'flag' if t.flag else '' }}"><div class="label">{{ t.label }}</div><div class="status" style="font-size:10.5pt">{{ t.status }}</div><div class="foot">{{ t.foot }}</div></div>{% endfor %}
+  </div>
+  <div class="small" style="margin-top:4px"><i>{{ scope_statement }}</i></div>
+
+  <h2 class="section" style="margin-top:12px">Items for consideration</h2>
+  <div class="section-lede">Required provisions the policy text does not expressly address, or states in terms that differ from the Act. Each is an observation about the document, not a determination.</div>
+  {% if leading %}
+  <table class="check"><thead><tr><th style="width:20%">Provision</th><th>Requirement</th><th style="width:26%">Policy text</th></tr></thead><tbody>
+  {% for i in leading %}<tr><td>{{ i.cite }}</td><td>{{ i.title }}</td><td>{{ i.status }}{% if i.verify %}<span class="pill-sub">Reading to verify</span>{% endif %}</td></tr>{% endfor %}
+  </tbody></table>
+  {% if leading_more %}<div class="small" style="margin-top:4px">{{ leading_more }} further item(s) are listed in the working sections.</div>{% endif %}
+  {% else %}<p>No required provision was found missing or stated in terms that differ from the Act.</p>{% endif %}
+
+  <div class="box"><h3>Basis and limits</h3>
+    <p>The review compares the adopted investment policy with a register of Tex. Gov't Code ch. 2256, Subchapter A, focused on authorized investments and investment management provisions. Every observation rests on a passage located and verified in the document. It reads the policy only: it does not examine practices, holdings or controls, and it is not an audit, a determination of compliance or legal advice. A policy more restrictive than the Act conforms (Sec. 2256.024). Ch. 2257 collateral is outside its scope.</p></div>
+</section>
+
+<section class="pagebreak">
+  <div class="eyebrow" style="color:#DA291C">Internal working paper</div>
+  <h2 class="section" style="margin-top:2px">Reviewer work queue</h2>
+  <div class="section-lede">Grouped by the kind of check each item needs. Resolve each as item wrong, reading wrong or policy gap confirmed.</div>
+  {% for label, g in queue.items() %}
+  <h3 class="sub" style="margin:8px 0 2px 0">{{ label }} · {{ g['items']|length }}</h3><div class="small" style="margin-bottom:3px">{{ g.why }}</div>
+  <table class="check"><thead><tr><th style="width:24%">Item</th><th style="width:16%">Provision</th><th>Requirement</th><th style="width:8%">Priority</th><th style="width:20%">Policy text</th></tr></thead><tbody>
+  {% for i in g['items'] %}<tr><td class="ref small">{{ i.id }}</td><td class="small">{{ i.cite }}</td><td>{{ i.title }}</td><td class="small">{{ i.priority }}</td><td class="small">{{ i.status }}</td></tr>{% endfor %}
+  </tbody></table>
+  {% else %}<p>No item needs reviewer attention.</p>{% endfor %}
+</section>
+
+<section class="pagebreak">
+  <h2 class="section">Authorized investments</h2>
+  <div class="section-lede">Authorized by the policy: {{ authorized|join(', ') if authorized else 'none read' }}.{% if v2 %} Condition by condition from the Schedule B v2 catalogue {{ v2_version }} ({{ v2_status }}); the section's status is set by the instrument schedule until the catalogue is adopted.{% endif %}</div>
+  {% if v2 %}
+    {% for inst in v2 %}{% if inst.conditions or inst.status_code == 'NOT_REVIEWED' %}
+    <h3 class="sub" style="margin:8px 0 2px 0">{{ inst.label }} · {{ inst.status }}</h3>
+    {% if inst.conditions %}<table class="check"><thead><tr><th style="width:9%">Item</th><th style="width:15%">Provision</th><th>Requirement</th><th style="width:22%">Policy text</th></tr></thead><tbody>
+    {% for c in inst.conditions %}<tr><td class="ref small">{{ c.id }}</td><td class="small">Sec. {{ c.cite }}</td><td>{{ c.requirement }}{% if c.quote %}<div class="quote">"{{ c.quote }}"</div>{% endif %}</td><td class="small">{{ c.state }}</td></tr>{% endfor %}
+    </tbody></table>{% endif %}
+    {% endif %}{% endfor %}
+  {% else %}
+    <table class="check"><thead><tr><th style="width:20%">Provision</th><th>Instrument</th><th style="width:28%">Policy text</th></tr></thead><tbody>
+    {% for i in instrument_findings %}<tr><td>{{ i.cite }}</td><td>{{ i.title }}</td><td>{{ i.status }}</td></tr>{% endfor %}</tbody></table>
+  {% endif %}
+</section>
+
+<section class="pagebreak">
+  <h2 class="section">Investment management provisions</h2>
+  <div class="section-lede">Core provisions reviewed element by element. Items to add or revise first; proposed language is statute-derived and unreviewed.</div>
+  {% for c in core_cards %}
+  <div class="card">
+    <div class="meta-line">{{ c.cite }} · {{ c.id }} · {{ c.band }} · priority {{ c.priority }}{% if c.action %} · {{ c.action }}{% endif %}</div>
+    <h4>{{ c.title }} — {{ c.status }}</h4>
+    {% for e in c.evidence %}<div class="quote">"{{ e.text }}"{% if e.page %} <span class="page-ref">(page {{ e.page }})</span>{% endif %}</div>{% endfor %}
+    {% for h in c.flagged %}<div class="small">Language that defeats the requirement: <del>{{ h.text }}</del>{% if h.page %} <span class="page-ref">(page {{ h.page }})</span>{% endif %}</div>{% endfor %}
+    <table class="check" style="margin-top:4px"><tbody>{% for e in c.elements %}<tr><td style="width:16%" class="{{ 'el-yes' if e.addressed else 'el-no' }} small">{{ 'Addressed' if e.addressed else 'Not addressed' }}</td><td class="small">{{ e.text }}{% if e.optional %} <span class="page-ref">(binds regardless)</span>{% endif %}</td></tr>{% endfor %}</tbody></table>
+    {% for l in c.limitations %}<div class="page-ref">{{ l }}</div>{% endfor %}
+    {% if c.proposed %}<div class="small" style="margin-top:4px"><b>Proposed language (unreviewed):</b> <ins>{{ c.proposed }}</ins></div>{% endif %}
+  </div>
+  {% else %}<p>Every Core provision is addressed.</p>{% endfor %}
+  {% if core_aligned %}
+  <h3 class="sub" style="margin:10px 0 2px 0">Addressed or not applicable</h3>
+  <table class="check"><tbody>{% for i in core_aligned %}<tr><td style="width:20%" class="small">{{ i.cite }}</td><td class="small">{{ i.title }}</td><td style="width:26%" class="small">{{ i.status }}</td></tr>{% endfor %}</tbody></table>
+  {% endif %}
+</section>
+
+<section class="pagebreak">
+  <h2 class="section">Policy governance (summary)</h2>
+  <div class="section-lede">Governance and administrative provisions, summarized as addressed or not expressly addressed. Not reviewed element by element and never set a status.</div>
+  <table class="check"><tbody>{% for i in governance %}<tr><td style="width:20%" class="small">{{ i.cite }}</td><td class="small">{{ i.title }}</td><td style="width:26%" class="small">{{ i.status }}</td></tr>{% endfor %}</tbody></table>
+
+  {% if restatements %}
+  <h2 class="section" style="margin-top:14px">Restatement items</h2>
+  <div class="section-lede">Instrument conditions the Act binds whether or not the policy repeats them. Restating them is optional.</div>
+  <table class="check"><tbody>{% for i in restatements %}<tr><td style="width:20%" class="small">{{ i.cite }}</td><td class="small">{{ i.title }}</td><td style="width:26%" class="small">{{ i.status }}</td></tr>{% endfor %}</tbody></table>
+  {% endif %}
+
+  {% if evidence %}
+  <h2 class="section" style="margin-top:14px">Evidence requests</h2>
+  <div class="section-lede">Conduct the policy text cannot show. Requested from the entity; never reviewed as policy text.</div>
+  <table class="check"><thead><tr><th style="width:9%">Item</th><th>Request</th><th style="width:16%">Provision</th><th style="width:16%">Cadence</th></tr></thead><tbody>
+  {% for q in evidence %}<tr><td class="ref small">{{ q.id }}</td><td class="small">{{ q.request }}</td><td class="small">Sec. {{ q.cite }}</td><td class="small">{{ q.cadence }}</td></tr>{% endfor %}</tbody></table>
+  {% endif %}
+</section>
+
+<section class="pagebreak">
+  <h2 class="section">Run provenance</h2>
+  <table class="check"><tbody>
+    <tr><td style="width:28%">Source file</td><td class="mono small">{{ provenance.source }}</td></tr>
+    <tr><td>Source SHA-256</td><td class="mono small">{{ provenance.sha256 }}</td></tr>
+    <tr><td>Text extraction</td><td class="small">{{ provenance.backend }} backend · quality {{ provenance.quality }}</td></tr>
+    <tr><td>Reader</td><td class="small">{{ provenance.reader }}</td></tr>
+    <tr><td>Registers</td><td class="small">{{ provenance.registers }}</td></tr>
+    <tr><td>Condition catalogue</td><td class="small">{{ provenance.catalogue }}</td></tr>
+    <tr><td>Quotations discarded</td><td class="mono small">{{ provenance.discarded|join(', ') if provenance.discarded else 'none' }}</td></tr>
+    <tr><td>Package</td><td class="small">{{ package_version }}</td></tr>
+    <tr><td>Generated (UTC)</td><td class="small">{{ provenance.generated }}</td></tr>
+    <tr><td>Ledger</td><td class="mono small">{{ ledger_id }}</td></tr>
+  </tbody></table>
+  <div class="box"><h3>About this document</h3><p>Generated from the review ledger; nothing appears here that is not in the ledger. Observations have not been reviewed by a licensed professional and are not legal advice or a determination of compliance.</p></div>
+</section>
+</body></html>
