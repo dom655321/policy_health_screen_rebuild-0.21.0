@@ -1,0 +1,21 @@
+{
+  "elements": {
+    "e1": {
+      "supported": true,
+      "text": "issued by state and national banks, or a savings bank, a state or federal credit union (having its main or branch office in Texas)"
+    },
+    "e2": {
+      "note": "The policy omits NCUSIF insurance coverage for certificates of deposit and share certificates.",
+      "supported": false
+    },
+    "e3": {
+      "note": "The policy does not specify the market value requirement or the derivatives exclusion under Section 2256.009 for collateral.",
+      "supported": false
+    }
+  },
+  "security_methods": [
+    "insured",
+    "collateralized"
+  ],
+  "texas_office_required": true
+}

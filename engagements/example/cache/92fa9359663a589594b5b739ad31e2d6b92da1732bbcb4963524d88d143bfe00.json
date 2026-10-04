@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "Commissioners Court will at least annually approve a recom mended broker/dealer list , or sooner if circumstances require a change.",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "note": "The policy requires annual approval, but states the evaluation to remove or continue dealers is performed at least biennially.",
+      "supported": false
+    }
+  ]
+}

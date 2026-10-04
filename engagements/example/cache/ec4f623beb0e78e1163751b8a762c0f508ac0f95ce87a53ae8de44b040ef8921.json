@@ -1,0 +1,24 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "ment policy shall be presented to a qualifi ed representative of any business offering to engage in an investment transaction with the County.",
+      "supported": true
+    },
+    {
+      "id": "e2a",
+      "quote": "The qualified representative of the business organization offering to engage in an investment transaction shall execute a written instrument in a form acceptable to the County substantially to the effect that the business organization has: (1) received and reviewed the investment policy of the entity",
+      "supported": true
+    },
+    {
+      "id": "e2b",
+      "quote": "acknowledged that the business organization has implemented reasonable procedures and controls in an effort to preclude investment transactions not authorized within the investment policy",
+      "supported": true
+    },
+    {
+      "id": "e2c",
+      "quote": "The qualified representative of the business organization offering to engage in an investment transaction shall execute a written instrument in a form acceptable to the County",
+      "supported": true
+    }
+  ]
+}

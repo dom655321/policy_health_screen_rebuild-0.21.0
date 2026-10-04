@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tx-pfia-register"
+version = "0.21.0"
+description = "Texas PFIA control register and deterministic investment policy evaluator"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["jsonschema>=4.21"]
+# Report rendering only. The register, evaluator, adapter and ingestion path stay
+# importable with nothing installed.
+report = ["jinja2>=3.1", "weasyprint>=62"]
+# Better PDF text extraction than the stdlib floor (kerning, word spacing). Recommended.
+pdf = ["pypdf>=4"]
+
+[project.scripts]
+pfia = "pfia.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"pfia.report" = ["templates/*.html"]

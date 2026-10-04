@@ -1,0 +1,26 @@
+{
+  "entity_name": "Example City",
+  "classes": [
+    "MUNICIPALITY"
+  ],
+  "fiscal_year_start": "10-01",
+  "full_time_employees": 900,
+  "invests_funds": true,
+  "has_2256_003b_management_contract": false,
+  "funds_invested_by_other_investing_entity": false,
+  "deposits_only_interest_bearing_or_2256_010_cds": false,
+  "files_2256_008g_affidavit": false,
+  "endowment_book_value_2017_09_01": 0,
+  "exclusions": {
+    "public_retirement_system_802_001": false,
+    "state_funds_invested_by_comptroller": false,
+    "vlb_ch_161_162_164": false,
+    "registry_funds_ch_117": false,
+    "deferred_comp_401k_457": false
+  },
+  "has_pooled_fund_groups": true,
+  "investment_function_assigned_by_law": false,
+  "assets_invested_by_comptroller_404_024": false,
+  "long_term_debt_principal": 0,
+  "long_term_debt_rated_top_four": false
+}

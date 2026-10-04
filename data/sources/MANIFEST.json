@@ -1,0 +1,11 @@
+{
+  "url": "https://tcss.legis.texas.gov/resources/GV/htm/GV.2256.htm",
+  "retrieved": "2026-09-27",
+  "normalizer_version": "1",
+  "raw_path": "data/sources/raw/GV.2256.2026-09-27.htm",
+  "raw_sha256": "baefce1ff0aa9a9d1c3877e2221ad83edc0b7830d2748fdb6a76aa2c92bf9181",
+  "text_path": "data/sources/GV.2256.2026-09-27.txt",
+  "text_sha256": "4465da06531f1c801ce21f2d80aab8e5a644922c726fe800781fea6759e94294",
+  "current_alias": "data/sources/GV.2256.txt",
+  "law_in_force_as_of": "2026-09-27"
+}

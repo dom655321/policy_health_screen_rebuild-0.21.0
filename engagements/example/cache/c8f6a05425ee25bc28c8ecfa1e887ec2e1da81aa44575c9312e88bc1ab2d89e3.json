@@ -1,0 +1,19 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "The Investment Officer shall invest County funds using judgment and care under then prevailing circumstances that a person of prudence, discretion, and intelligence would exercise in the management of their own affairs",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "quote": "not for speculation, but for investment",
+      "supported": true
+    },
+    {
+      "id": "e3",
+      "note": "The document window does not state the objectives in priority order of safety, liquidity, and yield.",
+      "supported": false
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "$id": "tx-pfia/gtot-criteria",
+  "schedule": "C",
+  "status": "paused",
+  "title": "GTOT Investment Policy Certification Criteria (PROPOSED - CRITERIA TEXT NOT VERIFIED)",
+  "version": "0.1.0-draft",
+  "authority": "GTOT",
+  "authority_label": "Government Treasurers' Organization of Texas - Investment Policy Certification",
+  "law_in_force_as_of": "2025-06-20",
+  "canonical_source": "REPLACE WITH THE URL OR DOCUMENT REFERENCE FOR THE CURRENT GTOT CERTIFICATION CHECKLIST",
+  "uses": [
+    "tx-pfia/entity_classes",
+    "tx-pfia/predicates"
+  ],
+  "register_gate": {
+    "predicate_refs": [
+      "P_SUBCH_A_APPLIES"
+    ]
+  },
+  "verdict_scale": [
+    "CONFORMING",
+    "DEFICIENT",
+    "ABSENT",
+    "NOT_APPLICABLE"
+  ],
+  "READ_THIS_FIRST": [
+    "This is a STRUCTURAL mock-up, not a register of the GTOT criteria.",
+    "I do not have the GTOT Investment Policy Certification checklist. Every criterion below is a PLACEHOLDER: the shape is right, the wording is mine, and the mapping to a numbered GTOT criterion is unknown. Nothing here should be scored against a client policy or shown to a client.",
+    "What it is for: reviewing the structure. Does a criterion decompose the way a certification item actually reads? Is `certification_effect` the right field? Should a criterion that the statute already requires appear here at all, or only as a cross-reference? Those questions can be answered from this file without the real checklist.",
+    "To make it real: obtain the current checklist, replace `canonical_source`, then for each criterion set `criterion_ref` to the checklist's own numbering, replace `source_text` with the criterion as written, and delete the `placeholder` flag. A criterion that still carries `placeholder: true` must never be scored.",
+    "The `placeholder` flag is enforced: a test fails the build if this register is adopted (status changed to `adopted`) while any criterion still carries it."
+  ],
+  "framework_notes": {
+    "separation": "GTOT criteria are a certification checklist, not statute. They score on their own composite, never enter the statutory result, and must never be described to a client as requirements of the Public Funds Investment Act. The report renders them in their own section with that stated on its face.",
+    "overlap": "Many certification criteria restate a statutory requirement. Where that is so, the criterion should cross-reference the statutory control rather than duplicate its elements, so a policy is not reported twice for one gap and a statutory finding is not diluted into a certification observation.",
+    "beyond_statute": "The criteria that earn this register its place are the ones with no statutory counterpart - benchmark selection, competitive bidding practice, internal control documentation, officer continuity. Those are where certification adds something a statutory register cannot see.",
+    "scoring": "Every criterion sits in the advisory band by construction: a certification checklist cannot create a statutory obligation. `policy_text_expectation` is RECOMMENDED_NOT_REQUIRED throughout and a test enforces it."
+  },
+  "criteria": [
+    {
+      "control_id": "GTOT-C-001",
+      "criterion_ref": "UNKNOWN - map to the checklist's own numbering",
+      "placeholder": true,
+      "title": "Investment objectives stated in priority order with a stated purpose",
+      "citation": {
+        "section": "GTOT.001"
+      },
+      "source_text": "PLACEHOLDER. The policy states its objectives in order of priority and states the purpose the policy serves for the entity.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy opens with a statement of purpose and states its objectives in priority order.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A statement of the policy's purpose and scope is present."
+        },
+        {
+          "id": "e2",
+          "assertion": "Objectives are stated in an explicit order of priority."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(b)(2), 2256.006(a)",
+          "text": "The priority order is separately required by statute. Report the statutory control and cross-reference this criterion; do not report the same gap twice.",
+          "linked_control": "TX-PFIA-2256.005-b-2-001",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "purpose",
+          "scope",
+          "objectives",
+          "in order of priority"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER - does an unmet criterion block certification, or is it an observation? The checklist distinguishes these and the register should carry the distinction.",
+      "deficiency_language": "The policy does not state its purpose and objectives in the form the certification criteria look for.",
+      "remediation_language": "Open the policy with a statement of purpose and scope, and state the objectives in explicit priority order.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-2-001",
+        "TX-PFIA-2256.006-a-001"
+      ]
+    },
+    {
+      "control_id": "GTOT-C-002",
+      "criterion_ref": "UNKNOWN",
+      "placeholder": true,
+      "title": "Performance benchmarks identified for each fund or portfolio",
+      "citation": {
+        "section": "GTOT.002"
+      },
+      "source_text": "PLACEHOLDER. The policy identifies a performance benchmark appropriate to the maturity and risk profile of each fund or portfolio.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy names a benchmark for each fund or portfolio and relates it to that fund's maturity and risk profile.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A benchmark is identified for each fund or portfolio."
+        },
+        {
+          "id": "e2",
+          "assertion": "The benchmark is related to the fund's maturity or risk profile rather than stated generically."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "text": "No statutory counterpart. Sec. 2256.005(d) requires strategies stating objectives; it does not require a benchmark. This is a criterion that earns the register its place.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "benchmark",
+          "performance measurement",
+          "comparable to",
+          "index"
+        ],
+        "anti_patterns": [
+          "benchmark to be determined",
+          "performance is not measured"
+        ],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER",
+      "deficiency_language": "The policy does not identify performance benchmarks.",
+      "remediation_language": "Identify a benchmark for each fund or portfolio, chosen to reflect that fund's maturity and risk profile.",
+      "cross_references": [
+        "TX-PFIA-2256.005-d-001"
+      ]
+    },
+    {
+      "control_id": "GTOT-C-003",
+      "criterion_ref": "UNKNOWN",
+      "placeholder": true,
+      "title": "Competitive bidding practice for investment purchases",
+      "citation": {
+        "section": "GTOT.003"
+      },
+      "source_text": "PLACEHOLDER. The policy describes how competitive offers are obtained before an investment is purchased, and how many.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states how competitive offers are solicited and how many are obtained before a purchase.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A competitive solicitation practice is described."
+        },
+        {
+          "id": "e2",
+          "assertion": "The number of offers sought, or the basis for accepting fewer, is stated."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(c), 2256.015(c)",
+          "text": "The statute addresses bid solicitation for certificates of deposit and requires three bids for guaranteed investment contracts. It does not require a general competitive practice, which is what this criterion looks for.",
+          "linked_control": "TX-PFIA-2256.005-c-001",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "competitive",
+          "offers",
+          "bids",
+          "solicit",
+          "at least three"
+        ],
+        "anti_patterns": [
+          "purchases are made at the discretion of the Investment Officer without solicitation"
+        ],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER",
+      "deficiency_language": "The policy does not describe a competitive solicitation practice for investment purchases.",
+      "remediation_language": "State how competitive offers are solicited, how many are sought, and the basis on which fewer may be accepted.",
+      "cross_references": [
+        "TX-PFIA-2256.005-c-001",
+        "IS-2256.015-001"
+      ]
+    },
+    {
+      "control_id": "GTOT-C-004",
+      "criterion_ref": "UNKNOWN",
+      "placeholder": true,
+      "title": "Internal controls over investment transactions documented",
+      "citation": {
+        "section": "GTOT.004"
+      },
+      "source_text": "PLACEHOLDER. The policy describes the internal controls over investment transactions, including separation of duties and written confirmation of trades.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy describes the internal controls over investment transactions, naming separation of duties and transaction confirmation.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Internal controls over investment transactions are described."
+        },
+        {
+          "id": "e2",
+          "assertion": "Separation of duties between authorising, executing and recording a transaction is addressed."
+        },
+        {
+          "id": "e3",
+          "assertion": "Written confirmation of each transaction is required."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(m)",
+          "text": "The statute requires a compliance audit of management controls; it does not require the policy to describe the controls. The description is what this criterion adds.",
+          "linked_control": "TX-PFIA-2256.005-m-001",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "internal control",
+          "separation of duties",
+          "segregation of duties",
+          "confirmation",
+          "dual authorization"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER",
+      "deficiency_language": "The policy does not describe internal controls over investment transactions.",
+      "remediation_language": "Describe the internal controls over investment transactions, including separation of duties and written confirmation of each trade.",
+      "cross_references": [
+        "TX-PFIA-2256.005-m-001",
+        "TX-PFIA-2256.023-d-001"
+      ]
+    },
+    {
+      "control_id": "GTOT-C-005",
+      "criterion_ref": "UNKNOWN",
+      "placeholder": true,
+      "title": "Investment officer continuity and succession addressed",
+      "citation": {
+        "section": "GTOT.005"
+      },
+      "source_text": "PLACEHOLDER. The policy addresses continuity of the investment function, including who acts when a designated officer is unavailable.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy names more than one designated officer, or states who acts when the designated officer is unavailable.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Continuity of the investment function is addressed, by naming multiple officers or by stating a succession."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(f)",
+          "text": "The statute permits one or more officers to be designated but does not require continuity planning.",
+          "linked_control": "TX-PFIA-2256.005-f-001",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "in the absence of",
+          "designee",
+          "successor",
+          "acting",
+          "one or more officers"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER",
+      "deficiency_language": "The policy does not address continuity of the investment function.",
+      "remediation_language": "Name more than one investment officer, or state who acts when the designated officer is unavailable.",
+      "cross_references": [
+        "TX-PFIA-2256.005-f-001"
+      ]
+    },
+    {
+      "control_id": "GTOT-C-006",
+      "criterion_ref": "UNKNOWN",
+      "placeholder": true,
+      "title": "Policy review and amendment process described",
+      "citation": {
+        "section": "GTOT.006"
+      },
+      "source_text": "PLACEHOLDER. The policy describes how it is reviewed and amended, including who initiates a review and how amendments are recorded.",
+      "source_version": {
+        "effective_date": "2025-01-01",
+        "last_amended_by": "unverified draft"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy describes the review and amendment process, beyond the bare statutory duty to review annually.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The process for reviewing the policy is described, naming who initiates it."
+        },
+        {
+          "id": "e2",
+          "assertion": "How amendments are recorded and communicated is described."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(e)",
+          "text": "The annual review and the written instrument recording it are statutory. This criterion looks for the process around them, and the statutory control should carry any gap in the duty itself.",
+          "linked_control": "TX-PFIA-2256.005-e-001",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "review",
+          "amend",
+          "revision",
+          "recorded",
+          "communicated"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "certification_effect": "PLACEHOLDER",
+      "deficiency_language": "The policy does not describe its own review and amendment process.",
+      "remediation_language": "Describe who initiates the annual review, how amendments are adopted, and how they are communicated to officers and counterparties.",
+      "cross_references": [
+        "TX-PFIA-2256.005-e-001"
+      ]
+    }
+  ],
+  "controls": [],
+  "STRUCTURE_NOTE": "The criteria above are held under a `criteria` key rather than `controls` so this file cannot be scored by accident even if the status flag is changed. Adopting the register means renaming the key to `controls` deliberately, which is a visible one-line diff in review.",
+  "status_note": "Paused 2026-09-27 (ADR 0011): scope narrowed to the PFIA. The register is being completed by the team and is switched on when adopted."
+}

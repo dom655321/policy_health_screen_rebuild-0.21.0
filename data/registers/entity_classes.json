@@ -1,0 +1,115 @@
+{
+  "$id": "tx-pfia/entity_classes",
+  "version": "2026.09.08",
+  "note": "Class membership is a set, not a tree walk at evaluation time. The loader expands `parent` transitively so a school district profile carries {SCHOOL_DISTRICT, LOCAL_GOV}.",
+  "entity_classes": [
+    {
+      "id": "LOCAL_GOV",
+      "label": "Local government",
+      "cite": "2256.002(7)"
+    },
+    {
+      "id": "SCHOOL_DISTRICT",
+      "label": "School district",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.002(11)"
+    },
+    {
+      "id": "ISD_1371_ISSUER",
+      "label": "ISD qualifying as an issuer under Sec. 1371.001",
+      "parent": "SCHOOL_DISTRICT",
+      "cite": "2256.0204(b)"
+    },
+    {
+      "id": "MUNICIPALITY",
+      "label": "Municipality",
+      "parent": "LOCAL_GOV"
+    },
+    {
+      "id": "MUNICIPAL_ELECTRIC_UTILITY_OWNER",
+      "label": "Municipality owning an electric or gas utility",
+      "parent": "MUNICIPALITY",
+      "cite": "2256.0201"
+    },
+    {
+      "id": "TOLLWAY_AUTHORITY",
+      "label": "Regional tollway or mobility authority",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.002(7); Transportation Code ch. 366, 370",
+      "aliases": [
+        "regional tollway authority",
+        "regional mobility authority",
+        "RMA",
+        "RTA"
+      ],
+      "note": "A political subdivision, so a local government for Subchapter A purposes. It is not a district under art. III sec. 52(b) or art. XVI sec. 59, so the Sec. 2256.008(b) four-hour substitute and the Water Code ch. 36/49 exemption do not reach it."
+    },
+    {
+      "id": "COUNTY",
+      "label": "County",
+      "parent": "LOCAL_GOV"
+    },
+    {
+      "id": "DISTRICT_ART3_52B_ART16_59",
+      "label": "District or authority created under Tex. Const. art. III, sec. 52(b) or art. XVI, sec. 59",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.002(7)"
+    },
+    {
+      "id": "WATER_DISTRICT_36_49",
+      "label": "District governed by Water Code ch. 36 or 49",
+      "parent": "DISTRICT_ART3_52B_ART16_59",
+      "cite": "2256.008(e)"
+    },
+    {
+      "id": "HOSPITAL_DISTRICT",
+      "label": "Hospital district",
+      "parent": "LOCAL_GOV"
+    },
+    {
+      "id": "HOUSING_AUTHORITY_392",
+      "label": "Housing authority created under Local Gov't Code ch. 392",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.008(b-1)"
+    },
+    {
+      "id": "PORT_NAVIGATION_DISTRICT",
+      "label": "Port or navigation district",
+      "parent": "DISTRICT_ART3_52B_ART16_59",
+      "cite": "2256.0203"
+    },
+    {
+      "id": "JUNIOR_COLLEGE_DISTRICT",
+      "label": "Public junior college district",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.0207"
+    },
+    {
+      "id": "COMMISSION_391",
+      "label": "Commission created under Local Gov't Code ch. 391",
+      "parent": "LOCAL_GOV",
+      "cite": "2256.005(h)"
+    },
+    {
+      "id": "NONPROFIT_ON_BEHALF_OF",
+      "label": "Nonprofit corporation acting on behalf of a local government or state agency",
+      "cite": "2256.003(a)(3)"
+    },
+    {
+      "id": "STATE_AGENCY",
+      "label": "State agency",
+      "cite": "2256.002(13)"
+    },
+    {
+      "id": "IHE",
+      "label": "Institution of higher education",
+      "parent": "STATE_AGENCY",
+      "cite": "2256.002(4)"
+    },
+    {
+      "id": "INVESTMENT_POOL",
+      "label": "Investment pool acting on behalf of two or more entities",
+      "cite": "2256.003(a)(4)"
+    }
+  ]
+}

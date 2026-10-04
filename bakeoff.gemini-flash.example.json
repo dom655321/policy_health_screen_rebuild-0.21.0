@@ -1,0 +1,12 @@
+{
+  "_note": "Gemini-only bake-off (no Claude key needed). Copy to bakeoff.json. Compares thinking levels on gemini-3.8-flash; 'minimal' is not supported on 3.8 Flash. Confirm the price on Google's pricing page; the introductory rate ends 2026-12-31.",
+  "benchmark": null,
+  "repeats": 3,
+  "thresholds": {"unknown_rate_max": 0.15, "quote_verified_min": 0.98, "failures_max": 0},
+  "prices_per_mtok": {"gemini-3.8-flash": [0.75, 3.75]},
+  "candidates": [
+    {"id": "flash-low", "provider": "gemini", "model": "gemini-3.8-flash", "env": {"PFIA_GEMINI_THINKING_LEVEL": "low"}},
+    {"id": "flash-medium", "provider": "gemini", "model": "gemini-3.8-flash", "env": {"PFIA_GEMINI_THINKING_LEVEL": "medium"}},
+    {"id": "flash-high", "provider": "gemini", "model": "gemini-3.8-flash", "env": {"PFIA_GEMINI_THINKING_LEVEL": "high"}}
+  ]
+}

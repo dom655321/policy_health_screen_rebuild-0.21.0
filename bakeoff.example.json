@@ -1,0 +1,21 @@
+{
+  "_note": "Copy to bakeoff.json. Keys come from the environment, never this file. Prices are per 1M tokens (input, output); confirm them on the providers' pricing pages before a run.",
+  "benchmark": null,
+  "repeats": 3,
+  "thresholds": {"unknown_rate_max": 0.15, "quote_verified_min": 0.98, "failures_max": 0},
+  "prices_per_mtok": {
+    "claude-sonnet-5-5": [2.0, 10.0],
+    "claude-haiku-4-5-20251001": [1.0, 5.0],
+    "claude-opus-5-5": [4.0, 20.0],
+    "gemini-3.8-flash": [0.75, 3.75],
+    "gemini-3.1-pro": [2.0, 12.0]
+  },
+  "candidates": [
+    {"id": "sonnet-5.5", "provider": "anthropic", "model": "claude-sonnet-5-5"},
+    {"id": "haiku-4.5", "provider": "anthropic", "model": "claude-haiku-4-5-20251001"},
+    {"id": "opus-5.5 (ceiling)", "provider": "anthropic", "model": "claude-opus-5-5"},
+    {"id": "gemini-3.8-flash", "provider": "gemini", "model": "gemini-3.8-flash"},
+    {"id": "sonnet-5.5 + gemini-3.8-flash (two readers)", "provider": "anthropic", "model": "claude-sonnet-5-5",
+     "second": {"provider": "gemini", "model": "gemini-3.8-flash"}}
+  ]
+}

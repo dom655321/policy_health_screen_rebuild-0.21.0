@@ -1,0 +1,22 @@
+{
+  "elements": {
+    "e1": {
+      "note": "The policy requires SEC registration and no-load status, but does not state that the fund must be regulated by the SEC.",
+      "supported": false
+    },
+    "e2": {
+      "quote": "the County must be provided with a prospectus and other information required by the SEC Act of 1934 or the Investment Company Act of 1940",
+      "supported": true
+    },
+    "e3": {
+      "note": "The document does not mention compliance with SEC Rule 2a-7.",
+      "supported": false
+    },
+    "e4": {
+      "note": "The policy caps investment at 10 percent of total assets, but does not state this includes bond proceeds and debt service funds.",
+      "supported": false
+    }
+  },
+  "no_load_required": true,
+  "single_fund_cap_pct": 10
+}

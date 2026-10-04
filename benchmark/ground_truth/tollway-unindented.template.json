@@ -1,0 +1,71 @@
+{
+  "case": "tollway-unindented",
+  "reviewed": false,
+  "reviewed_by": "",
+  "reviewed_on": "",
+  "note": "Prefilled from the offline stand-in. Correct every entry, then set reviewed to true.",
+  "instruments": {
+    "BANKERS_ACCEPTANCE": {
+      "conflicts": []
+    },
+    "COMMERCIAL_PAPER": {
+      "conflicts": []
+    },
+    "DEPOSITORY_CD": {
+      "conflicts": []
+    },
+    "GIC": {
+      "conflicts": []
+    },
+    "INTEREST_BEARING_DEPOSIT": {
+      "conflicts": []
+    },
+    "INVESTMENT_POOL": {
+      "conflicts": []
+    },
+    "MMMF": {
+      "conflicts": []
+    },
+    "MUNI_OBLIGATIONS": {
+      "conflicts": []
+    },
+    "MUTUAL_FUND": {
+      "conflicts": []
+    },
+    "REPO": {
+      "conflicts": []
+    },
+    "REVERSE_REPO": {
+      "conflicts": []
+    },
+    "TX_OBLIGATIONS": {
+      "conflicts": []
+    },
+    "US_OBLIGATIONS": {
+      "conflicts": []
+    },
+    "CMO_IO_PO_INVERSE": {
+      "conflicts": []
+    }
+  },
+  "controls": {
+    "TX-PFIA-2256.005-b-2-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.005-b-3-001": "PARTIALLY_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-A-001": "PARTIALLY_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-B-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-C-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-D-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-E-001": "PARTIALLY_ADDRESSED",
+    "TX-PFIA-2256.005-b-4-F-001": "PARTIALLY_ADDRESSED",
+    "TX-PFIA-2256.005-d-001": "PARTIALLY_ADDRESSED",
+    "TX-PFIA-2256.005-k-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.005-l-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.006-a-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.017-001": "ALIGNED",
+    "TX-PFIA-2256.0208-001": "ALIGNED",
+    "TX-PFIA-2256.021-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.023-a-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.023-b-001": "NOT_ADDRESSED",
+    "TX-PFIA-2256.025-001": "NOT_ADDRESSED"
+  }
+}

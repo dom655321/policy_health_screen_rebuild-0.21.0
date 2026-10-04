@@ -1,0 +1,14 @@
+{
+  "differentiated_by_fund": true,
+  "elements": {
+    "e1": {
+      "quote": "Fund investment may not exceed the following maturities , or as restricted by specific bond indentures:",
+      "supported": true
+    },
+    "e2": {
+      "note": "The policy specifies maximum maturity in years but does not express it on a stated-maturity basis.",
+      "supported": false
+    }
+  },
+  "max_stated_maturity_months": 84
+}

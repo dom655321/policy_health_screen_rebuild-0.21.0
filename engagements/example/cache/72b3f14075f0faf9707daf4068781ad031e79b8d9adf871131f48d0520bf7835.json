@@ -1,0 +1,44 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "The text lists fund strategies in the table of contents but does not include the strategy text.",
+      "supported": false
+    },
+    {
+      "id": "e2a",
+      "note": "Individual fund strategies are not provided, and suitability is not addressed.",
+      "supported": false
+    },
+    {
+      "id": "e2b",
+      "note": "Individual fund strategies are not provided in the text.",
+      "supported": false
+    },
+    {
+      "id": "e2c",
+      "note": "Individual fund strategies are not provided in the text.",
+      "supported": false
+    },
+    {
+      "id": "e2d",
+      "note": "Individual fund strategies are not provided in the text.",
+      "supported": false
+    },
+    {
+      "id": "e2e",
+      "note": "Individual fund strategies are not provided in the text.",
+      "supported": false
+    },
+    {
+      "id": "e2f",
+      "note": "Individual fund strategies are not provided in the text.",
+      "supported": false
+    },
+    {
+      "id": "e3",
+      "note": "The policy lists five general objectives omitting suitability, not the six statutory objectives.",
+      "supported": false
+    }
+  ]
+}

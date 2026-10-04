@@ -1,0 +1,24 @@
+{
+  "elements": [
+    {
+      "id": "e1a",
+      "quote": "The 90-day limit may be exceeded in the case of flexible repurchase agreements (\"flex repos\") provided the investment type is specifically authorized within individual bond ordinances and final maturity does not exceed the anticipated spending schedule of bond proceeds.",
+      "supported": true
+    },
+    {
+      "id": "e1b",
+      "note": "The document text does not mention or address the investment of pledged revenue.",
+      "supported": false
+    },
+    {
+      "id": "e2",
+      "note": "The document does not state that investments are subject to statutory provisions governing the debt issuance or agreement.",
+      "supported": false
+    },
+    {
+      "id": "e3",
+      "note": "The document does not state investments are subject to investment policy provisions for that debt issuance or agreement.",
+      "supported": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "Local government investment pools with a dollar weighted average maturity of 60 days or less, approved through resolution of Commissioners Court to provide services to the C ounty",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "quote": "To be eligible to receive funds from and invest funds on behalf of the County an investment pool must furnish to the Investment Officer or other authorized representative an offering circular or other similar disclosure instrument that contains information required by the Tex. Gov't. Code, Sec. 2256.016.",
+      "supported": true
+    },
+    {
+      "id": "e3",
+      "note": "The policy requires monthly review of portfolio securities, but does not explicitly require monthly reporting and transaction confirmations from the pool.",
+      "supported": false
+    },
+    {
+      "id": "e4",
+      "quote": "continuously rated no lower than AAA or equivalent by at least one nationally recognized rating service.",
+      "supported": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "diversification of the investment portfolio",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "quote": "(e) maximization of return (yield).",
+      "supported": true
+    },
+    {
+      "id": "e3",
+      "quote": "The County, as a general objective, plans to hold investments to final maturity which protects principal and liquidity while obtaining the most prudent competitive yield possible at the date of the investment trade.",
+      "supported": true
+    },
+    {
+      "id": "e4",
+      "note": "The document text does not address the quality and capability of investment management.",
+      "supported": false
+    }
+  ]
+}

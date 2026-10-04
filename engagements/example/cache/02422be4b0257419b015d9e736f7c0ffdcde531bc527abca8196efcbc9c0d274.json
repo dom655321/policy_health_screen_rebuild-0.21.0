@@ -1,0 +1,16 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "no keyword overlap in the supplied windows",
+      "quote": "",
+      "supported": false
+    },
+    {
+      "id": "e2",
+      "note": "",
+      "quote": "All investments must comply with the Investment Act and all federal, state, and local statutes, rules and regulations .",
+      "supported": true
+    }
+  ]
+}

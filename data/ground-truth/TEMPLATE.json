@@ -1,0 +1,27 @@
+{
+  "case": "short-slug-for-this-policy",
+  "policy": "../../engagements/example/investment-policy-2024.pdf",
+  "profile": "water_authority",
+  "ingest_backend": null,
+  "reviewer": "initials",
+  "review_date": "2025-03-14",
+  "source_report": "reference to the prior report this was transcribed from",
+  "_instructions": [
+    "One file per previously reviewed policy. `policy` is a path relative to this file or to the repository root; keep client documents outside the repository and point at them.",
+    "`profile` names a file in data/profiles. Create one per entity with `python3 -m pfia profile init` and answer every question before benchmarking - an unanswered question makes controls unresolved, which the harness reports separately rather than counting as disagreement.",
+    "`findings` maps control_id to the verdict the reviewer reached. Use the reviewer's own words; the harness maps Pass/Fail/Partial/Not Found/N/A onto the register vocabulary. Record only controls the prior review actually addressed - leave the rest out rather than guessing, since a guessed CONFORMING is indistinguishable from a real one.",
+    "`unmapped_findings` is for anything the reviewer raised that no control in the register could have produced. This is the most valuable field in the file: it measures register coverage depth, which no automated check can."
+  ],
+  "findings": {
+    "TX-PFIA-2256.005-a-001": { "verdict": "Pass", "note": "" },
+    "TX-PFIA-2256.005-d-001": { "verdict": "Partial", "note": "single strategy for all funds" },
+    "TX-PFIA-2256.005-b-4-E-001": { "verdict": "Fail", "note": "DVP qualified 'where practical'" },
+    "IS-2256.013-001": { "verdict": "Not Found", "note": "CP authorized, no conditions stated" }
+  },
+  "unmapped_findings": [
+    {
+      "section": "2256.016(c)",
+      "summary": "Pool monthly reporting duties are not addressed anywhere in the policy; the register has one pool control and does not test this."
+    }
+  ]
+}

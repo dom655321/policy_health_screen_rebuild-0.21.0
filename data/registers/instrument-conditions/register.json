@@ -1,0 +1,3924 @@
+{
+  "$id": "tx-pfia/instrument-conditions",
+  "schedule": "B2",
+  "status": "proposed",
+  "title": "PFIA Authorized-Investment Condition Catalogue (Schedule B v2)",
+  "version": "0.2.0-proposed",
+  "authority": "STATUTE",
+  "authority_label": "Tex. Gov't Code ch. 2256, Subchapter A",
+  "law_in_force_as_of": "2026-09-27",
+  "snapshot": "data/sources/GV.2256.2026-09-27.txt",
+  "canonical_source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.2256.htm",
+  "semantics": {
+    "unit": "One condition = one requirement a policy can state, contradict or omit independently.",
+    "states": {
+      "CONFORMING": "Policy states the condition at the statutory level.",
+      "STRICTER": "Policy states a narrower term (lower cap, higher floor, better rating, smaller permitted set). Conforms under Sec. 2256.024.",
+      "BY_REFERENCE": "Satisfied by an incorporation clause in scope (ADR 0007).",
+      "SILENT": "Policy does not address the condition. Never a conformity finding; the statute binds regardless.",
+      "CONTRADICTED": "Policy states a term the statute does not permit.",
+      "UNKNOWN": "Extracted fact missing or unparseable. Never resolved to a pass or a fail (ADR 0005)."
+    },
+    "conformity": "Statutory band. An instrument is DEFICIENT if any active condition is CONTRADICTED, UNKNOWN if any is UNKNOWN and none is CONTRADICTED, else CONFORMING. The finding names every contradicted condition.",
+    "division_of_labour": "The model extracts facts (value, unit, stated, contradicted, span). All comparisons are made in code; the model never decides whether a term is stricter or looser.",
+    "anti_patterns": "Retired as scoring inputs for this schedule. Where kept, they are extraction hints confined to the instrument's clause window, never document-wide.",
+    "status": "Categorical (ADR 0010). An instrument is CONFLICTS if any active condition is CONTRADICTED, REVIEW_REQUIRED if any is UNKNOWN or APPLICABILITY_UNRESOLVED and none is CONTRADICTED, otherwise ALIGNED. Conditions the policy does not restate are reported as NOT_RESTATED; they never change the instrument status, because the statute binds regardless. No weights, fractions or indices.",
+    "extraction_cues": "`cues`, `outside_cues` and `contradiction_cues` are extraction hints: examples shown to the model and the only signals the offline stand-in uses. They never decide a state; the evaluator compares the extracted fact."
+  },
+  "instruments": [
+    {
+      "code": "US_OBLIGATIONS",
+      "label": "U.S. Treasury, agency and instrumentality obligations",
+      "authority": [
+        "2256.009(a)(1)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "USO-01",
+          "cite": "2256.009(a)(1)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Authorized obligations are limited to those (including letters of credit) of the United States or its agencies and instrumentalities, including the Federal Home Loan Banks.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "US_TREASURY",
+              "US_AGENCY_INSTRUMENTALITY",
+              "FHLB",
+              "US_LETTER_OF_CREDIT"
+            ],
+            "fact": "issuer_types",
+            "contradiction_cues": [
+              "obligations of any federal agency",
+              "any government sponsored enterprise",
+              "agency securities of any structure"
+            ]
+          },
+          "quote": "obligations, including letters of credit, of the United States or its agencies and instrumentalities, including the Federal Home Loan Banks",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "lexicon_change": "Split from the combined US_OBLIGATIONS code (2256.009(a)(1)-(4)); (a)(2)-(4) now carry their own codes."
+    },
+    {
+      "code": "TX_OBLIGATIONS",
+      "label": "Direct obligations of Texas and its agencies",
+      "authority": [
+        "2256.009(a)(2)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "TXO-01",
+          "cite": "2256.009(a)(2)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Authorized obligations are direct obligations of this state or its agencies and instrumentalities.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "TX_DIRECT",
+              "TX_AGENCY_DIRECT"
+            ],
+            "fact": "issuer_types"
+          },
+          "quote": "direct obligations of this state or its agencies and instrumentalities",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "lexicon_change": "New code; previously folded into US_OBLIGATIONS."
+    },
+    {
+      "code": "AGENCY_CMO",
+      "label": "Agency collateralized mortgage obligations",
+      "authority": [
+        "2256.009(a)(3)",
+        "2256.009(b)(3)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "CMO-01",
+          "cite": "2256.009(a)(3)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "CMOs are directly issued by a federal agency or instrumentality of the United States.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "direct_agency_issuer"
+          },
+          "quote": "collateralized mortgage obligations directly issued by a federal agency or instrumentality of the United States",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "CMO-02",
+          "cite": "2256.009(a)(3)",
+          "component": "CREDIT_SUPPORT",
+          "binds": "SECURITY",
+          "requirement": "The underlying security is guaranteed by an agency or instrumentality of the United States.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "underlying_agency_guarantee"
+          },
+          "quote": "the underlying security for which is guaranteed by an agency or instrumentality of the United States",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "CMO-03",
+          "cite": "2256.009(b)(3)",
+          "component": "MATURITY",
+          "binds": "SECURITY",
+          "requirement": "Stated final maturity does not exceed 10 years.",
+          "test": {
+            "mode": "CAP",
+            "limit": 10,
+            "unit": "years",
+            "strict": false,
+            "fact": "max_final_maturity"
+          },
+          "quote": "collateralized mortgage obligations that have a stated final maturity date of greater than 10 years",
+          "note": "Numeric cap on authorized CMOs. The (b)(1), (b)(2) and (b)(4) structures are prohibitions carried by CMO_IO_PO_INVERSE.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "lexicon_change": "New code; previously a condition inside US_OBLIGATIONS completeness (IS-2256.009-a-1-002 e2)."
+    },
+    {
+      "code": "GUARANTEED_OBLIGATIONS",
+      "label": "Obligations unconditionally guaranteed by Texas or the U.S.",
+      "authority": [
+        "2256.009(a)(4)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "GTD-01",
+          "cite": "2256.009(a)(4)",
+          "component": "CREDIT_SUPPORT",
+          "binds": "SECURITY",
+          "requirement": "Principal and interest are unconditionally guaranteed or insured by, or backed by the full faith and credit of, this state or the United States or their agencies and instrumentalities.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "unconditional_guarantee_principal_interest"
+          },
+          "quote": "other obligations, the principal and interest of which are unconditionally guaranteed or insured by, or backed by the full faith and credit of, this state or the United States or their respective agencies and instrumentalities",
+          "note": "Includes obligations fully guaranteed or insured by the FDIC or by the explicit full faith and credit of the United States.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "lexicon_change": "New code; previously folded into US_OBLIGATIONS."
+    },
+    {
+      "code": "MUNI_OBLIGATIONS",
+      "label": "Obligations of states and political subdivisions",
+      "authority": [
+        "2256.009(a)(5)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "MUN-01",
+          "cite": "2256.009(a)(5)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Issuers are limited to states, agencies, counties, cities and other political subdivisions of any state.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "STATE",
+              "STATE_AGENCY",
+              "COUNTY",
+              "CITY",
+              "POLITICAL_SUBDIVISION"
+            ],
+            "fact": "issuer_types"
+          },
+          "quote": "obligations of states, agencies, counties, cities, and other political subdivisions of any state",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MUN-02",
+          "cite": "2256.009(a)(5)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Rated as to investment quality not less than A or its equivalent by a nationally recognized investment rating firm.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "LONG_TERM",
+            "floor": "A",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "AT_PURCHASE",
+            "fact": "min_rating",
+            "contradiction_cues": [
+              {
+                "cue": "investment grade",
+                "value": "BBB-"
+              },
+              {
+                "cue": "rated by a rating agency",
+                "value": null
+              }
+            ]
+          },
+          "quote": "rated as to investment quality by a nationally recognized investment rating firm not less than A or its equivalent",
+          "interpretive": "Notch-level reading: A- is below 'A'. Basis: Sec. 2256.020(3) expressly disregards gradations, implying gradations count where the Act does not say so. Flip granularity to CATEGORY if counsel reads 'A' as the category.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "ISRAEL_BONDS",
+      "label": "State of Israel bonds",
+      "authority": [
+        "2256.009(a)(6)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "ISR-01",
+          "cite": "2256.009(a)(6)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Bonds are issued, assumed or guaranteed by the State of Israel.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "israel_issuer_or_guarantor"
+          },
+          "quote": "bonds issued, assumed, or guaranteed by the State of Israel",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "lexicon_change": "NEW instrument. Verified against the 2026-09-27 statute snapshot; the 0.18.0 register had no code, so an authorization produced no observation."
+    },
+    {
+      "code": "INTEREST_BEARING_DEPOSIT",
+      "label": "Interest-bearing banking deposits (directly insured)",
+      "authority": [
+        "2256.009(a)(7)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "IBD-01",
+          "cite": "2256.009(a)(7)",
+          "component": "INSURANCE",
+          "binds": "SECURITY",
+          "requirement": "Deposits are guaranteed or insured by the FDIC or the NCUSIF (or a successor).",
+          "test": {
+            "mode": "ANY_OF",
+            "alternatives": [
+              {
+                "id": "FDIC",
+                "label": "FDIC or successor",
+                "cues": [
+                  "federal deposit insurance",
+                  "fdic"
+                ]
+              },
+              {
+                "id": "NCUSIF",
+                "label": "NCUSIF or successor",
+                "cues": [
+                  "national credit union share insurance",
+                  "ncusif"
+                ]
+              }
+            ],
+            "fact": "insurer_paths",
+            "contradiction_cues": [
+              "deposits at any financial institution",
+              "uninsured deposits"
+            ]
+          },
+          "quote": "interest-bearing banking deposits that are guaranteed or insured by: (A) the Federal Deposit Insurance Corporation or its successor; or (B) the National Credit Union Share Insurance Fund or its successor",
+          "note": "Deposits above insured limits fall under ch. 2257 collateral, outside this register.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "BROKERED_DEPOSIT",
+      "label": "Placed interest-bearing banking deposits",
+      "authority": [
+        "2256.009(a)(8)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "BRD-03",
+          "cite": "2256.009(a)(8)(B)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "The intermediary arranges deposit in one or more federally insured depository institutions, wherever located, for the entity's account.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "arranged_in_federally_insured_institutions"
+          },
+          "quote": "arranges for the deposit of the funds in the banking deposits in one or more federally insured depository institutions, regardless of where located, for the investing entity's account",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BRD-04",
+          "cite": "2256.009(a)(8)(C)",
+          "component": "INSURANCE",
+          "binds": "SECURITY",
+          "requirement": "The full amount of principal and accrued interest is insured by the United States or an instrumentality of the United States.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "full_principal_and_interest_insured",
+            "contradiction_cues": [
+              "insured up to the fdic limit"
+            ]
+          },
+          "quote": "the full amount of the principal and accrued interest of the banking deposits is insured by the United States or an instrumentality of the United States",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "retired_conditions": [
+        {
+          "id": "BRD-01",
+          "cite": "2256.009(a)(8)(A)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Funds are placed through a Texas-office broker or a Texas-office depository institution selected by the entity.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "TX_OFFICE_BROKER",
+              "TX_OFFICE_DEPOSITORY"
+            ],
+            "fact": "intermediary_types",
+            "contradiction_cues": [
+              "any broker selected by the investment officer"
+            ]
+          },
+          "quote": "a depository institution with a main office or branch office in this state that the investing entity selects",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "BRD-02",
+          "cite": "2256.009(a)(8)(A)(i)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "A broker is selected from the list adopted by the governing body or designated investment committee under Sec. 2256.025.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "broker_from_adopted_list"
+          },
+          "quote": "a broker with a main office or branch office in this state that the investing entity selects from a list the governing body or designated investment committee of the entity adopts as required by Section 2256.025",
+          "activation": {
+            "fact": "broker_path_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "BRD-05",
+          "cite": "2256.009(a)(8)(D)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "The custodian is the selected depository institution, an entity described by Sec. 2257.041(d), or an SEC-registered clearing broker-dealer operating under Rule 15c3-3.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "SELECTED_DEPOSITORY",
+              "ENTITY_2257_041_D",
+              "SEC_15C3_3_CLEARING_BD"
+            ],
+            "fact": "custodian_types",
+            "contradiction_cues": [
+              "held by the placing broker"
+            ]
+          },
+          "quote": "the investing entity appoints as the entity's custodian of the banking deposits issued for the entity's account",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        }
+      ]
+    },
+    {
+      "code": "DEPOSITORY_CD",
+      "label": "Certificates of deposit and share certificates",
+      "authority": [
+        "2256.010(a)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "DCD-01",
+          "cite": "2256.010(a)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Issued by a depository institution with its main office or a branch office in Texas.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "tx_office_issuer",
+            "contradiction_cues": [
+              "certificates of deposit from any bank",
+              "issued by any federally insured institution"
+            ]
+          },
+          "quote": "issued by a depository institution that has its main office or a branch office in this state",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "DCD-02",
+          "cite": "2256.010(a)(1)-(3)",
+          "component": "CREDIT_SUPPORT",
+          "binds": "SECURITY",
+          "requirement": "The certificate is insured (FDIC/NCUSIF), secured by Sec. 2256.009(a) obligations, or secured under ch. 2257 or other law.",
+          "test": {
+            "mode": "ANY_OF",
+            "alternatives": [
+              {
+                "id": "INSURED",
+                "label": "FDIC or NCUSIF insured"
+              },
+              {
+                "id": "SECURED_009A",
+                "label": "Secured by Sec. 2256.009(a) obligations"
+              },
+              {
+                "id": "SECURED_2257",
+                "label": "Secured under ch. 2257 or other law"
+              }
+            ],
+            "fact": "credit_support_paths"
+          },
+          "quote": "guaranteed or insured by the Federal Deposit Insurance Corporation or its successor or the National Credit Union Share Insurance Fund or its successor",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "DCD-03",
+          "cite": "2256.010(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Where secured by obligations, collateral is limited to Sec. 2256.009(a) obligations (including agency MBS).",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "OBLIGATIONS_2256_009A",
+              "AGENCY_MBS"
+            ],
+            "fact": "collateral_types",
+            "contradiction_cues": [
+              "collateralized by any authorized investment"
+            ]
+          },
+          "quote": "secured by obligations that are described by Section 2256.009(a), including mortgage backed securities directly issued by a federal agency or instrumentality",
+          "activation": {
+            "fact": "obligation_secured_path_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "NOT_TESTABLE"
+            }
+          }
+        },
+        {
+          "id": "DCD-04",
+          "cite": "2256.010(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Collateral market value is not less than the principal amount of the certificates.",
+          "test": {
+            "mode": "FLOOR",
+            "limit": 100,
+            "unit": "pct_of_principal",
+            "fact": "collateral_margin"
+          },
+          "quote": "have a market value of not less than the principal amount of the certificates",
+          "activation": {
+            "fact": "obligation_secured_path_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "NOT_TESTABLE"
+            }
+          }
+        },
+        {
+          "id": "DCD-05",
+          "cite": "2256.010(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Sec. 2256.009(b) mortgage-backed securities are excluded as collateral.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "prohibited_mbs_as_collateral"
+          },
+          "quote": "but excluding those mortgage backed securities of the nature described by Section 2256.009(b)",
+          "activation": {
+            "fact": "obligation_secured_path_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "NOT_TESTABLE"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "BROKERED_CD",
+      "label": "Brokered certificates of deposit",
+      "authority": [
+        "2256.010(b)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "BCD-03",
+          "cite": "2256.010(b)(2)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "The intermediary arranges deposit in certificates of deposit in one or more federally insured depository institutions, wherever located, for the entity's account.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "arranged_in_federally_insured_institutions"
+          },
+          "quote": "arranges for the deposit of the funds in certificates of deposit in one or more federally insured depository institutions, wherever located, for the account of the investing entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BCD-04",
+          "cite": "2256.010(b)(3)",
+          "component": "INSURANCE",
+          "binds": "SECURITY",
+          "requirement": "The full amount of principal and accrued interest of each certificate is insured by the United States or an instrumentality of the United States.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "full_principal_and_interest_insured",
+            "contradiction_cues": [
+              "insured up to the fdic limit",
+              "cdars is authorized without further condition"
+            ]
+          },
+          "quote": "the full amount of the principal and accrued interest of each of the certificates of deposit is insured by the United States or an instrumentality of the United States",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "note": "No reciprocal-deposit condition: verified absent from current Sec. 2256.010(b). The 2017 state checklist is superseded on this point (crosswalk item 4 closed).",
+      "retired_conditions": [
+        {
+          "id": "BCD-01",
+          "cite": "2256.010(b)(1)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Funds are placed through a Texas-office broker or a Texas-office depository institution selected by the entity.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "TX_OFFICE_BROKER",
+              "TX_OFFICE_DEPOSITORY"
+            ],
+            "fact": "intermediary_types"
+          },
+          "quote": "a depository institution that has its main office or a branch office in this state and that is selected by the investing entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "BCD-02",
+          "cite": "2256.010(b)(1)(A)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "A broker is selected from the list adopted by the investing entity under Sec. 2256.025.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "broker_from_adopted_list"
+          },
+          "quote": "a broker that has its main office or a branch office in this state and is selected from a list adopted by the investing entity as required by Section 2256.025",
+          "activation": {
+            "fact": "broker_path_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "BCD-05",
+          "cite": "2256.010(b)(4)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "The custodian is the selected depository institution, an entity described by Sec. 2257.041(d), or an SEC-registered clearing broker-dealer operating under Rule 15c3-3.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "SELECTED_DEPOSITORY",
+              "ENTITY_2257_041_D",
+              "SEC_15C3_3_CLEARING_BD"
+            ],
+            "fact": "custodian_types",
+            "contradiction_cues": [
+              "held by the placing broker"
+            ]
+          },
+          "quote": "as custodian for the investing entity with respect to the certificates of deposit issued for the account of the investing entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        }
+      ]
+    },
+    {
+      "code": "REPO",
+      "label": "Repurchase agreements",
+      "authority": [
+        "2256.011(a)",
+        "2256.011(b)(2)",
+        "2256.011(f)-(g)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "REP-01",
+          "cite": "2256.011(a)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "The agreement is fully collateralized.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "fully_collateralized"
+          },
+          "quote": "A fully collateralized repurchase agreement",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-02",
+          "cite": "2256.011(a)(1)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "The agreement has a defined termination date.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "defined_termination_date"
+          },
+          "quote": "is an authorized investment under this subchapter if the repurchase agreement: (1) has a defined termination date",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-03",
+          "cite": "2256.011(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Collateral is limited to cash and Sec. 2256.009(a)(1) or 2256.013 obligations (or Sec. 2256.0204, if applicable).",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "CASH",
+              "OBLIGATIONS_2256_009A1",
+              "COMMERCIAL_PAPER_2256_013",
+              "ISD_CORPORATE_BOND_2256_0204"
+            ],
+            "fact": "collateral_types",
+            "contradiction_cues": [
+              "collateral of any authorized investment"
+            ]
+          },
+          "quote": "is secured by a combination of cash and obligations described by Section 2256.009(a)(1) or 2256.013 or, if applicable, Section 2256.0204",
+          "note": "ISD_CORPORATE_BOND_2256_0204 is permitted only for an entity that qualifies under Sec. 2256.0204.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-04",
+          "cite": "2256.011(b)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Market value of the purchased obligations at disbursement is not less than the principal disbursed.",
+          "test": {
+            "mode": "FLOOR",
+            "limit": 100,
+            "unit": "pct_of_principal",
+            "fact": "collateral_margin"
+          },
+          "quote": "at a market value at the time the funds are disbursed of not less than the principal amount of the funds disbursed",
+          "note": "NEW. From the statutory definition of repurchase agreement; the 0.18.0 register did not test collateral value.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-05",
+          "cite": "2256.011(a)(3)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is pledged to the entity, directly or through a joint account the entity approves.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "pledged_to_entity",
+            "contradiction_cues": [
+              "unpledged",
+              "without a pledge"
+            ]
+          },
+          "quote": "to be pledged to the entity either directly or through a joint account approved by the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "REP-06",
+          "cite": "2256.011(a)(3)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is held in the entity's name, directly or through a joint account the entity approves.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "held_in_entity_name",
+            "contradiction_cues": [
+              "in the dealer's name",
+              "in the counterparty's name",
+              "in the borrower's name",
+              "in street name"
+            ]
+          },
+          "quote": "held in the entity's name either directly or through a joint account approved by the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "REP-07",
+          "cite": "2256.011(a)(3)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is deposited, at the time the investment is made, with the entity or with a third party the entity selects and approves.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "deposited_with_entity_or_approved_third_party",
+            "contradiction_cues": [
+              "held by the dealer",
+              "held by the counterparty",
+              "held by the borrower",
+              "retained by the dealer"
+            ]
+          },
+          "quote": "deposited at the time the investment is made with the entity or with a third party selected and approved by the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "REP-08",
+          "cite": "2256.011(a)(4)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Placed through a primary government securities dealer (as defined by the Federal Reserve) or a financial institution doing business in Texas.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "PRIMARY_DEALER_FRB",
+              "TX_FINANCIAL_INSTITUTION"
+            ],
+            "fact": "counterparty_types"
+          },
+          "quote": "is placed through a primary government securities dealer, as defined by the Federal Reserve, or a financial institution doing business in this state",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-09",
+          "cite": "2256.011(g)(1)",
+          "component": "MANAGER_DUTY",
+          "binds": "INVESTMENT_MANAGER",
+          "requirement": "Accounting and control procedures document the entity's aggregate daily investment and pro rata share in the joint account.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "jr_accounting_controls"
+          },
+          "quote": "accounting and control procedures are implemented to document the investing entity's aggregate daily investment and pro rata share in the joint account",
+          "activation": {
+            "fact": "joint_account_via_manager_authorized"
+          },
+          "note": "Binds the investment management firm directly (Sec. 2256.011(f)-(g)).",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-10",
+          "cite": "2256.011(g)(2)",
+          "component": "MANAGER_DUTY",
+          "binds": "INVESTMENT_MANAGER",
+          "requirement": "Each joint-account participant retains sole ownership of its pro rata share, including earnings.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "jr_sole_ownership"
+          },
+          "quote": "each party participating in the joint account retains the sole rights of ownership to the party's pro rata share of assets invested in the joint account, including investment earnings on those assets",
+          "activation": {
+            "fact": "joint_account_via_manager_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "REP-11",
+          "cite": "2256.011(g)(3)",
+          "component": "MANAGER_DUTY",
+          "binds": "INVESTMENT_MANAGER",
+          "requirement": "Policies and procedures prevent any participant from using a balance credited to another party.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "jr_balance_segregation"
+          },
+          "quote": "policies and procedures are implemented to prevent a party participating in the joint account from using any part of a balance of the joint account that is credited to another party",
+          "activation": {
+            "fact": "joint_account_via_manager_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "note": "Sec. 2256.011(a-1) permits clearing through a covered clearing agency (SEC Rule 17Ad-22); permissive, so not a condition."
+    },
+    {
+      "code": "REVERSE_REPO",
+      "label": "Reverse security repurchase agreements",
+      "authority": [
+        "2256.011(c)",
+        "2256.011(d)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "RRP-01",
+          "cite": "2256.011(c)",
+          "component": "MATURITY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Term does not exceed 90 days after delivery.",
+          "test": {
+            "mode": "CAP",
+            "limit": 90,
+            "unit": "days",
+            "strict": false,
+            "fact": "max_term"
+          },
+          "quote": "the term of any reverse security repurchase agreement may not exceed 90 days after the date the reverse security repurchase agreement is delivered",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "RRP-02",
+          "cite": "2256.011(d)",
+          "component": "USE_OF_PROCEEDS",
+          "binds": "ENTITY",
+          "requirement": "Proceeds are invested only in authorized investments maturing no later than the agreement's expiration date.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "proceeds_maturity_matched",
+            "contradiction_cues": [
+              "may be rolled",
+              "leverage the portfolio",
+              "arbitrage"
+            ]
+          },
+          "quote": "the term of the authorized investments acquired must mature not later than the expiration date stated in the reverse security repurchase agreement",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "inherits": [
+        "REPO"
+      ],
+      "note": "A reverse security repurchase agreement is a repurchase agreement by definition (Sec. 2256.011(b)(2)); REP-01 to REP-08 apply."
+    },
+    {
+      "code": "SECURITIES_LENDING",
+      "label": "Securities lending program",
+      "authority": [
+        "2256.0115"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "SLN-01",
+          "cite": "2256.0115(b)(1)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Loaned securities are collateralized at not less than 100 percent.",
+          "test": {
+            "mode": "FLOOR",
+            "limit": 100,
+            "unit": "pct_of_loan_value",
+            "fact": "collateral_margin"
+          },
+          "quote": "the value of securities loaned under the program must be not less than 100 percent collateralized, including accrued income",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "SLN-03",
+          "cite": "2256.0115(b)(2)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "Each loan allows termination at any time.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "terminable_at_any_time",
+            "contradiction_cues": [
+              "term of the loan is set by the lending agent"
+            ]
+          },
+          "quote": "a loan made under the program must allow for termination at any time",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "SLN-04",
+          "cite": "2256.0115(b)(3)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Collateral is limited to pledged Sec. 2256.009 securities, pledged irrevocable bank letters of credit, or cash reinvested under Secs. 2256.009, .013, .014 or .016.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "PLEDGED_2256_009_SECURITIES",
+              "PLEDGED_IRREVOCABLE_LOC",
+              "CASH"
+            ],
+            "fact": "collateral_types"
+          },
+          "quote": "a loan made under the program must be secured by",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "SLN-05",
+          "cite": "2256.0115(b)(3)(B)",
+          "component": "CREDIT_RATING",
+          "binds": "COUNTERPARTY",
+          "requirement": "A letter-of-credit bank is U.S./state organized and continuously rated not less than A by at least one NRSRO.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "LONG_TERM",
+            "floor": "A",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "CONTINUOUS",
+            "fact": "loc_bank_min_rating"
+          },
+          "quote": "continuously rated by at least one nationally recognized investment rating firm at not less than A or its equivalent",
+          "activation": {
+            "fact": "loc_collateral_authorized"
+          },
+          "interpretive": "Notch-level 'A', as MUN-02.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "SLN-06",
+          "cite": "2256.0115(b)(3)(C)",
+          "component": "COLLATERAL",
+          "binds": "ENTITY",
+          "requirement": "Cash collateral is reinvested only under Section 2256.009, .013, .014 or .016.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "REINVEST_2256_009",
+              "REINVEST_2256_013",
+              "REINVEST_2256_014",
+              "REINVEST_2256_016"
+            ],
+            "fact": "cash_reinvestment_types",
+            "contradiction_cues": [
+              "cash collateral may be invested at the agent's discretion"
+            ]
+          },
+          "quote": "cash invested in accordance with Section",
+          "activation": {
+            "fact": "cash_collateral_authorized"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "REWORD",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "note": "Section 2256.009, .013, .014 or .016.",
+            "prior_requirement": "Cash collateral is reinvested only under Secs. 2256.009, .013, .014 or .016."
+          }
+        },
+        {
+          "id": "SLN-07",
+          "cite": "2256.0115(b)(4)(A)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is pledged to the entity.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "pledged_to_entity",
+            "contradiction_cues": [
+              "unpledged",
+              "without a pledge"
+            ]
+          },
+          "quote": "pledged to the investing entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "SLN-08",
+          "cite": "2256.0115(b)(4)(B)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is held in the entity's name.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "held_in_entity_name",
+            "contradiction_cues": [
+              "in the dealer's name",
+              "in the counterparty's name",
+              "in the borrower's name",
+              "in street name"
+            ]
+          },
+          "quote": "held in the investing entity's name",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "SLN-09",
+          "cite": "2256.0115(b)(4)(C)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is deposited, at the time the investment is made, with the entity or with a third party the entity selects or approves.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "deposited_with_entity_or_approved_third_party",
+            "contradiction_cues": [
+              "held by the dealer",
+              "held by the counterparty",
+              "held by the borrower",
+              "retained by the dealer"
+            ]
+          },
+          "quote": "deposited at the time the investment is made with the entity or with a third party selected by or approved by the investing entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          },
+          "custody_set": "PLEDGED_HELD_DEPOSITED"
+        },
+        {
+          "id": "SLN-11",
+          "cite": "2256.0115(b)(6)",
+          "component": "MATURITY",
+          "binds": "COUNTERPARTY",
+          "requirement": "The lending agreement has a term of one year or less.",
+          "test": {
+            "mode": "CAP",
+            "limit": 1,
+            "unit": "years",
+            "strict": false,
+            "fact": "max_agreement_term"
+          },
+          "quote": "an agreement to lend securities that is executed under this section must have a term of one year or less",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "retired_conditions": [
+        {
+          "id": "SLN-02",
+          "cite": "2256.0115(b)(1)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "The collateral measure includes accrued income.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "margin_includes_accrued_income",
+            "contradiction_cues": [
+              "excluding accrued income"
+            ]
+          },
+          "quote": "the value of securities loaned under the program must be not less than 100 percent collateralized, including accrued income",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "SLN-10",
+          "cite": "2256.0115(b)(5)",
+          "component": "COUNTERPARTY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Loans are placed through a primary government securities dealer (5 C.F.R. 6801.102(f) as of Sept. 1, 2003) or a financial institution doing business in Texas.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "PRIMARY_DEALER_5CFR",
+              "TX_FINANCIAL_INSTITUTION"
+            ],
+            "fact": "counterparty_types"
+          },
+          "quote": "a loan made under the program must be placed through",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "BANKERS_ACCEPTANCE",
+      "label": "Bankers' acceptances",
+      "authority": [
+        "2256.012"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "BA-01",
+          "cite": "2256.012(1)",
+          "component": "MATURITY",
+          "binds": "SECURITY",
+          "requirement": "Stated maturity is 270 days or fewer from issuance.",
+          "test": {
+            "mode": "CAP",
+            "limit": 270,
+            "unit": "days",
+            "strict": false,
+            "fact": "max_maturity"
+          },
+          "quote": "has a stated maturity of 270 days or fewer from the date of its issuance",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BA-02",
+          "cite": "2256.012(2)",
+          "component": "STRUCTURE",
+          "binds": "SECURITY",
+          "requirement": "Will be liquidated in full at maturity in accordance with its terms.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "liquidated_in_full_at_maturity"
+          },
+          "quote": "will be, in accordance with its terms, liquidated in full at maturity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BA-03",
+          "cite": "2256.012(3)",
+          "component": "STRUCTURE",
+          "binds": "SECURITY",
+          "requirement": "Eligible as collateral for borrowing from a Federal Reserve Bank.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "fed_eligible_collateral"
+          },
+          "quote": "is eligible for collateral for borrowing from a Federal Reserve Bank",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BA-04",
+          "cite": "2256.012(4)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "Accepted by a bank organized and existing under U.S. or state law.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "us_or_state_bank_acceptor"
+          },
+          "quote": "is accepted by a bank organized and existing under the laws of the United States or any state",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "BA-05",
+          "cite": "2256.012(4)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Short-term obligations of the bank (or its holding company where the bank is the largest subsidiary) rated not less than A-1/P-1 by at least one NRSRO.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "SHORT_TERM",
+            "floor": "A-1",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "AT_PURCHASE",
+            "fact": "min_short_term_rating"
+          },
+          "quote": "are rated not less than A-1 or P-1 or an equivalent rating by at least one nationally recognized credit rating agency",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "COMMERCIAL_PAPER",
+      "label": "Commercial paper",
+      "authority": [
+        "2256.013"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "CP-01",
+          "cite": "2256.013(1)",
+          "component": "MATURITY",
+          "binds": "SECURITY",
+          "requirement": "Stated maturity is 365 days or fewer from issuance.",
+          "test": {
+            "mode": "CAP",
+            "limit": 365,
+            "unit": "days",
+            "strict": false,
+            "fact": "max_maturity"
+          },
+          "quote": "has a stated maturity of 365 days or fewer from the date of its issuance",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "CP-02",
+          "cite": "2256.013(2)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Rated not less than A-1/P-1 or equivalent.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "SHORT_TERM",
+            "floor": "A-1",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "AT_PURCHASE",
+            "fact": "min_short_term_rating"
+          },
+          "quote": "is rated not less than A-1 or P-1 or an equivalent rating by at least",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "CP-03",
+          "cite": "2256.013(2)(A)-(B)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Rated by at least two NRSROs, or by one NRSRO and fully secured by an irrevocable letter of credit from a U.S. or state bank.",
+          "test": {
+            "mode": "ANY_OF",
+            "alternatives": [
+              {
+                "id": "TWO_AGENCIES",
+                "label": "Two NRSROs",
+                "cues": [
+                  "at least two nationally recognized",
+                  "two nationally recognized",
+                  "two rating agencies",
+                  "two credit rating agencies"
+                ]
+              },
+              {
+                "id": "ONE_AGENCY_PLUS_LOC",
+                "label": "One NRSRO plus irrevocable bank LOC",
+                "cues": [
+                  "letter of credit"
+                ]
+              }
+            ],
+            "fact": "rating_support_paths",
+            "outside_cues": [
+              "at least one nationally recognized",
+              "one nationally recognized credit rating agency"
+            ]
+          },
+          "quote": "(A) two nationally recognized credit rating agencies; or (B) one nationally recognized credit rating agency and is fully secured by an irrevocable letter of credit issued by a bank organized and existing under the laws of the United States or any state",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "MMMF",
+      "label": "No-load money market mutual funds",
+      "authority": [
+        "2256.014(a)",
+        "2256.014(c)(3)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "MMF-01",
+          "cite": "2256.014(a)",
+          "component": "FORM",
+          "binds": "FUND",
+          "requirement": "The fund is no-load.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "no_load",
+            "contradiction_cues": [
+              "load funds permitted"
+            ]
+          },
+          "quote": "A no-load money market mutual fund is an authorized investment",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MMF-02",
+          "cite": "2256.014(a)(1)",
+          "component": "FORM",
+          "binds": "FUND",
+          "requirement": "The fund is registered with and regulated by the SEC.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "sec_registered_regulated"
+          },
+          "quote": "is registered with and regulated by the Securities and Exchange Commission",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MMF-04",
+          "cite": "2256.014(a)(3)",
+          "component": "FORM",
+          "binds": "FUND",
+          "requirement": "The fund complies with SEC Rule 2a-7.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "rule_2a7",
+            "contradiction_cues": [
+              "any fund rated aaam"
+            ]
+          },
+          "quote": "complies with federal Securities and Exchange Commission Rule 2a-7",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MMF-05",
+          "cite": "2256.014(c)(3)",
+          "component": "CONCENTRATION",
+          "binds": "ENTITY",
+          "requirement": "Holdings in any one fund do not exceed 10 percent of the fund's total assets, including bond proceeds, reserves and debt service funds.",
+          "test": {
+            "mode": "CAP",
+            "limit": 10,
+            "unit": "pct_of_fund_assets",
+            "strict": false,
+            "fact": "single_fund_cap"
+          },
+          "quote": "in any one mutual fund described in Subsection (a) or (b) in an amount that exceeds 10 percent of the total assets of the mutual fund",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "retired_conditions": [
+        {
+          "id": "MMF-03",
+          "cite": "2256.014(a)(2)",
+          "component": "DISCLOSURE",
+          "binds": "FUND",
+          "requirement": "The fund provides the entity a prospectus and other information required by the 1934 Act or the 1940 Act.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "prospectus_provided"
+          },
+          "quote": "provides the investing entity with a prospectus and other information required by the Securities Exchange Act of 1934",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "NOT_TESTABLE"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        }
+      ]
+    },
+    {
+      "code": "MUTUAL_FUND",
+      "label": "No-load mutual funds (non-money-market)",
+      "authority": [
+        "2256.014(b)",
+        "2256.014(c)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "MF-01",
+          "cite": "2256.014(b)",
+          "component": "FORM",
+          "binds": "FUND",
+          "requirement": "The fund is no-load.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "no_load",
+            "contradiction_cues": [
+              "load funds permitted"
+            ]
+          },
+          "quote": "a no-load mutual fund is an authorized investment under this subchapter if the mutual fund",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27a",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MF-02",
+          "cite": "2256.014(b)(1)",
+          "component": "FORM",
+          "binds": "FUND",
+          "requirement": "The fund is registered with the SEC.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "sec_registered"
+          },
+          "quote": "(1) is registered with the Securities and Exchange Commission; (2) has an average weighted maturity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MF-03",
+          "cite": "2256.014(b)(2)",
+          "component": "MATURITY",
+          "binds": "FUND",
+          "requirement": "Average weighted maturity is less than two years.",
+          "test": {
+            "mode": "CAP",
+            "limit": 2,
+            "unit": "years",
+            "strict": true,
+            "fact": "max_wam"
+          },
+          "quote": "has an average weighted maturity of less than two years",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MF-04",
+          "cite": "2256.014(b)(3)",
+          "component": "PORTFOLIO",
+          "binds": "FUND",
+          "requirement": "Duration of one year or more with holdings exclusively in Act-approved obligations; or duration under one year with holdings limited to investment grade, excluding asset-backed securities.",
+          "test": {
+            "mode": "ANY_OF",
+            "alternatives": [
+              {
+                "id": "LONG_DURATION_ACT_OBLIGATIONS",
+                "label": "Duration >= 1 year; exclusively Act-approved obligations"
+              },
+              {
+                "id": "SHORT_DURATION_IG_EX_ABS",
+                "label": "Duration < 1 year; investment grade excluding ABS"
+              }
+            ],
+            "fact": "portfolio_paths"
+          },
+          "quote": "(A) has a duration of one year or more and is invested exclusively in obligations approved by this subchapter; or (B) has a duration of less than one year and the investment portfolio is limited to investment grade securities, excluding asset-backed securities",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MF-05",
+          "cite": "2256.014(c)(1)",
+          "component": "CONCENTRATION",
+          "binds": "ENTITY",
+          "requirement": "Aggregate holdings do not exceed 15 percent of monthly average fund balance, excluding bond proceeds, reserves and debt service funds.",
+          "test": {
+            "mode": "CAP",
+            "limit": 15,
+            "unit": "pct_of_monthly_avg_balance",
+            "strict": false,
+            "fact": "aggregate_cap"
+          },
+          "quote": "invest in the aggregate more than 15 percent of its monthly average fund balance, excluding bond proceeds and reserves and other funds held for debt service, in mutual funds described in Subsection (b)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MF-06",
+          "cite": "2256.014(c)(2)",
+          "component": "FUNDS_RESTRICTION",
+          "binds": "ENTITY",
+          "requirement": "Bond proceeds, reserves and debt service funds are not invested in these funds.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "bond_proceeds_permitted",
+            "contradiction_cues": [
+              "bond proceeds may be invested in mutual funds"
+            ]
+          },
+          "quote": "invest any portion of bond proceeds, reserves and funds held for debt service, in mutual funds described in Subsection (b)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "MF-07",
+          "cite": "2256.014(c)(3)",
+          "component": "CONCENTRATION",
+          "binds": "ENTITY",
+          "requirement": "Holdings in any one fund do not exceed 10 percent of the fund's total assets.",
+          "test": {
+            "mode": "CAP",
+            "limit": 10,
+            "unit": "pct_of_fund_assets",
+            "strict": false,
+            "fact": "single_fund_cap"
+          },
+          "quote": "in any one mutual fund described in Subsection (a) or (b) in an amount that exceeds 10 percent of the total assets of the mutual fund",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "code": "GIC",
+      "label": "Guaranteed investment contracts",
+      "authority": [
+        "2256.015"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "GIC-01",
+          "cite": "2256.015(a)",
+          "component": "FUNDS_RESTRICTION",
+          "binds": "ENTITY",
+          "requirement": "GICs are used for bond proceeds only.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "bond_proceeds_only",
+            "contradiction_cues": [
+              "available for operating funds"
+            ]
+          },
+          "quote": "A guaranteed investment contract is an authorized investment for bond proceeds under this subchapter",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-02",
+          "cite": "2256.015(a)(1)",
+          "component": "STRUCTURE",
+          "binds": "COUNTERPARTY",
+          "requirement": "The contract has a defined termination date.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "defined_termination_date"
+          },
+          "quote": "if the guaranteed investment contract: (1) has a defined termination date",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-03",
+          "cite": "2256.015(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Secured by Sec. 2256.009(a)(1) obligations, excluding Sec. 2256.009(b) obligations.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "OBLIGATIONS_2256_009A1"
+            ],
+            "fact": "collateral_types"
+          },
+          "quote": "is secured by obligations described by Section 2256.009(a)(1), excluding those obligations described by Section 2256.009(b)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-04",
+          "cite": "2256.015(a)(2)",
+          "component": "COLLATERAL",
+          "binds": "SECURITY",
+          "requirement": "Collateral is at least equal to the bond proceeds invested.",
+          "test": {
+            "mode": "FLOOR",
+            "limit": 100,
+            "unit": "pct_of_proceeds",
+            "fact": "collateral_margin"
+          },
+          "quote": "in an amount at least equal to the amount of bond proceeds invested under the contract",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-05",
+          "cite": "2256.015(a)(3)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is pledged to the entity.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "pledged_to_entity"
+          },
+          "quote": "(3) is pledged to the entity and deposited with the entity or with a third party selected and approved by the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-06",
+          "cite": "2256.015(a)(3)",
+          "component": "CUSTODY",
+          "binds": "ENTITY",
+          "requirement": "Collateral is deposited with the entity or a third party it selects and approves.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "deposited_with_entity_or_approved_third_party"
+          },
+          "quote": "(3) is pledged to the entity and deposited with the entity or with a third party selected and approved by the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-07",
+          "cite": "2256.015(b)",
+          "component": "MATURITY",
+          "binds": "COUNTERPARTY",
+          "requirement": "Term does not exceed five years from bond issuance for proceeds other than reserves and debt service funds.",
+          "test": {
+            "mode": "CAP",
+            "limit": 5,
+            "unit": "years",
+            "strict": false,
+            "fact": "max_term_from_issuance"
+          },
+          "quote": "may not be invested under this subchapter in a guaranteed investment contract with a term of longer than five years from the date of issuance of the bonds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "GIC-08",
+          "cite": "2256.015(c)(1)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "The bond order, ordinance or resolution specifically authorizes GICs as an eligible investment.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "bond_order_authorizes_gic"
+          },
+          "quote": "the governing body of the entity must specifically authorize guaranteed investment contracts as an eligible investment in the order, ordinance, or resolution authorizing the issuance of bonds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "retired_conditions": [
+        {
+          "id": "GIC-09",
+          "cite": "2256.015(c)(2)",
+          "component": "PROCUREMENT",
+          "binds": "ENTITY",
+          "requirement": "Bids are received from at least three separate providers.",
+          "test": {
+            "mode": "FLOOR",
+            "limit": 3,
+            "unit": "bids",
+            "fact": "min_bids"
+          },
+          "quote": "the entity must receive bids from at least three separate providers with no material financial interest in the bonds from which proceeds were received",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "GIC-10",
+          "cite": "2256.015(c)(2)",
+          "component": "PROCUREMENT",
+          "binds": "ENTITY",
+          "requirement": "Bidding providers have no material financial interest in the bonds.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "bidders_independent",
+            "contradiction_cues": [
+              "negotiated with a single provider",
+              "sole source"
+            ]
+          },
+          "quote": "the entity must receive bids from at least three separate providers with no material financial interest in the bonds from which proceeds were received",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "GIC-11",
+          "cite": "2256.015(c)(3)",
+          "component": "PROCUREMENT",
+          "binds": "ENTITY",
+          "requirement": "The highest-yielding qualifying bid is purchased.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "highest_yield_awarded"
+          },
+          "quote": "the entity must purchase the highest yielding guaranteed investment contract for which a qualifying bid is received",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "GIC-12",
+          "cite": "2256.015(c)(4)",
+          "component": "PROCUREMENT",
+          "binds": "ENTITY",
+          "requirement": "Price reflects the reasonably expected drawdown schedule.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "price_reflects_drawdown"
+          },
+          "quote": "the price of the guaranteed investment contract must take into account the reasonably expected drawdown schedule for the bond proceeds to be invested",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "GIC-13",
+          "cite": "2256.015(c)(5)",
+          "component": "PROCUREMENT",
+          "binds": "COUNTERPARTY",
+          "requirement": "The provider certifies administrative costs expected to be paid to third parties.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "provider_cost_certification"
+          },
+          "quote": "the provider must certify the administrative costs reasonably expected to be paid to third parties in connection with the guaranteed investment contract",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        }
+      ]
+    },
+    {
+      "code": "INVESTMENT_POOL",
+      "label": "Local government investment pools",
+      "authority": [
+        "2256.016",
+        "2256.019"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "POL-01",
+          "cite": "2256.016(a)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "Each particular pool is authorized by rule, order, ordinance or resolution of the governing body.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "each_pool_authorized",
+            "contradiction_cues": [
+              "staff may select pools",
+              "pools generally approved",
+              "any pool authorized by state law"
+            ]
+          },
+          "quote": "if the governing body of the entity by rule, order, ordinance, or resolution, as appropriate, authorizes investment in the particular pool",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "POL-02",
+          "cite": "2256.016(a)",
+          "component": "PORTFOLIO",
+          "binds": "POOL",
+          "requirement": "The pool invests only in authorized investments permitted by the subchapter.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "pool_invests_authorized_only"
+          },
+          "quote": "An investment pool shall invest the funds it receives from entities in authorized investments permitted by this subchapter",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "POL-04",
+          "cite": "2256.016(c)(1)",
+          "component": "DISCLOSURE",
+          "binds": "POOL",
+          "requirement": "The pool furnishes investment transaction confirmations.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "transaction_confirmations"
+          },
+          "quote": "(1) investment transaction confirmations",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "POL-05",
+          "cite": "2256.016(c)(2)",
+          "component": "DISCLOSURE",
+          "binds": "POOL",
+          "requirement": "The pool furnishes a monthly report containing the eleven statutory items.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "monthly_report"
+          },
+          "quote": "a monthly report that contains, at a minimum, the following information",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "POL-06",
+          "cite": "2256.016(f)(1)",
+          "component": "VALUATION",
+          "binds": "POOL",
+          "requirement": "The pool marks its portfolio to market daily.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "daily_mark_to_market"
+          },
+          "quote": "a public funds investment pool that uses amortized cost or fair value accounting must mark its portfolio to market daily",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "POL-07",
+          "cite": "2256.016(f)(2)(A)",
+          "component": "VALUATION",
+          "binds": "POOL",
+          "requirement": "An amortized-cost pool stabilizes, to the extent reasonably possible, at a $1.00 net asset value.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "stable_nav"
+          },
+          "quote": "the investment pool must, to the extent reasonably possible, stabilize at a $1.00 net asset value",
+          "activation": {
+            "fact": "amortized_cost_pool"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "POL-10",
+          "cite": "2256.016(h); 2256.019",
+          "component": "CREDIT_RATING",
+          "binds": "POOL",
+          "requirement": "The pool is continuously rated no lower than AAA or AAA-m (or equivalent) by at least one NRSRO.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "POOL",
+            "floor": "AAA",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "CONTINUOUS",
+            "fact": "min_pool_rating"
+          },
+          "quote": "must be continuously rated no lower than AAA or AAA-m or at an equivalent rating by at least one nationally recognized rating service",
+          "note": "Replaces IS-2256.016-002 e4 and IS-2256.019-002 e1 (one test, previously scored twice).",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "POL-11",
+          "cite": "2256.016(j)",
+          "component": "DISCLOSURE",
+          "binds": "POOL",
+          "requirement": "The pool makes an annual audited financial statement available.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "audited_financials"
+          },
+          "quote": "an investment pool must make available to the entity an annual audited financial statement of the investment pool",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "NOT_TESTABLE"
+            }
+          }
+        }
+      ],
+      "retired_conditions": [
+        {
+          "id": "POL-03",
+          "cite": "2256.016(b)",
+          "component": "DISCLOSURE",
+          "binds": "POOL",
+          "requirement": "The pool furnishes an offering circular or similar disclosure instrument containing the thirteen statutory items.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "offering_circular"
+          },
+          "quote": "an investment pool must furnish to the investment officer or other authorized representative of the entity an offering circular or other similar disclosure instrument",
+          "note": "Item-level contents go to the evidence request list (PBC-20).",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "POL-08",
+          "cite": "2256.016(f)(2)(B)",
+          "component": "VALUATION",
+          "binds": "POOL",
+          "requirement": "The pool's governing body acts when market-to-book falls outside 0.995 to 1.005.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "nav_band_action"
+          },
+          "quote": "if the ratio of the market value of the portfolio divided by the book value of the portfolio is less than 0.995 or greater than 1.005",
+          "activation": {
+            "fact": "amortized_cost_pool"
+          },
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        },
+        {
+          "id": "POL-09",
+          "cite": "2256.016(g)",
+          "component": "GOVERNANCE",
+          "binds": "POOL",
+          "requirement": "The pool has an advisory board of participants and qualified persons without a business relationship with the pool.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "advisory_board"
+          },
+          "quote": "a public funds investment pool must have an advisory board composed",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "NOT_TESTABLE",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            },
+            "effect": "Removed from evaluation; routed to the evidence request list."
+          }
+        }
+      ]
+    },
+    {
+      "code": "ISD_CORPORATE_BOND",
+      "label": "Independent school district corporate bonds",
+      "authority": [
+        "2256.0204"
+      ],
+      "entity_classes": [
+        "ISD_1371_ISSUER"
+      ],
+      "conditions": [],
+      "note": "Applicability (Sec. 2256.0204(b), issuer under Sec. 1371.001) stays an entity predicate, not a policy condition.",
+      "retired_conditions": [
+        {
+          "id": "ICB-01",
+          "cite": "2256.0204(a)",
+          "component": "FORM",
+          "binds": "SECURITY",
+          "requirement": "The bond is a senior secured debt obligation.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "senior_secured"
+          },
+          "quote": "means a senior secured debt obligation issued by a domestic business entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-02",
+          "cite": "2256.0204(a)",
+          "component": "ISSUER",
+          "binds": "SECURITY",
+          "requirement": "The issuer is a domestic business entity.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "domestic_issuer"
+          },
+          "quote": "means a senior secured debt obligation issued by a domestic business entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-03",
+          "cite": "2256.0204(a)(1)",
+          "component": "FORM",
+          "binds": "SECURITY",
+          "requirement": "Convertible obligations are excluded.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "convertibles_permitted"
+          },
+          "quote": "on conversion, would result in the holder becoming a stockholder or shareholder in the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-04",
+          "cite": "2256.0204(a)(2)",
+          "component": "FORM",
+          "binds": "SECURITY",
+          "requirement": "Unsecured obligations are excluded.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "unsecured_permitted"
+          },
+          "quote": "(2) is an unsecured debt obligation",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-05",
+          "cite": "2256.0204(a),(c)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Rated not lower than AA- (or equivalent) at the time of purchase.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "LONG_TERM",
+            "floor": "AA-",
+            "granularity": "NOTCH",
+            "min_agencies": 1,
+            "basis": "AT_PURCHASE",
+            "fact": "min_rating",
+            "contradiction_cues": [
+              {
+                "cue": "investment grade corporate",
+                "value": "BBB-"
+              }
+            ]
+          },
+          "quote": "at the time of purchase, are rated by a nationally recognized investment rating firm",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-06",
+          "cite": "2256.0204(c)",
+          "component": "MATURITY",
+          "binds": "SECURITY",
+          "requirement": "Stated final maturity is no later than the third anniversary of purchase.",
+          "test": {
+            "mode": "CAP",
+            "limit": 3,
+            "unit": "years",
+            "strict": false,
+            "fact": "max_final_maturity"
+          },
+          "quote": "have a stated final maturity that is not later than the third anniversary of the date the corporate bonds were purchased",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "ICB-07",
+          "cite": "2256.0204(d)(1)",
+          "component": "CONCENTRATION",
+          "binds": "ENTITY",
+          "requirement": "Aggregate holdings do not exceed 15 percent of monthly average fund balance, excluding bond proceeds, reserves and debt service funds.",
+          "test": {
+            "mode": "CAP",
+            "limit": 15,
+            "unit": "pct_of_monthly_avg_balance",
+            "strict": false,
+            "fact": "aggregate_cap"
+          },
+          "quote": "invest in the aggregate more than 15 percent of its monthly average fund balance, excluding bond proceeds, reserves, and other funds held for the payment of debt service, in corporate bonds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-08",
+          "cite": "2256.0204(d)(2)",
+          "component": "CONCENTRATION",
+          "binds": "ENTITY",
+          "requirement": "No more than 25 percent of corporate bond holdings in any one domestic business entity, including subsidiaries and affiliates.",
+          "test": {
+            "mode": "CAP",
+            "limit": 25,
+            "unit": "pct_of_corporate_holdings",
+            "strict": false,
+            "fact": "single_issuer_cap"
+          },
+          "quote": "invest more than 25 percent of the funds invested in corporate bonds in any one domestic business entity, including subsidiaries and affiliates of the entity",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-09",
+          "cite": "2256.0204(e)(1)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "The policy authorizes corporate bonds as an eligible investment.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "policy_authorizes"
+          },
+          "quote": "amends its investment policy to authorize corporate bonds as an eligible investment",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-10",
+          "cite": "2256.0204(e)(2)(A)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "Procedures provide for monitoring rating changes in corporate bonds.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "rating_monitoring_procedure"
+          },
+          "quote": "monitoring rating changes in corporate bonds acquired with public funds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-11",
+          "cite": "2256.0204(e)(2)(B)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "Procedures provide for liquidating corporate bond investments.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "liquidation_procedure"
+          },
+          "quote": "liquidating the investment in corporate bonds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-12",
+          "cite": "2256.0204(e)(3)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "The funds eligible for corporate bonds are identified.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "eligible_funds_identified"
+          },
+          "quote": "identifies the funds eligible to be invested in corporate bonds",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-13",
+          "cite": "2256.0204(f)(1)",
+          "component": "DISPOSITION",
+          "binds": "INVESTMENT_MANAGER",
+          "requirement": "Bonds rated AA- are sold within seven days after a negative credit watch release on the bond or issuer.",
+          "test": {
+            "mode": "CAP",
+            "limit": 7,
+            "unit": "days",
+            "strict": false,
+            "fact": "negative_watch_sale_days"
+          },
+          "quote": "places the corporate bonds or the domestic business entity that issued the corporate bonds on negative credit watch or the equivalent",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "ICB-14",
+          "cite": "2256.0204(f)(2)",
+          "component": "DISPOSITION",
+          "binds": "INVESTMENT_MANAGER",
+          "requirement": "Bonds are sold within seven days after a downgrade below AA-.",
+          "test": {
+            "mode": "CAP",
+            "limit": 7,
+            "unit": "days",
+            "strict": false,
+            "fact": "downgrade_sale_days"
+          },
+          "quote": "changes the rating on the corporate bonds to a rating lower than",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base: every condition dropped in the approved review TR-2026-10-02. An authorization is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "IHE_CASH_MGMT_FUND",
+      "label": "Higher education 501(f) cash management and fixed income funds",
+      "authority": [
+        "2256.020(1)"
+      ],
+      "entity_classes": [
+        "IHE"
+      ],
+      "conditions": [],
+      "retired_conditions": [
+        {
+          "id": "IHC-01",
+          "cite": "2256.020(1)",
+          "component": "ISSUER",
+          "binds": "FUND",
+          "requirement": "The fund sponsor is exempt from federal income tax under IRC Sec. 501(f).",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "sponsor_501f",
+            "contradiction_cues": [
+              "any tax-exempt sponsor",
+              "501(c)(3)"
+            ]
+          },
+          "quote": "cash management and fixed income funds sponsored by organizations exempt from federal income taxation under Section 501(f)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base: every condition dropped in the approved review TR-2026-10-02. An authorization is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "NEGOTIABLE_CD",
+      "label": "Negotiable certificates of deposit (higher education; ports and navigation districts)",
+      "authority": [
+        "2256.020(2)",
+        "2256.0203(b)"
+      ],
+      "entity_classes": [
+        "IHE",
+        "PORT_OR_NAVIGATION_DISTRICT"
+      ],
+      "conditions": [
+        {
+          "id": "NCD-01",
+          "cite": "2256.020(2); 2256.0203(b)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "The issuing bank has a CD rating of at least 1 (or equivalent), or is associated with a holding company whose commercial paper is rated at least A-1/P-1 (or equivalent).",
+          "test": {
+            "mode": "ANY_OF",
+            "alternatives": [
+              {
+                "id": "BANK_CD_RATING_1",
+                "label": "Bank CD rating of at least 1",
+                "cues": [
+                  "certificate of deposit rating"
+                ]
+              },
+              {
+                "id": "HOLDCO_CP_A1_P1",
+                "label": "Holding company CP rated A-1/P-1",
+                "cues": [
+                  "holding company"
+                ]
+              }
+            ],
+            "fact": "rating_paths"
+          },
+          "quote": "negotiable certificates of deposit issued by a bank that has a certificate of deposit rating of at least 1 or the equivalent by a nationally recognized credit rating agency or that is associated with a holding company having a commercial paper rating of at least A-1, P-1, or the equivalent",
+          "note": "Replaces the 0.5/0.5 disjunction mis-split in IS-2256.020-2-002 and IS-2256.0203-002.",
+          "interpretive": "The legacy bank certificate-of-deposit rating 'at least 1' is read as the top short-term deposit or CD rating of any NRSRO (e.g. A-1, P-1, F1 or better). Confirm with counsel; the Act does not name the scale.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "note": "Not the Sec. 2256.010 depository CD: no Texas-office or insurance condition applies."
+    },
+    {
+      "code": "IHE_CORPORATE_BOND",
+      "label": "Higher education corporate debt",
+      "authority": [
+        "2256.020(3)"
+      ],
+      "entity_classes": [
+        "IHE"
+      ],
+      "conditions": [],
+      "retired_conditions": [
+        {
+          "id": "IHB-01",
+          "cite": "2256.020(3)",
+          "component": "FORM",
+          "binds": "SECURITY",
+          "requirement": "Instruments are corporate bonds, debentures or similar debt obligations.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "CORPORATE_BOND",
+              "DEBENTURE",
+              "SIMILAR_DEBT"
+            ],
+            "fact": "instrument_forms"
+          },
+          "quote": "corporate bonds, debentures, or similar debt obligations",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "IHB-02",
+          "cite": "2256.020(3)",
+          "component": "CREDIT_RATING",
+          "binds": "SECURITY",
+          "requirement": "Rated in one of the two highest long-term rating categories, without regard to gradations.",
+          "test": {
+            "mode": "RATING_FLOOR",
+            "scale": "LONG_TERM",
+            "floor": "AA",
+            "granularity": "CATEGORY",
+            "min_agencies": 1,
+            "basis": "AT_PURCHASE",
+            "fact": "min_rating"
+          },
+          "quote": "in one of the two highest long-term rating categories, without regard to gradations within those categories",
+          "note": "Category-level: AA- satisfies. A policy floor of AA- is stricter-or-equal, never deficient.",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base: every condition dropped in the approved review TR-2026-10-02. An authorization is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "MUNICIPAL_UTILITY_HEDGE",
+      "label": "Municipal electric utility hedging",
+      "authority": [
+        "2256.0201"
+      ],
+      "entity_classes": [
+        "MUNICIPAL_ELECTRIC_UTILITY"
+      ],
+      "conditions": [],
+      "note": "Sec. 2256.0201(c) permits (does not require) the utility's governing body to set hedging policy; not a condition.",
+      "retired_conditions": [
+        {
+          "id": "MUH-01",
+          "cite": "2256.0201(a),(d)",
+          "component": "PURPOSE",
+          "binds": "ENTITY",
+          "requirement": "Hedging is limited to fuel oil, natural gas, coal, nuclear fuel and electric energy (and related transportation costs).",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "FUEL_OIL",
+              "NATURAL_GAS",
+              "COAL",
+              "NUCLEAR_FUEL",
+              "ELECTRIC_ENERGY",
+              "RELATED_TRANSPORTATION"
+            ],
+            "fact": "commodities"
+          },
+          "quote": "in relation to fuel oil, natural gas, coal, nuclear fuel, and electric energy",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MUH-02",
+          "cite": "2256.0201(a)",
+          "component": "PURPOSE",
+          "binds": "ENTITY",
+          "requirement": "Hedging is entered into to protect against loss due to price fluctuations.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "price_protection_purpose",
+            "contradiction_cues": [
+              "speculative",
+              "to enhance yield",
+              "trading for profit"
+            ]
+          },
+          "quote": "to protect against loss due to price fluctuations",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MUH-03",
+          "cite": "2256.0201(a)",
+          "component": "REGULATORY",
+          "binds": "ENTITY",
+          "requirement": "Hedging transactions comply with CFTC and SEC regulations.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "cftc_sec_compliance"
+          },
+          "quote": "A hedging transaction must comply with the regulations of the Commodity Futures Trading Commission and the Securities and Exchange Commission",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base (TR-2026-09-27a). An authorization of this instrument is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "MINERAL_RIGHTS_MUNI",
+      "label": "Mineral-rights lease funds (municipality)",
+      "authority": [
+        "2256.0202"
+      ],
+      "entity_classes": [
+        "MUNICIPALITY"
+      ],
+      "conditions": [],
+      "lexicon_change": "Split from MINERAL_RIGHTS_TRUST_INVESTMENT by entity class.",
+      "retired_conditions": [
+        {
+          "id": "MRM-01",
+          "cite": "2256.0202(a)",
+          "component": "FUNDS_RESTRICTION",
+          "binds": "ENTITY",
+          "requirement": "The expanded authority is limited to funds from mineral-development leases or contracts on entity-owned land.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "funds_limited_to_mineral_proceeds",
+            "contradiction_cues": [
+              "all municipal funds may be invested as a trustee"
+            ]
+          },
+          "quote": "funds received by the municipality from a lease or contract for the management and development of land owned by the municipality and leased for oil, gas, or other mineral development",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MRM-02",
+          "cite": "2256.0202(a)",
+          "component": "PORTFOLIO",
+          "binds": "ENTITY",
+          "requirement": "Investments are limited to those a trustee may make under the Texas Trust Code (Property Code Subtitle B, Title 9).",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "trust_code_scope"
+          },
+          "quote": "in any investment authorized to be made by a trustee under Subtitle B, Title 9, Property Code (Texas Trust Code)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MRM-03",
+          "cite": "2256.0202(b)",
+          "component": "SEGREGATION",
+          "binds": "ENTITY",
+          "requirement": "These funds are segregated and accounted for separately.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "segregated",
+            "contradiction_cues": [
+              "commingled with other funds"
+            ]
+          },
+          "quote": "shall be segregated and accounted for separately from other funds of the municipality",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base (TR-2026-09-27a). An authorization of this instrument is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "MINERAL_RIGHTS_JUCO",
+      "label": "Mineral-rights lease funds (public junior college district)",
+      "authority": [
+        "2256.0207"
+      ],
+      "entity_classes": [
+        "PUBLIC_JUNIOR_COLLEGE"
+      ],
+      "conditions": [],
+      "lexicon_change": "Split from MINERAL_RIGHTS_TRUST_INVESTMENT by entity class.",
+      "retired_conditions": [
+        {
+          "id": "MRJ-01",
+          "cite": "2256.0207(a)",
+          "component": "FUNDS_RESTRICTION",
+          "binds": "ENTITY",
+          "requirement": "The expanded authority is limited to funds from mineral-development leases or contracts on entity-owned land.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "funds_limited_to_mineral_proceeds",
+            "contradiction_cues": [
+              "all district funds may be invested as a trustee"
+            ]
+          },
+          "quote": "funds received by the district from a lease or contract for the management and development of land owned by the district and leased for oil, gas, or other mineral development",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MRJ-02",
+          "cite": "2256.0207(a)",
+          "component": "PORTFOLIO",
+          "binds": "ENTITY",
+          "requirement": "Investments are limited to those a trustee may make under the Texas Trust Code (Property Code Subtitle B, Title 9).",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "trust_code_scope"
+          },
+          "quote": "in any investment authorized to be made by a trustee under Subtitle B, Title 9, Property Code (Texas Trust Code)",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "MRJ-03",
+          "cite": "2256.0207(b)",
+          "component": "SEGREGATION",
+          "binds": "ENTITY",
+          "requirement": "These funds are segregated and accounted for separately.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "segregated",
+            "contradiction_cues": [
+              "commingled with other funds"
+            ]
+          },
+          "quote": "shall be segregated and accounted for separately from other funds of the district",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base (TR-2026-09-27a). An authorization of this instrument is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "DECOMMISSIONING_TRUST",
+      "label": "Nuclear decommissioning trust funds",
+      "authority": [
+        "2256.0205"
+      ],
+      "entity_classes": [
+        "MUNICIPAL_ELECTRIC_UTILITY"
+      ],
+      "conditions": [],
+      "lexicon_change": "Renamed from DECOMMISSIONING_TRUST_INVESTMENT.",
+      "retired_conditions": [
+        {
+          "id": "DEC-01",
+          "cite": "2256.0205(b)",
+          "component": "FUNDS_RESTRICTION",
+          "binds": "ENTITY",
+          "requirement": "The expanded authority is limited to funds held in a decommissioning trust.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "funds_limited_to_trust",
+            "contradiction_cues": [
+              "all utility funds",
+              "operating reserves may be invested as a trustee"
+            ]
+          },
+          "quote": "invest funds held in a decommissioning trust",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "DEC-02",
+          "cite": "2256.0205(b)",
+          "component": "PORTFOLIO",
+          "binds": "ENTITY",
+          "requirement": "Investments are limited to those authorized by Property Code Subtitle B, Title 9.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "trust_code_scope"
+          },
+          "quote": "in any investment authorized by Subtitle B, Title 9, Property Code",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base (TR-2026-09-27a). An authorization of this instrument is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "ELIGIBLE_ENTITY_HEDGE",
+      "label": "Eligible entity commodity hedging",
+      "authority": [
+        "2256.0206"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [],
+      "note": "Eligibility ($250M debt and top-four rating) stays the P_HEDGING_ELIGIBLE_ENTITY predicate; IS-2256.0206-002 e1 is retired.",
+      "retired_conditions": [
+        {
+          "id": "EEH-01",
+          "cite": "2256.0206(d)",
+          "component": "PURPOSE",
+          "binds": "ENTITY",
+          "requirement": "Hedging is connected to commodities used in general operations, a capital project, or an eligible project.",
+          "test": {
+            "mode": "SUBSET",
+            "allowed": [
+              "GENERAL_OPERATIONS_COMMODITIES",
+              "CAPITAL_PROJECT",
+              "ELIGIBLE_PROJECT_1371"
+            ],
+            "fact": "hedge_connections",
+            "contradiction_cues": [
+              "any political subdivision may hedge"
+            ]
+          },
+          "quote": "in connection with commodities used by an eligible entity in the entity's general operations, with the acquisition or construction of a capital project, or with an eligible project",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "EEH-02",
+          "cite": "2256.0206(a)(3)",
+          "component": "PURPOSE",
+          "binds": "ENTITY",
+          "requirement": "Hedging protects against economic loss from commodity price fluctuation.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "price_protection_purpose"
+          },
+          "quote": "acting to protect against economic loss due to price fluctuation of a commodity or related investment",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "EEH-03",
+          "cite": "2256.0206(d)",
+          "component": "REGULATORY",
+          "binds": "ENTITY",
+          "requirement": "Hedging transactions comply with federal CFTC and SEC regulations.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "cftc_sec_compliance"
+          },
+          "quote": "A hedging transaction must comply with the regulations of the federal Commodity Futures Trading Commission and the federal Securities and Exchange Commission",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        },
+        {
+          "id": "EEH-04",
+          "cite": "2256.0206(c)",
+          "component": "GOVERNANCE",
+          "binds": "ENTITY",
+          "requirement": "The governing body establishes the entity's hedging policy.",
+          "test": {
+            "mode": "REQUIRED",
+            "fact": "governing_body_hedging_policy",
+            "contradiction_cues": [
+              "hedging at the discretion of the investment officer"
+            ]
+          },
+          "quote": "The governing body of an eligible entity shall establish the entity's policy regarding hedging transactions",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "DROP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "DROP"
+            }
+          }
+        }
+      ],
+      "scope": {
+        "status": "NOT_REVIEWED",
+        "reason": "Outside the firm's client base (TR-2026-09-27a). An authorization of this instrument is reported as not reviewed, never as aligned."
+      }
+    },
+    {
+      "code": "CMO_IO_PO_INVERSE",
+      "label": "Prohibited mortgage derivatives",
+      "authority": [
+        "2256.009(b)(1),(2),(4)"
+      ],
+      "entity_classes": [
+        "*"
+      ],
+      "conditions": [
+        {
+          "id": "PRH-01",
+          "cite": "2256.009(b)(1)",
+          "component": "PROHIBITION",
+          "binds": "SECURITY",
+          "requirement": "Interest-only mortgage strips are not authorized.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "io_strips_authorized"
+          },
+          "quote": "obligations whose payment represents the coupon payments on the outstanding principal balance of the underlying mortgage-backed security collateral and pays no principal",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "PRH-02",
+          "cite": "2256.009(b)(2)",
+          "component": "PROHIBITION",
+          "binds": "SECURITY",
+          "requirement": "Principal-only mortgage strips are not authorized.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "po_strips_authorized"
+          },
+          "quote": "obligations whose payment represents the principal stream of cash flow from the underlying mortgage-backed security collateral and bears no interest",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        },
+        {
+          "id": "PRH-03",
+          "cite": "2256.009(b)(4)",
+          "component": "PROHIBITION",
+          "binds": "SECURITY",
+          "requirement": "Inverse-floating-rate CMOs are not authorized.",
+          "test": {
+            "mode": "PROHIBITED",
+            "fact": "inverse_floaters_authorized"
+          },
+          "quote": "collateralized mortgage obligations the interest rate of which is determined by an index that adjusts opposite to the changes in a market index",
+          "review": {
+            "ref": "TR-2026-10-02",
+            "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+            "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+            "status": "ADOPTED",
+            "verdict": "KEEP",
+            "prior": {
+              "ref": "TR-2026-09-27",
+              "verdict": "KEEP"
+            }
+          }
+        }
+      ],
+      "note": "Always active. (b)(3) is the numeric cap CMO-03."
+    }
+  ],
+  "team_review": {
+    "ref": "TR-2026-10-02",
+    "status": "ADOPTED",
+    "source": "schedule-b-v2-condition-catalogue_APPROVED.xlsx",
+    "source_sha256": "d0096dc79ef51a997dd299f1c6f897798388fbb3d2b22b9f34a501f1fbaa0569",
+    "applied": "2026-10-02",
+    "supersedes": [
+      "TR-2026-09-27",
+      "TR-2026-09-27a"
+    ],
+    "counts": {
+      "KEEP": 79,
+      "NOT_TESTABLE": 15,
+      "DROP": 34,
+      "REWORD": 1
+    },
+    "note": "Complete re-review of all 129 conditions; supersedes the earlier review and its follow-up."
+  },
+  "version_note": "0.2.0: approved re-review TR-2026-10-02 applied. Status stays proposed until the recorded-run gate (ADR 0009) is met."
+}

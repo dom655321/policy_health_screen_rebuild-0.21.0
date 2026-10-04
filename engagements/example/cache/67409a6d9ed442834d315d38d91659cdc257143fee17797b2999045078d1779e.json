@@ -1,0 +1,28 @@
+{
+  "elements": {
+    "e1": {
+      "note": "Text requires loans be 'fully colla teralized' but does not state the 100 percent collateral threshold.",
+      "supported": false
+    },
+    "e2": {
+      "quote": "A loan must allow for termination at any time",
+      "supported": true
+    },
+    "e3": {
+      "note": "Text allows cash invested under the Investment Act generally rather than limiting it to Sections 2256.009, .013, .014, or .016.",
+      "supported": false
+    },
+    "e4": {
+      "note": "Text does not state that collateral must be deposited with the entity or an approved third party.",
+      "supported": false
+    },
+    "e5": {
+      "quote": "A loan must be placed through a primary government securities dealer or a financial institution doing business in Texas. A loan must allow for termination at any time and must have a term of one year or less.",
+      "supported": true
+    }
+  },
+  "values": {
+    "max_term_months": 12,
+    "terminable_at_any_time": true
+  }
+}

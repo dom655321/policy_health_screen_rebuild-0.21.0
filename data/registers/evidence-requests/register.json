@@ -1,0 +1,1248 @@
+{
+  "$id": "tx-pfia/evidence-requests",
+  "status": "proposed",
+  "version": "0.1.0-proposed",
+  "title": "Evidence request list (prepared-by-client) derived from conduct and extrinsic elements",
+  "semantics": {
+    "purpose": "Conduct the screen cannot see is requested, never scored. Items are filtered by the scope of the controls and conditions they derive from, so each entity receives only the requests that apply to its class and authorized instruments.",
+    "scoring": "None. No request affects any index.",
+    "retired": "IS-2256.0206-002#e1 (entity debt size and rating) is answered by the P_HEDGING_ELIGIBLE_ENTITY profile predicate, not requested.",
+    "source_elements": "All 36 observational and 8 extrinsic elements from the 2026-09-27 element audit are covered, plus procurement and pool-eligibility conditions from Schedule B v2.",
+    "team_review": "TR-2026-10-02 (approved re-review): references to dropped conditions removed; NOT_TESTABLE conditions route here (PBC-11 broker and intermediary eligibility, PBC-13 custodians, PBC-17 GIC procurement, PBC-19 pool disclosures and governance, PBC-26 MMF prospectus).",
+    "scope": "ADR 0011: requests deriving from Context provisions or from instruments outside the client base are paused, not deleted."
+  },
+  "requests": [
+    {
+      "id": "PBC-01",
+      "request": "Adopting instrument (rule, order, ordinance or resolution) for the current investment policy, showing adoption date.",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Current",
+      "cite": "2256.005(a)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-a-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-a-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-02",
+      "request": "Written instrument recording the most recent annual review of the investment policy and strategies, including any changes adopted.",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Most recent fiscal year",
+      "cite": "2256.005(e)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-e-001#e3"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-e-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-03",
+      "request": "Instrument designating each current investment officer.",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Current",
+      "cite": "2256.005(f)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-f-001#e1",
+        "TX-PFIA-2256.005-h-001#e1"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-f-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.005-h-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_COMMISSION_391"
+            ],
+            "include_classes": [
+              "COMMISSION_391"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-04",
+      "request": "Disclosure statements filed by each investment officer with the Texas Ethics Commission and the governing body (personal business relationships; relatives within the second degree).",
+      "evidence": "THIRD_PARTY_ATTESTATION",
+      "cadence": "Current officers",
+      "cite": "2256.005(i)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-i-001#e3"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-i-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-05",
+      "request": "Most recent compliance audit of management controls on investments and adherence to the investment policy, performed with the annual financial audit.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Most recent fiscal year",
+      "cite": "2256.005(m)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-m-001#e1",
+        "TX-PFIA-2256.005-m-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-m-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_NON_STATE_AGENCY_INVESTING_ENTITY"
+            ],
+            "include_classes": [
+              "*"
+            ],
+            "exclude_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.005-m-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_NON_STATE_AGENCY_INVESTING_ENTITY"
+            ],
+            "include_classes": [
+              "*"
+            ],
+            "exclude_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-06",
+      "request": "Most recent biennial compliance audit and evidence of transmittal to the State Auditor by January 1 of the even-numbered year.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Most recent biennium",
+      "cite": "2256.005(n)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.005-n-001#e1",
+        "TX-PFIA-2256.005-n-001#e2",
+        "TX-PFIA-2256.005-n-001#e3"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.005-n-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_STATE_AGENCY"
+            ],
+            "include_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.005-n-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_STATE_AGENCY"
+            ],
+            "include_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.005-n-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_STATE_AGENCY"
+            ],
+            "include_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-07",
+      "request": "Training certificates for each person required to train (hours, dates, provider) and the instrument approving independent training sources.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current two-year period",
+      "cite": "2256.007-.008",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.007-a-001#e2",
+        "TX-PFIA-2256.008-b-001#e2",
+        "TX-PFIA-2256.008-b1-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.007-a-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_STATE_AGENCY"
+            ],
+            "include_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.008-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_TRAINING_SEC_008_APPLIES",
+              "P_TRAINING_4HR_TRACK"
+            ],
+            "include_classes": [
+              "LOCAL_GOV"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.008-b1-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_TRAINING_SEC_008_APPLIES",
+              "P_TRAINING_5HR_TRACK"
+            ],
+            "include_classes": [
+              "HOUSING_AUTHORITY_392"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-08",
+      "request": "Post-session report on changes to the subchapter delivered to the governing body within 180 days after the last regular session.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Most recent session",
+      "cite": "2256.007(d)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.007-d-001#e3"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.007-d-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_IS_STATE_AGENCY"
+            ],
+            "include_classes": [
+              "STATE_AGENCY"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-09",
+      "request": "Quarterly investment reports for the last four quarters, signed by each investment officer, with evidence of presentation to the governing body.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Last four quarters",
+      "cite": "2256.023(a)-(b)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.023-a-001#e1",
+        "TX-PFIA-2256.023-a-001#e2",
+        "TX-PFIA-2256.023-a-001#e3",
+        "TX-PFIA-2256.023-b-001#e1",
+        "TX-PFIA-2256.023-b-001#e2",
+        "TX-PFIA-2256.023-b-001#e3",
+        "TX-PFIA-2256.023-b-001#e4",
+        "TX-PFIA-2256.023-b-001#e5",
+        "TX-PFIA-2256.023-b-001#e6",
+        "TX-PFIA-2256.023-b-001#e7",
+        "TX-PFIA-2256.023-b-001#e8"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.023-a-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-a-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-a-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.023-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-10",
+      "request": "Independent auditor's annual review of the quarterly reports and the auditor's report of the result to the governing body.",
+      "evidence": "THIRD_PARTY_ATTESTATION",
+      "cadence": "Most recent fiscal year",
+      "cite": "2256.023(d)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.023-d-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.023-d-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "predicate_ref": "P_BEYOND_2256_023D_SAFE_HARBOR"
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-11",
+      "request": "Current qualified broker list and the instrument adopting it (reviewed within the last twelve months).",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Current",
+      "cite": "2256.025",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.025-001#e1",
+        "TX-PFIA-2256.025-001#e2",
+        "BRD-02",
+        "BCD-02",
+        "BRD-01",
+        "BCD-01"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.025-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.025-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "always": true
+          }
+        },
+        {
+          "condition": "BRD-02",
+          "instrument_authorized": "BROKERED_DEPOSIT",
+          "activation": {
+            "fact": "broker_path_authorized"
+          }
+        },
+        {
+          "condition": "BCD-02",
+          "instrument_authorized": "BROKERED_CD",
+          "activation": {
+            "fact": "broker_path_authorized"
+          }
+        },
+        {
+          "condition": "BRD-01",
+          "instrument_authorized": "BROKERED_DEPOSIT",
+          "activation": null
+        },
+        {
+          "condition": "BCD-01",
+          "instrument_authorized": "BROKERED_CD",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-12",
+      "request": "Investment management firm contract(s), term, and the renewal or extension instrument.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.003(b)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.003-b-001#e1",
+        "TX-PFIA-2256.003-b-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.003-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "predicate_ref": "P_HAS_IM_FIRM_CONTRACT"
+          }
+        },
+        {
+          "control": "TX-PFIA-2256.003-b-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "predicate_ref": "P_HAS_IM_FIRM_CONTRACT"
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-13",
+      "request": "Custodial appointment for placed deposits and brokered CDs, identifying the custodian and its eligibility.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.009(a)(8)(D); 2256.010(b)(4)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "BRD-05",
+        "BCD-05",
+        "IS-2256.009-a-8-002#e4",
+        "IS-2256.010-b-002#e4"
+      ],
+      "scope": [
+        {
+          "condition": "BRD-05",
+          "instrument_authorized": "BROKERED_DEPOSIT",
+          "activation": null
+        },
+        {
+          "condition": "BCD-05",
+          "instrument_authorized": "BROKERED_CD",
+          "activation": null
+        },
+        {
+          "control": "IS-2256.009-a-8-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "BROKERED_DEPOSIT"
+          }
+        },
+        {
+          "control": "IS-2256.010-b-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "BROKERED_CD"
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-14",
+      "request": "Master repurchase agreement(s), custody or tri-party agreements, and counterparty status (primary dealer or Texas financial institution).",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.011(a)-(b)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "REP-03",
+        "REP-04",
+        "REP-05",
+        "REP-06",
+        "REP-07",
+        "REP-08"
+      ],
+      "scope": [
+        {
+          "condition": "REP-04",
+          "instrument_authorized": "REPO",
+          "activation": null
+        },
+        {
+          "condition": "REP-05",
+          "instrument_authorized": "REPO",
+          "activation": null
+        },
+        {
+          "condition": "REP-06",
+          "instrument_authorized": "REPO",
+          "activation": null
+        },
+        {
+          "condition": "REP-07",
+          "instrument_authorized": "REPO",
+          "activation": null
+        },
+        {
+          "condition": "REP-08",
+          "instrument_authorized": "REPO",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-15",
+      "request": "Joint-account repurchase procedures maintained by the investment management firm: daily pro rata accounting, ownership records, and balance segregation controls.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.011(f)-(g)",
+      "binds": "INVESTMENT_MANAGER",
+      "derived_from": [
+        "REP-09",
+        "REP-10"
+      ],
+      "scope": [
+        {
+          "condition": "REP-09",
+          "instrument_authorized": "REPO",
+          "activation": {
+            "fact": "joint_account_via_manager_authorized"
+          }
+        },
+        {
+          "condition": "REP-10",
+          "instrument_authorized": "REPO",
+          "activation": {
+            "fact": "joint_account_via_manager_authorized"
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-16",
+      "request": "Securities lending agreement(s): term, termination rights, collateral schedule, custody terms and cash reinvestment guidelines.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.0115",
+      "binds": "ENTITY",
+      "derived_from": [
+        "SLN-01",
+        "SLN-03",
+        "SLN-04",
+        "SLN-06",
+        "SLN-11",
+        "SLN-07",
+        "SLN-08",
+        "SLN-09"
+      ],
+      "scope": [
+        {
+          "condition": "SLN-01",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-03",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-04",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-06",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": {
+            "fact": "cash_collateral_authorized"
+          }
+        },
+        {
+          "condition": "SLN-11",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-07",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-08",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        },
+        {
+          "condition": "SLN-09",
+          "instrument_authorized": "SECURITIES_LENDING",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-17",
+      "request": "For each GIC: the bond order authorizing GICs, bid tabulation (three or more independent providers), award documentation, and the provider's administrative-cost certification.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Each contract",
+      "cite": "2256.015(c)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "IS-2256.015-002#e5",
+        "IS-2256.015-002#e6",
+        "GIC-09",
+        "GIC-10",
+        "GIC-11",
+        "GIC-12",
+        "GIC-13"
+      ],
+      "scope": [
+        {
+          "control": "IS-2256.015-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "GIC"
+          }
+        },
+        {
+          "control": "IS-2256.015-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "GIC"
+          }
+        },
+        {
+          "condition": "GIC-09",
+          "instrument_authorized": "GIC",
+          "activation": null
+        },
+        {
+          "condition": "GIC-10",
+          "instrument_authorized": "GIC",
+          "activation": null
+        },
+        {
+          "condition": "GIC-11",
+          "instrument_authorized": "GIC",
+          "activation": null
+        },
+        {
+          "condition": "GIC-12",
+          "instrument_authorized": "GIC",
+          "activation": null
+        },
+        {
+          "condition": "GIC-13",
+          "instrument_authorized": "GIC",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-18",
+      "request": "Governing-body instrument authorizing each investment pool in which funds are held.",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Current",
+      "cite": "2256.016(a)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "IS-2256.016-002#e1"
+      ],
+      "scope": [
+        {
+          "control": "IS-2256.016-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "INVESTMENT_POOL"
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-19",
+      "request": "For each pool: current offering circular (13 items), latest monthly report (11 items), current rating letter, annual audited financial statements, and advisory board roster.",
+      "evidence": "THIRD_PARTY_ATTESTATION",
+      "cadence": "Current",
+      "cite": "2256.016(b),(c),(g),(h),(j); 2256.019",
+      "binds": "POOL",
+      "derived_from": [
+        "POL-03",
+        "POL-10",
+        "POL-11",
+        "POL-08",
+        "POL-09"
+      ],
+      "scope": [
+        {
+          "condition": "POL-03",
+          "instrument_authorized": "INVESTMENT_POOL",
+          "activation": null
+        },
+        {
+          "condition": "POL-10",
+          "instrument_authorized": "INVESTMENT_POOL",
+          "activation": null
+        },
+        {
+          "condition": "POL-11",
+          "instrument_authorized": "INVESTMENT_POOL",
+          "activation": null
+        },
+        {
+          "condition": "POL-08",
+          "instrument_authorized": "INVESTMENT_POOL",
+          "activation": null
+        },
+        {
+          "condition": "POL-09",
+          "instrument_authorized": "INVESTMENT_POOL",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-20",
+      "request": "ISD corporate bonds: policy amendment authorizing them, rating-monitoring and liquidation procedures, eligible-fund designation, and evidence of Sec. 1371.001 issuer status.",
+      "evidence": "BOARD_RECORD",
+      "cadence": "Current",
+      "cite": "2256.0204(b),(e)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "IS-2256.0204-002#e5"
+      ],
+      "scope": [
+        {
+          "control": "IS-2256.0204-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "ISD_1371_ISSUER"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "ISD_CORPORATE_BOND"
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-21",
+      "request": "Hedging: the governing body's hedging policy and confirmation of CFTC and SEC compliance for open positions.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.0201; 2256.0206",
+      "binds": "ENTITY",
+      "derived_from": [
+        "IS-2256.0201-002#e2",
+        "IS-2256.0206-002#e2",
+        "IS-2256.0206-002#e4",
+        "IS-2256.0201-002#e3"
+      ],
+      "scope": [
+        {
+          "control": "IS-2256.0201-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "MUNICIPAL_ELECTRIC_UTILITY_OWNER"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "MUNICIPAL_UTILITY_HEDGE"
+          }
+        },
+        {
+          "control": "IS-2256.0206-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_HEDGING_ELIGIBLE_ENTITY"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "ELIGIBLE_ENTITY_HEDGE"
+          }
+        },
+        {
+          "control": "IS-2256.0206-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES",
+              "P_HEDGING_ELIGIBLE_ENTITY"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "ELIGIBLE_ENTITY_HEDGE"
+          }
+        },
+        {
+          "control": "IS-2256.0201-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "MUNICIPAL_ELECTRIC_UTILITY_OWNER"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "MUNICIPAL_UTILITY_HEDGE"
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-22",
+      "request": "Evidence that mineral-rights lease funds are segregated and separately accounted for.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Current",
+      "cite": "2256.0202(b); 2256.0207(b)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "IS-2256.0202-002#e3",
+        "IS-2256.0207-002#e3"
+      ],
+      "scope": [
+        {
+          "control": "IS-2256.0202-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "MUNICIPALITY"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "MINERAL_RIGHTS_TRUST_INVESTMENT"
+          }
+        },
+        {
+          "control": "IS-2256.0207-002",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "JUNIOR_COLLEGE_DISTRICT"
+            ]
+          },
+          "activation": {
+            "instrument_authorized": "MINERAL_RIGHTS_TRUST_INVESTMENT"
+          }
+        }
+      ],
+      "status": "paused"
+    },
+    {
+      "id": "PBC-23",
+      "request": "Holdings that lost a required rating during the period and the liquidation actions taken.",
+      "evidence": "OPERATIONAL_ARTIFACT",
+      "cadence": "Review period",
+      "cite": "2256.021",
+      "binds": "ENTITY",
+      "derived_from": [
+        "TX-PFIA-2256.021-001#e2"
+      ],
+      "scope": [
+        {
+          "control": "TX-PFIA-2256.021-001",
+          "applicability": {
+            "predicate_refs": [
+              "P_SUBCH_A_APPLIES"
+            ],
+            "include_classes": [
+              "*"
+            ]
+          },
+          "activation": {
+            "logic": {
+              "some": [
+                {
+                  "var": "policy.authorized_instruments"
+                },
+                {
+                  "in": [
+                    {
+                      "var": ""
+                    },
+                    [
+                      "MUNI_OBLIGATIONS",
+                      "BANKERS_ACCEPTANCE",
+                      "COMMERCIAL_PAPER",
+                      "INVESTMENT_POOL",
+                      "ISD_CORPORATE_BOND",
+                      "SECURITIES_LENDING"
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-25",
+      "request": "For certificates of deposit secured by obligations: the pledge or custodial report showing the collateral held, its eligibility under Sec. 2256.009(a) (excluding Sec. 2256.009(b) mortgage-backed securities), and its market value against principal.",
+      "evidence": "THIRD_PARTY_ATTESTATION",
+      "cadence": "Most recent month-end",
+      "cite": "2256.010(a)(2)",
+      "binds": "ENTITY",
+      "derived_from": [
+        "DCD-03",
+        "DCD-04",
+        "DCD-05"
+      ],
+      "scope": [
+        {
+          "condition": "DCD-03",
+          "instrument_authorized": "DEPOSITORY_CD",
+          "activation": null
+        },
+        {
+          "condition": "DCD-04",
+          "instrument_authorized": "DEPOSITORY_CD",
+          "activation": null
+        },
+        {
+          "condition": "DCD-05",
+          "instrument_authorized": "DEPOSITORY_CD",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "PBC-26",
+      "request": "For each money market mutual fund held: the current prospectus and the information the fund provides under the 1934 or 1940 Act.",
+      "evidence": "THIRD_PARTY_ATTESTATION",
+      "cadence": "Current",
+      "cite": "2256.014(a)(2)",
+      "binds": "FUND",
+      "derived_from": [
+        "MMF-03"
+      ],
+      "scope": [
+        {
+          "condition": "MMF-03",
+          "instrument_authorized": "MMMF",
+          "activation": null
+        }
+      ],
+      "status": "active"
+    }
+  ]
+}

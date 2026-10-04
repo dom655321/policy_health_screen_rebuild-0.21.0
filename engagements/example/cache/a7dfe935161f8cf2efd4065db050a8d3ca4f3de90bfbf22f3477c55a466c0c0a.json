@@ -1,0 +1,28 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "no keyword overlap in the supplied windows",
+      "quote": "",
+      "supported": false
+    },
+    {
+      "id": "e2a",
+      "note": "",
+      "quote": "18 - 1 - HARRIS COUNTY, TEXAS INVESTMENT POLICY This Investment Policy (the Policy) is adopted by the Harris County Commissioners Court as the governing body of Harris County pursuant to the Texas Government Code , Title 10, Chapter 2256 (Public Funds Investment Act) and Texas Local Government Code, Chapter 116.112.",
+      "supported": true
+    },
+    {
+      "id": "e2b",
+      "note": "",
+      "quote": "18 - 1 - HARRIS COUNTY, TEXAS INVESTMENT POLICY This Investment Policy (the Policy) is adopted by the Harris County Commissioners Court as the governing body of Harris County pursuant to the Texas Government Code , Title 10, Chapter 2256 (Public Funds Investment Act) and Texas Local Government Code, Chapter 116.112.",
+      "supported": true
+    },
+    {
+      "id": "e3",
+      "note": "",
+      "quote": "18 - 1 - HARRIS COUNTY, TEXAS INVESTMENT POLICY This Investment Policy (the Policy) is adopted by the Harris County Commissioners Court as the governing body of Harris County pursuant to the Texas Government Code , Title 10, Chapter 2256 (Public Funds Investment Act) and Texas Local Government Code, Chapter 116.112.",
+      "supported": true
+    }
+  ]
+}

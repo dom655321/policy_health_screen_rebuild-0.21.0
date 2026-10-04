@@ -1,0 +1,4068 @@
+{
+  "$id": "tx-pfia/policy-content",
+  "schedule": "A",
+  "title": "PFIA Policy-Content and Governance Controls",
+  "version": "2026.10.04",
+  "authority": "STATUTE",
+  "authority_label": "Tex. Gov't Code ch. 2256 (Public Funds Investment Act)",
+  "law_in_force_as_of": "2026-09-27",
+  "canonical_source": "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.2256.htm",
+  "uses": [
+    "tx-pfia/entity_classes",
+    "tx-pfia/predicates"
+  ],
+  "register_gate": {
+    "predicate_refs": [
+      "P_SUBCH_A_APPLIES"
+    ]
+  },
+  "verdict_scale": [
+    "CONFORMING",
+    "DEFICIENT",
+    "ABSENT",
+    "NOT_APPLICABLE"
+  ],
+  "interpretive_notes": [
+    "Sec. 2256.005(h) exists in two unreconciled 1997 amendments in the official code. Any control derived from (h) must carry both texts and be flagged INTERPRETIVE.",
+    "Sec. 2256.024 makes the subchapter cumulative. A policy more restrictive than PFIA is conforming. The evaluator must never score restriction as deficiency."
+  ],
+  "controls": [
+    {
+      "control_id": "TX-PFIA-2256.003-b-001",
+      "title": "Investment management firm contract - two-year term limit and formal renewal",
+      "citation": {
+        "section": "2256.003",
+        "subsection": "b"
+      },
+      "source_text": "A contract made under authority of this subsection may not be for a term longer than two years. A renewal or extension of the contract must be made by the governing body of the investing entity by order, ordinance, or resolution.",
+      "source_version": {
+        "effective_date": "1999-09-01",
+        "last_amended_by": "Acts 1999, 76th Leg., ch. 1454"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "predicate_ref": "P_HAS_IM_FIRM_CONTRACT"
+      },
+      "activation_note": "Fires only where the entity profile records a Sec. 2256.003(b) management contract.",
+      "operative_clause": "Any investment management firm contract runs for no more than two years and is renewed or extended only by order, ordinance or resolution of the governing body.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy limits any investment management contract to a term of not more than two years.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Contract term does not exceed two years."
+            }
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires any renewal or extension of the contract to be made by order, ordinance or resolution of the governing body.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Renewal or extension is made by order, ordinance or resolution of the governing body."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(f)",
+          "text": "Where the entity contracts with another investing entity, that entity's investment officer is the first entity's investment officer for chapter purposes.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "investment management firm",
+          "two years",
+          "renewal",
+          "order, ordinance, or resolution"
+        ],
+        "anti_patterns": [
+          "automatically renews",
+          "evergreen",
+          "three-year term",
+          "renewed administratively"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "An auto-renewing or staff-renewed advisory contract exceeds the statutory two-year term because renewal is not an act of the governing body."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy or contract terms do not observe the two-year limit and formal renewal requirement of Sec. 2256.003(b).",
+      "remediation_language": "State that any investment management firm contract is limited to a two-year term and that renewal or extension requires action of the governing body by order, ordinance or resolution.",
+      "cross_references": [
+        "TX-PFIA-2256.005-f-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Any contract with an investment management firm shall be for a term of not more than two years, and any renewal or extension of the contract shall be made by the [Governing Body] by order, ordinance, or resolution."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-a-001",
+      "title": "Written investment policy adopted by the governing body",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "a"
+      },
+      "source_text": "The governing body of an investing entity shall adopt by rule, order, ordinance, or resolution, as appropriate, a written investment policy regarding the investment of its funds and funds under its control.",
+      "source_version": {
+        "effective_date": "2017-09-01",
+        "last_amended_by": "Acts 2017, 85th Leg., R.S., Ch. 149 (H.B. 1701)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "A written investment policy exists AND its adoption instrument is a rule, order, ordinance, or resolution of the governing body.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy identifies the governing body that adopted it.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Policy is in writing and identifies the adopting governing body."
+            },
+            "note": "'In writing' dropped as tautological for any document under review."
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy states the rule, order, ordinance or resolution by which it was adopted.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Policy or attached record identifies the adoption vehicle and adoption date."
+            },
+            "note": "Adoption date dropped as a scored element (not required by the statute); the adopting instrument itself is evidence request PBC-01."
+          }
+        }
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "adopted by resolution",
+          "adopted by ordinance",
+          "order of the Board",
+          "approved by the Board of Directors",
+          "effective date"
+        ],
+        "anti_patterns": [
+          "adopted by the Investment Officer",
+          "administrative directive",
+          "adopted by staff"
+        ],
+        "anti_pattern_effect": "DEFICIENT"
+      },
+      "severity": "CRITICAL",
+      "deficiency_language": "The policy does not evidence adoption by the governing body via rule, order, ordinance, or resolution as required by Tex. Gov't Code Sec. 2256.005(a).",
+      "remediation_language": "Add an adoption block reciting the governing body, adoption vehicle, and effective date, and attach the executed instrument as an exhibit.",
+      "cross_references": [
+        "TX-PFIA-2256.005-e-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-2-001",
+      "title": "Primary emphasis on safety of principal and liquidity",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "2"
+      },
+      "source_text": "The investment policies must: (1) be written; (2) primarily emphasize safety of principal and liquidity;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states that safety of principal and liquidity are the primary emphases, with yield subordinated.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Safety/preservation of principal is stated as a primary objective."
+        },
+        {
+          "id": "e2",
+          "assertion": "Liquidity is stated as a primary objective."
+        }
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "safety of principal",
+          "preservation and safety of principal",
+          "liquidity",
+          "yield"
+        ],
+        "anti_patterns": [
+          "maximize yield",
+          "highest return",
+          "yield is the primary objective",
+          "total return objective"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Return-maximizing language inverts the statutory priority order and is independently a Sec. 2256.006(a) standard-of-care problem."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not primarily emphasize safety of principal and liquidity as required by Sec. 2256.005(b)(2).",
+      "remediation_language": "State that the primary objectives, in order of priority, are preservation and safety of principal, liquidity, and yield.",
+      "cross_references": [
+        "TX-PFIA-2256.006-a-001",
+        "TX-PFIA-2256.005-d-001"
+      ],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The primary objectives of [Entity]'s investment activities shall be, in order of priority, preservation and safety of principal, liquidity, and yield."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-3-001",
+      "title": "Policy addresses diversification, yield, maturity, and quality and capability of investment management",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "3"
+      },
+      "source_text": "address investment diversification, yield, and maturity and the quality and capability of investment management;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy addresses all four subjects: investment diversification, yield, maturity, and the quality and capability of investment management.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Investment diversification is addressed."
+        },
+        {
+          "id": "e2",
+          "assertion": "Yield is addressed."
+        },
+        {
+          "id": "e3",
+          "assertion": "Maturity is addressed."
+        },
+        {
+          "id": "e4",
+          "assertion": "Quality and capability of investment management is addressed.",
+          "test_type": "PRESENCE"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "diversification",
+          "yield",
+          "maturity",
+          "quality and capability of investment management",
+          "training"
+        ],
+        "anti_patterns": [
+          "diversification is not required",
+          "diversification is achieved through participation in an investment pool",
+          "the short-term nature of the portfolio makes diversification unnecessary"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Sec. 2256.005(b)(3) requires the policy to address diversification as a subject; declaring it unnecessary, or outsourcing it to a pool the entity does not control, does not address it. Pool participation concentrates counterparty exposure rather than diversifying it."
+      },
+      "severity": "HIGH",
+      "interpretive_notes": "The fourth subject is the one most often omitted. It is the statutory hook for the policy's treatment of officer qualifications, training and the designated investment committee, and its absence is a content defect independent of Sec. 2256.008.",
+      "deficiency_language": "The policy does not address each subject required by Sec. 2256.005(b)(3).",
+      "remediation_language": "Add a section addressing diversification, yield and maturity, and a section on the quality and capability of investment management covering officer designation, qualifications and training.",
+      "cross_references": [
+        "TX-PFIA-2256.005-d-001",
+        "TX-PFIA-2256.008-a-2-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Investments shall be made with regard to investment diversification, yield, and maturity, and to the quality and capability of investment management."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-A-001",
+      "title": "Enumerated list of authorized investment types",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "A"
+      },
+      "source_text": "a list of the types of authorized investments in which the investing entity's funds may be invested;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy enumerates the specific types of investments in which the entity's funds may be invested, as a closed list rather than by incorporation of the chapter.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy contains an explicit enumerated list of authorized investment types."
+        },
+        {
+          "id": "e2",
+          "assertion": "The list is closed rather than a blanket incorporation of everything the chapter permits.",
+          "negative": true,
+          "contradicted_by": [
+            "any investment authorized by the Public Funds Investment Act",
+            "all investments permitted by state law",
+            "any investment authorized by Chapter 2256",
+            "as permitted by law",
+            "any other investment authorized by law"
+          ],
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "QUERY",
+            "note": "Interacts with ADR 0007: confirm a blanket incorporation clause is not a list of types."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "text": "Every instrument on this list activates its Schedule B conditions control. The extracted list is the input to policy.authorized_instruments.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.005(j)",
+          "text": "The governing body may specify that an otherwise authorized investment is not suitable. A list narrower than the chapter is conforming, not deficient.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": true,
+        "extract_schema": {
+          "authorized_instruments": [
+            "string"
+          ],
+          "enumerated": "boolean"
+        },
+        "search_directives": [
+          "authorized investments",
+          "the following investments are authorized",
+          "eligible investments"
+        ],
+        "anti_patterns": [
+          "any investment authorized by the Public Funds Investment Act",
+          "all investments permitted by state law",
+          "any investment authorized by Chapter 2256",
+          "as permitted by law"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Blanket incorporation of the chapter is not a list of types. It also defeats the entity's own control environment: every future amendment silently expands the entity's authority without an act of the governing body."
+      },
+      "severity": "CRITICAL",
+      "deficiency_language": "The policy does not include a list of the types of authorized investments as required by Sec. 2256.005(b)(4)(A).",
+      "remediation_language": "Enumerate each authorized investment type expressly, and state that investments not listed are not authorized notwithstanding any authority conferred by Chapter 2256.",
+      "cross_references": [
+        "IS-2256.013-001",
+        "IS-2256.011-001",
+        "IS-2256.016-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Funds of [Entity] may be invested only in the following investments, as further defined by the Act: [list each authorized type]. An investment not listed is not authorized."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-B-001",
+      "title": "Maximum allowable stated maturity of any individual investment",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "B"
+      },
+      "source_text": "the maximum allowable stated maturity of any individual investment owned by the entity;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states a maximum allowable stated maturity for any individual investment.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A maximum stated maturity for individual investments is expressed."
+        },
+        {
+          "id": "e2",
+          "assertion": "The maximum is expressed on a stated-maturity basis.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "The limit is expressed on a stated maturity basis, and where differentiated by fund group a maximum is given for each."
+            },
+            "note": "Per-fund-group maximum dropped: the statute speaks of any individual investment owned by the entity."
+          }
+        }
+      ],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": true,
+        "extract_schema": {
+          "max_stated_maturity_months": "number",
+          "differentiated_by_fund": "boolean"
+        },
+        "search_directives": [
+          "maximum stated maturity",
+          "maximum maturity",
+          "no investment shall have a maturity"
+        ],
+        "anti_patterns": [
+          "maximum average maturity",
+          "maximum duration",
+          "no maximum maturity",
+          "maturity to the next reset date"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Paragraph (B) governs the stated maturity of an individual security; paragraph (C) governs dollar-weighted average maturity for pooled fund groups. Substituting an average or a duration limit satisfies neither, and a reset-date basis understates the stated maturity of a floater."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not state the maximum allowable stated maturity of an individual investment as required by Sec. 2256.005(b)(4)(B).",
+      "remediation_language": "State a maximum stated maturity for any individual investment owned by the entity.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-4-C-001",
+        "TX-PFIA-2256.005-d-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "No individual investment shall have a stated maturity of more than [___] from the date of purchase."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-C-001",
+      "title": "Maximum dollar-weighted average maturity for pooled fund groups",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "C"
+      },
+      "source_text": "for pooled fund groups, the maximum dollar-weighted average maturity allowed based on the stated maturity date for the portfolio;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "predicate_ref": "P_HAS_POOLED_FUND_GROUP"
+      },
+      "activation_note": "Sec. 2256.002(9) defines a pooled fund group as an internally created fund holding one or more institutional accounts. An entity with only separately invested assets is outside paragraph (C).",
+      "operative_clause": "For each pooled fund group, the policy states a maximum dollar-weighted average maturity computed on stated maturity dates.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A maximum dollar-weighted average maturity is stated for pooled fund groups."
+        },
+        {
+          "id": "e2",
+          "assertion": "The measure is computed on the stated maturity date, not an effective, reset or expected-life basis."
+        }
+      ],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": true,
+        "extract_schema": {
+          "max_dwam_days": "number",
+          "basis": "string"
+        },
+        "search_directives": [
+          "dollar-weighted average maturity",
+          "weighted average maturity",
+          "stated maturity date",
+          "pooled fund group"
+        ],
+        "anti_patterns": [
+          "weighted average maturity to reset",
+          "based on the effective maturity",
+          "average life",
+          "WAM to reset"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "A reset-basis WAM treats a multi-year floater as an overnight instrument. The statute fixes the basis at stated maturity precisely because the reset basis conceals interest-rate exposure in the portfolio a board is asked to approve."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not state a maximum dollar-weighted average maturity for pooled fund groups on a stated maturity basis, as required by Sec. 2256.005(b)(4)(C).",
+      "remediation_language": "State the maximum dollar-weighted average maturity for each pooled fund group, expressly computed using stated maturity dates.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-4-B-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The maximum dollar-weighted average maturity of each pooled fund group, based on the stated maturity date of each investment, shall not exceed [___] days."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-D-001",
+      "title": "Methods to monitor the market price of investments",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "D"
+      },
+      "source_text": "methods to monitor the market price of investments acquired with public funds;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states the method and the pricing source used to monitor the market price of investments acquired with public funds.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy states a method to monitor the market price of investments acquired with public funds.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "A monitoring method and cadence are stated."
+            },
+            "note": "Cadence and pricing-source independence dropped: neither is in Sec. 2256.005(b)(4)(D)."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.002(8)",
+          "text": "Market value is defined by reference to a recognized market pricing source quoted on the valuation date.",
+          "severity": "MEDIUM"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.023(b)(4)-(5)",
+          "text": "The quarterly report's market value disclosures depend on this method operating.",
+          "linked_control": "TX-PFIA-2256.023-b-001",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "monitor the market price",
+          "market value",
+          "pricing source",
+          "independent pricing",
+          "monthly"
+        ],
+        "anti_patterns": [
+          "market value provided by the broker",
+          "prices supplied by the dealer",
+          "valued at cost"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Marks sourced from the selling counterparty are not an independent monitoring method, and carrying at cost defeats the paragraph entirely.",
+        "context_directives": [
+          "market value",
+          "priced",
+          "pricing source",
+          "valuation"
+        ]
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not state methods to monitor the market price of investments as required by Sec. 2256.005(b)(4)(D).",
+      "remediation_language": "State the method used to monitor the market price of investments acquired with public funds.",
+      "cross_references": [
+        "TX-PFIA-2256.023-b-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The market price of investments acquired with public funds shall be monitored [frequency] using [method or pricing source]."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-E-001",
+      "title": "Delivery-versus-payment settlement requirement",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "E"
+      },
+      "source_text": "a requirement for settlement of all transactions, except investment pool funds and mutual funds, on a delivery versus payment basis;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states an unqualified DVP settlement requirement, with any carve-out limited to investment pool funds and mutual funds.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Policy contains a DVP settlement requirement stated as a mandate."
+        },
+        {
+          "id": "e2",
+          "assertion": "Any stated carve-out is limited to investment pool funds and/or mutual funds.",
+          "negative": true,
+          "contradicted_by": [
+            "where practical",
+            "when feasible",
+            "to the extent possible",
+            "at the discretion of",
+            "may be settled otherwise",
+            "free delivery",
+            "except where",
+            "except as determined",
+            "except when",
+            "unless the safekeeping",
+            "unless the Investment Officer",
+            "otherwise directed",
+            "generally settled",
+            "should be settled"
+          ]
+        }
+      ],
+      "conditions": [],
+      "exemptions": [
+        {
+          "cite": "2256.005(b)(4)(E)",
+          "effect": "NARROWS_OPERATIVE_CLAUSE",
+          "scope": "TRANSACTION_TYPE",
+          "applies_to": [
+            "INVESTMENT_POOL",
+            "MUTUAL_FUND",
+            "MMMF"
+          ],
+          "note": "Transaction-scoped, not entity-scoped. Never excuses the policy from stating the requirement."
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "delivery versus payment",
+          "delivery vs. payment",
+          "DVP",
+          "simultaneous exchange"
+        ],
+        "anti_patterns": [
+          "where practical",
+          "when feasible",
+          "generally settled",
+          "should be settled",
+          "to the extent possible"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Discretionary qualifiers convert a statutory mandate into a preference and defeat Sec. 2256.005(b)(4)(E).",
+        "anti_pattern_anchors": [
+          "settle",
+          "delivery",
+          "DVP"
+        ]
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not impose an unqualified delivery-versus-payment settlement requirement as mandated by Sec. 2256.005(b)(4)(E).",
+      "remediation_language": "All securities transactions, other than investment pool funds and mutual funds, shall be settled on a delivery-versus-payment basis.",
+      "cross_references": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "All investment transactions, except investment pool funds and mutual funds, shall be settled on a delivery versus payment basis."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-b-4-F-001",
+      "title": "Procedures to monitor rating changes and liquidate downgraded holdings",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "b",
+        "subdivision": "4",
+        "paragraph": "F"
+      },
+      "source_text": "procedures to monitor rating changes in investments acquired with public funds and the liquidation of such investments consistent with the provisions of Section 2256.021.",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy sets out procedures to monitor rating changes AND to liquidate investments that fall below the minimum required rating, consistent with Sec. 2256.021.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy states a procedure to monitor rating changes in investments acquired with public funds.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Monitoring procedure for rating changes is stated, with an owner and a cadence."
+            },
+            "note": "Owner and cadence dropped: not in Sec. 2256.005(b)(4)(F)."
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy states a procedure for liquidating investments that do not have the minimum rating, consistent with Sec. 2256.021.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Liquidation procedure for downgraded holdings is stated and references prudent measures under Sec. 2256.021."
+            },
+            "note": "Tests consistency with Sec. 2256.021, not a citation to it."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.021",
+          "text": "An investment lacking its minimum rating is not an authorized investment for the period it lacks the rating.",
+          "linked_control": "TX-PFIA-2256.021-001"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "monitor rating",
+          "rating change",
+          "downgrade",
+          "liquidate",
+          "no longer has the minimum rating",
+          "prudent measures",
+          "monitored",
+          "monitor the credit",
+          "credit monitoring",
+          "reviewed for compliance",
+          "solvency"
+        ],
+        "anti_patterns": [
+          "ratings will be reviewed as needed",
+          "the Investment Officer may consider liquidation"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Permissive liquidation language does not satisfy the Sec. 2256.021 duty to take all prudent measures."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy lacks procedures to monitor rating changes and liquidate downgraded holdings as required by Sec. 2256.005(b)(4)(F).",
+      "remediation_language": "State a procedure to monitor rating changes and to liquidate investments that lose a required rating, consistent with Sec. 2256.021.",
+      "cross_references": [
+        "TX-PFIA-2256.021-001"
+      ],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "[Officer] shall monitor rating changes in investments acquired with public funds, and [Entity] shall take all prudent measures consistent with this policy to liquidate an investment that does not have the minimum rating, as provided by Section 2256.021 of the Act."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-c-001",
+      "title": "Certificate of deposit bid solicitation methods",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "c"
+      },
+      "source_text": "The investment policies may provide that bids for certificates of deposit be solicited:",
+      "source_version": {
+        "effective_date": "1997-09-01",
+        "last_amended_by": "Acts 1997, 75th Leg., ch. 1421"
+      },
+      "normative_force": "PERMISSIVE_ENABLING_WITH_CONDITIONS",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "logic": {
+          "or": [
+            {
+              "in": [
+                "DEPOSITORY_CD",
+                {
+                  "var": "policy.authorized_instruments"
+                }
+              ]
+            },
+            {
+              "in": [
+                "BROKERED_CD",
+                {
+                  "var": "policy.authorized_instruments"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "activation_note": "Enabling provision with an empty condition set. It exists to authorize a practice, so a silent policy is not deficient; stating the method is simply better control design.",
+      "operative_clause": "Where certificates of deposit are authorized, the policy states the permitted bid solicitation method or combination of methods.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy states how CD bids are solicited (orally, in writing, electronically, or a combination).",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "QUERY",
+            "note": "Enabling provision; consider informational only."
+          }
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "bids for certificates of deposit",
+          "solicited orally",
+          "electronically",
+          "bid solicitation",
+          "solicit bids",
+          "competitive bids",
+          "bid process",
+          "bids for certificates"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "ADVISORY",
+      "deficiency_language": "The policy authorizes certificates of deposit but does not state the bid solicitation method contemplated by Sec. 2256.005(c).",
+      "remediation_language": "State that bids for certificates of deposit may be solicited orally, in writing, electronically, or in any combination of those methods.",
+      "cross_references": [
+        "IS-2256.010-b-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-d-001",
+      "title": "Separate written strategy per fund or fund group with ranked objectives",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "d"
+      },
+      "source_text": "As an integral part of an investment policy, the governing body shall adopt a separate written investment strategy for each of the funds or group of funds under its control. Each investment strategy must describe the investment objectives for the particular fund using the following priorities in order of importance: (1) understanding of the suitability of the investment to the financial requirements of the entity; (2) preservation and safety of principal; (3) liquidity; (4) marketability of the investment if the need arises to liquidate the investment before maturity; (5) diversification of the investment portfolio; and (6) yield.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "STRATEGY_DOCUMENT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "For each fund or fund group under the entity's control, a separate written strategy exists AND recites the six statutory objectives in statutory order of importance.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A written investment strategy is stated for each fund or group of funds the policy identifies.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Strategies are fund-specific, not a single global strategy."
+            },
+            "note": "The statute permits a strategy for a group of funds; 'not a single global strategy' removed."
+          }
+        },
+        {
+          "id": "e2a",
+          "assertion": "Each strategy addresses understanding of the suitability of the investment to the financial requirements of the entity.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "Each strategy addresses preservation and safety of principal.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e2c",
+          "assertion": "Each strategy addresses liquidity.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e2d",
+          "assertion": "Each strategy addresses marketability of the investment if the need arises to liquidate the investment before maturity.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e2e",
+          "assertion": "Each strategy addresses diversification of the investment portfolio.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e2f",
+          "assertion": "Each strategy addresses yield.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "All six statutory objectives appear in each strategy."
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "Objectives are presented in the statutory sequence 1-6.",
+          "test_type": "ORDERED_SEQUENCE",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "KEEP",
+            "note": "Evaluate over the objectives present."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "text": "Fund groups named in the strategy set should reconcile to the fund structure disclosed in the entity's ACFR.",
+          "evidence_locus": "OPERATIONAL_ARTIFACT",
+          "severity": "ADVISORY"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": true,
+        "extract_schema": {
+          "strategies": [
+            {
+              "fund_name": "string",
+              "objectives_in_order": [
+                "string"
+              ]
+            }
+          ]
+        },
+        "search_directives": [
+          "investment strategy",
+          "strategy statement",
+          "operating fund",
+          "debt service fund",
+          "capital project fund",
+          "suitability",
+          "marketability"
+        ],
+        "anti_patterns": [
+          "single strategy applicable to all funds"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "The three-objective formulation is Sec. 2256.006(a) and Sec. 2256.005(b)(2). It does not satisfy the six-objective ordered list required of strategies by Sec. 2256.005(d). Conflation is the most common defect in Texas IPS drafting."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not adopt a separate written investment strategy for each fund or fund group reciting the six statutory objectives in order of importance, as required by Sec. 2256.005(d).",
+      "remediation_language": "Add a strategy statement per fund group, each reciting suitability, preservation and safety of principal, liquidity, marketability, diversification, and yield in that order.",
+      "interpretive_notes": "Do not let a conforming Sec. 2256.006 recitation satisfy this control.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-2-001"
+      ],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "A separate written investment strategy is adopted for each fund or group of funds under [Entity]'s control. Each strategy describes the investment objectives for the fund using the following priorities in order of importance: (1) understanding of the suitability of the investment to the financial requirements of [Entity]; (2) preservation and safety of principal; (3) liquidity; (4) marketability of the investment if the need arises to liquidate the investment before maturity; (5) diversification of the investment portfolio; and (6) yield."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-e-001",
+      "title": "Annual review of policy and strategies, evidenced by written instrument",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "e"
+      },
+      "source_text": "The governing body of an investing entity shall review its investment policy and investment strategies not less than annually. The governing body shall adopt a written instrument by rule, order, ordinance, or resolution stating that it has reviewed the investment policy and investment strategies and that the written instrument so adopted shall record any changes made to either the investment policy or investment strategies.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy commits the governing body to at-least-annual review of BOTH policy and strategies AND to adoption of a written instrument recording the review and any changes.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Review cadence is at least annual."
+        },
+        {
+          "id": "e2a",
+          "assertion": "The annual review covers the investment policy.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Review scope expressly covers both the policy and the investment strategies."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The annual review covers the investment strategies.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Review scope expressly covers both the policy and the investment strategies."
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "The policy requires the annual review to be recorded in a written instrument adopted by rule, order, ordinance or resolution that records any changes to the policy or strategies.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e3",
+              "assertion": "A written instrument adopted by rule/order/ordinance/resolution records the review and any changes."
+            },
+            "note": "Policy-duty form of a NOT_TESTABLE element; the instrument itself is evidence request PBC-02."
+          }
+        }
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "not less than annually",
+          "annual review",
+          "written instrument",
+          "record any changes",
+          "reviewed the investment policy and investment strategies",
+          "reviewed annually",
+          "annually review",
+          "review this Investment Policy",
+          "reviewed and adopted",
+          "annual adoption",
+          "Board shall review",
+          "reviewed at least annually",
+          "approved annually"
+        ],
+        "anti_patterns": [
+          "reviewed periodically",
+          "reviewed as needed",
+          "reviewed at least every two years",
+          "reviewed biennially"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Bare 'shall review the policy' omits strategies and the written-instrument requirement. Partial credit, not a pass.",
+        "anti_pattern_anchors": [
+          "policy",
+          "strateg"
+        ]
+      },
+      "severity": "CRITICAL",
+      "deficiency_language": "The policy does not require annual review of both the policy and the investment strategies evidenced by an adopted written instrument recording changes, as required by Sec. 2256.005(e).",
+      "remediation_language": "The governing body shall review this policy and the investment strategies not less than annually and shall adopt a written instrument recording that review and any changes made.",
+      "cross_references": [
+        "TX-PFIA-2256.005-a-001",
+        "TX-PFIA-2256.005-d-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-f-001",
+      "title": "Designation of investment officer and retained fiduciary responsibility",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "f"
+      },
+      "source_text": "Each investing entity shall designate, by rule, order, ordinance, or resolution, as appropriate, one or more officers or employees of the state agency, local government, or investment pool as investment officer to be responsible for the investment of its funds consistent with the investment policy adopted by the entity.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "One or more investment officers are designated by formal instrument, their authority persists only until rescinded or terminated, they are held to the prudent person standard, and the governing body expressly retains ultimate fiduciary responsibility.",
+      "required_elements": [
+        {
+          "id": "e1a",
+          "assertion": "The policy designates one or more officers or employees as investment officer.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e1",
+              "assertion": "One or more officers or employees are designated as investment officer by rule, order, ordinance or resolution."
+            }
+          }
+        },
+        {
+          "id": "e1b",
+          "assertion": "The policy states that the designation is made by rule, order, ordinance or resolution.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e1",
+              "assertion": "One or more officers or employees are designated as investment officer by rule, order, ordinance or resolution."
+            },
+            "note": "The designating instrument itself is evidence request PBC-03."
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "Authority runs until rescinded, until the officer's term or employment ends, or until an investment management contract expires.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REBAND",
+            "note": "Operates by law; moved to the advisory band at element level (Step 1)."
+          },
+          "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED"
+        },
+        {
+          "id": "e4",
+          "assertion": "The governing body expressly retains ultimate responsibility as fiduciary of the entity's assets.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REBAND",
+            "note": "Operates by law; moved to the advisory band at element level (Step 1)."
+          },
+          "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED"
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(f)",
+          "text": "Unless authorized by law, no other person may deposit, withdraw, transfer or otherwise manage entity funds.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.005(f)",
+          "text": "Where the entity has contracted with another investing entity to invest its funds, that entity's investment officer is treated as this entity's investment officer.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [
+        {
+          "cite": "2256.005(g)",
+          "predicate_ref": "P_OFFICER_ASSIGNED_BY_LAW",
+          "effect": "NOT_APPLICABLE",
+          "scope": "SUBSECTION_F_ONLY",
+          "note": "Subsection (f) does not reach an entity for which an officer is assigned the investing function by law."
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "investment officer",
+          "designated by resolution",
+          "prudent person",
+          "ultimate responsibility",
+          "fiduciary"
+        ],
+        "anti_patterns": [
+          "the Board delegates full responsibility",
+          "the Investment Officer is solely responsible",
+          "the Board has no further responsibility"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Sec. 2256.005(f) permits delegation of the function but not of the fiduciary duty; the governing body retains ultimate responsibility as a matter of statute and cannot contract out of it."
+      },
+      "severity": "CRITICAL",
+      "deficiency_language": "The policy does not designate one or more investment officers by formal instrument with retained fiduciary responsibility in the governing body, as required by Sec. 2256.005(f).",
+      "remediation_language": "Designate the investment officer by title through resolution, state the duration of the authority, apply the prudent person standard, and recite that the governing body retains ultimate responsibility as fiduciary of the entity's assets.",
+      "cross_references": [
+        "TX-PFIA-2256.006-a-001",
+        "TX-PFIA-2256.003-b-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-h-001",
+      "title": "Chapter 391 commission - investment officer ineligibility",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "h"
+      },
+      "source_text": "An officer or employee of a commission created under Chapter 391, Local Government Code, is ineligible to be designated as an investment officer under Subsection (f) for any investing entity other than for that commission.",
+      "source_text_variants": [
+        {
+          "amended_by": "Acts 1997, 75th Leg., ch. 685, Sec. 1",
+          "text": "An officer or employee of a commission created under Chapter 391, Local Government Code, is ineligible to be an investment officer for the commission under Subsection (f) if the officer or employee is an investment officer designated under Subsection (f) for another local government."
+        },
+        {
+          "amended_by": "Acts 1997, 75th Leg., ch. 1421, Sec. 3",
+          "text": "An officer or employee of a commission created under Chapter 391, Local Government Code, is ineligible to be designated as an investment officer under Subsection (f) for any investing entity other than for that commission."
+        }
+      ],
+      "interpretive": true,
+      "source_version": {
+        "effective_date": "1997-09-01",
+        "last_amended_by": "Acts 1997, 75th Leg., ch. 685 and ch. 1421 (unreconciled)"
+      },
+      "normative_force": "PROHIBITION",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_IS_COMMISSION_391"
+        ],
+        "include_classes": [
+          "COMMISSION_391"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The commission's investment officer designation observes the Subsection (h) ineligibility rule.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy states that an officer or employee of a Local Government Code ch. 391 commission is ineligible to be the commission's investment officer if the person is an investment officer designated for another local government.",
+          "negative": true,
+          "contradicted_by": [
+            "also serves as investment officer for",
+            "investment officer for another local government"
+          ],
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Designation excludes a person barred by Subsection (h) from serving as investment officer."
+            },
+            "note": "Corrected against the statute snapshot: the bar applies only where the person is an investment officer for another local government."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(h)",
+          "text": "Two 1997 amendments to Subsection (h) remain unreconciled in the official code and point in different directions. A review flags the conflict and applies the broader ch. 1421 text; it does not resolve the conflict.",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "Chapter 391",
+          "council of governments",
+          "ineligible",
+          "investment officer"
+        ],
+        "anti_patterns": [],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "MEDIUM",
+      "interpretive_notes": "Report as an interpretive flag rather than a scored deficiency unless the entity has in fact cross-designated. The narrower ch. 685 text bars a person already serving another local government from serving the commission; the broader ch. 1421 text bars a commission officer from serving any other entity. Applying the broader text is the conservative posture.",
+      "deficiency_language": "The commission's investment officer designation may conflict with the Sec. 2256.005(h) ineligibility rule.",
+      "remediation_language": "Confirm that no designated investment officer holds a conflicting designation, and note in the file which text of Subsection (h) the entity is relying on.",
+      "cross_references": [
+        "TX-PFIA-2256.005-f-001"
+      ],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-i-001",
+      "title": "Investment officer disclosure of personal business relationships and family ties",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "i"
+      },
+      "source_text": "An investment officer of an entity who has a personal business relationship with a business organization offering to engage in an investment transaction with the entity shall file a statement disclosing that personal business interest.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "An investment officer discloses personal business relationships and second-degree family ties with offering business organizations, filing with both the Texas Ethics Commission and the governing body.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires an investment officer who has a personal business relationship with a business organization offering to engage in an investment transaction with the entity to file a statement disclosing that relationship.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Disclosure duty for a personal business relationship with an offering business organization."
+            }
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "Disclosure duty for a relationship within the second degree by affinity or consanguinity with an individual seeking to sell an investment."
+        },
+        {
+          "id": "e3a",
+          "assertion": "The policy requires the disclosure statement to be filed with the Texas Ethics Commission.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e3",
+              "assertion": "The statement is filed with both the Texas Ethics Commission and the governing body."
+            },
+            "note": "Policy-duty form; filed statements are evidence request PBC-04."
+          }
+        },
+        {
+          "id": "e3b",
+          "assertion": "The policy requires the disclosure statement to be filed with the governing body.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e3",
+              "assertion": "The statement is filed with both the Texas Ethics Commission and the governing body."
+            }
+          }
+        }
+      ],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": false,
+        "extract_schema": {
+          "filed_with": [
+            "string"
+          ],
+          "thresholds_stated": "boolean"
+        },
+        "search_directives": [
+          "personal business relationship",
+          "Texas Ethics Commission",
+          "second degree by affinity or consanguinity",
+          "disclosing"
+        ],
+        "anti_patterns": [
+          "disclosed to the Investment Officer's supervisor"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Filing with only one of the two bodies does not discharge the duty, and a Local Gov't Code ch. 176 questionnaire is a different instrument with different triggers."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy's conflict disclosure provisions do not track Sec. 2256.005(i).",
+      "remediation_language": "Require the disclosure statement to be filed with both the Texas Ethics Commission and the governing body, covering personal business relationships and relatives within the second degree.",
+      "cross_references": [
+        "TX-PFIA-2256.005-f-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-k-001",
+      "title": "Policy delivery to business organizations and written acknowledgment instrument",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "k"
+      },
+      "source_text": "A written copy of the investment policy shall be presented to any business organization offering to engage in an investment transaction with an investing entity.",
+      "source_version": {
+        "effective_date": "2017-09-01",
+        "last_amended_by": "Acts 2017, 85th Leg., R.S., Ch. 149 (H.B. 1701)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY",
+        "BUSINESS_ORGANIZATION"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "THIRD_PARTY_ATTESTATION"
+      ],
+      "policy_text_expectation": "RECOMMENDED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy provides for delivery of the policy to business organizations and for receipt of the executed written instrument acknowledging review and reasonable procedures and controls.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Policy delivery to the business organization is provided for.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "KEEP",
+            "note": "Band question (k)/(l) resolved with element-level band in Step 1."
+          }
+        },
+        {
+          "id": "e2a",
+          "assertion": "The policy requires a written instrument by which the business organization acknowledges that it has received and reviewed the investment policy.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The policy requires the written instrument to acknowledge that the business organization has implemented reasonable procedures and controls to preclude investment transactions not authorized by the policy.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+            }
+          }
+        },
+        {
+          "id": "e2c",
+          "assertion": "The policy requires the written instrument to be executed by a qualified representative of the business organization.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(l)",
+          "text": "The investment officer may not acquire an authorized investment from a business organization that has not delivered the Subsection (k) instrument.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.005(k)",
+          "text": "Since the 2017 amendment, 'business organization' is limited to a pool or investment management firm under contract exercising discretion. A policy imposing the requirement more broadly is more restrictive, not deficient."
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "written instrument",
+          "qualified representative",
+          "received and reviewed the investment policy",
+          "reasonable procedures and controls",
+          "certification form",
+          "acknowledging that the organization has received"
+        ],
+        "anti_patterns": [
+          "certification is requested",
+          "brokers are encouraged to acknowledge"
+        ],
+        "anti_pattern_effect": "DEFICIENT"
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy does not provide for delivery of the policy and receipt of the executed acknowledgment instrument required by Sec. 2256.005(k)-(l).",
+      "remediation_language": "Require that a qualified representative of each business organization execute the Sec. 2256.005(k) instrument before any authorized investment is acquired from that organization.",
+      "cross_references": [
+        "TX-PFIA-2256.025-001"
+      ],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "PROVISIONAL",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb",
+        "note": "No team mark in the approved workbook; kept at the proposed tier pending confirmation."
+      },
+      "proposed_text": "A written copy of this policy shall be presented to any business organization offering to engage in an investment transaction with [Entity]. A qualified representative of the business organization shall execute a written instrument substantially to the effect that the organization has received and reviewed this policy and has implemented reasonable procedures and controls in an effort to preclude investment transactions between [Entity] and the organization that are not authorized by this policy, except to the extent that this authorization depends on an analysis of the makeup of [Entity]'s entire portfolio, requires an interpretation of subjective investment standards, or relates to transactions not made through accounts or other contractual arrangements over which the organization has accepted discretionary investment authority."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-l-001",
+      "title": "Acquisition barred absent the Subsection (k) instrument",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "l"
+      },
+      "source_text": "The investment officer of an entity may not acquire or otherwise obtain any authorized investment described in the investment policy of the investing entity from a business organization that has not delivered to the entity the instrument required by Subsection (k).",
+      "source_version": {
+        "effective_date": "2017-09-01",
+        "last_amended_by": "Acts 2017, 85th Leg., R.S., Ch. 149 (H.B. 1701)"
+      },
+      "normative_force": "PROHIBITION",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "THIRD_PARTY_ATTESTATION"
+      ],
+      "policy_text_expectation": "RECOMMENDED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy bars acquisition of any authorized investment from a business organization that has not delivered the Subsection (k) instrument.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Acquisition is prohibited until the Subsection (k) instrument has been delivered to the entity."
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "may not acquire",
+          "shall not be acquired",
+          "prior to engaging in any investment transaction",
+          "instrument required by Subsection",
+          "must sign the certification",
+          "certification form",
+          "shall not transact",
+          "before any transaction"
+        ],
+        "anti_patterns": [
+          "certification should be obtained",
+          "certification may be obtained",
+          "the entity will endeavor to obtain"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Subsection (l) is a bar on acquisition, not a documentation preference. Permissive phrasing removes the only enforcement mechanism attached to Subsection (k)."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not bar acquisition from a business organization that has not delivered the Sec. 2256.005(k) instrument.",
+      "remediation_language": "State that no authorized investment may be acquired from a business organization until that organization has delivered the executed Sec. 2256.005(k) instrument.",
+      "cross_references": [
+        "TX-PFIA-2256.005-k-001",
+        "TX-PFIA-2256.025-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The investment officer may not acquire or otherwise obtain any authorized investment described in this policy from a business organization that has not delivered to [Entity] the written instrument required by this policy."
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-m-001",
+      "title": "Annual compliance audit of management controls (non-state agencies)",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "m"
+      },
+      "source_text": "An investing entity other than a state agency, in conjunction with its annual financial audit, shall perform a compliance audit of management controls on investments and adherence to the entity's established investment policies.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_NON_STATE_AGENCY_INVESTING_ENTITY"
+        ],
+        "include_classes": [
+          "*"
+        ],
+        "exclude_classes": [
+          "STATE_AGENCY"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "A compliance audit of management controls on investments and adherence to the policy is performed in conjunction with the annual financial audit.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires a compliance audit of management controls on investments.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "A compliance audit of management controls on investments is performed."
+            },
+            "note": "Policy-duty form; the audit itself is evidence request PBC-05."
+          }
+        },
+        {
+          "id": "e2a",
+          "assertion": "The policy requires the compliance audit to be performed in conjunction with the annual financial audit.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "It is performed in conjunction with the annual financial audit and covers adherence to the established investment policies."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The policy requires the compliance audit to cover adherence to the entity's established investment policies.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "It is performed in conjunction with the annual financial audit and covers adherence to the established investment policies."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.023(d)",
+          "text": "Distinct from and additive to the independent auditor's annual review of the quarterly reports. The two are separate scopes and must not be merged in the engagement letter.",
+          "linked_control": "TX-PFIA-2256.023-d-001",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "compliance audit",
+          "management controls",
+          "annual financial audit",
+          "adherence to"
+        ],
+        "anti_patterns": [
+          "compliance is reviewed by staff",
+          "self-assessment"
+        ],
+        "anti_pattern_effect": "DEFICIENT"
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not provide for the Sec. 2256.005(m) compliance audit of management controls performed with the annual financial audit.",
+      "remediation_language": "Provide that a compliance audit of management controls on investments and adherence to this policy is performed in conjunction with the annual financial audit.",
+      "cross_references": [
+        "TX-PFIA-2256.023-d-001"
+      ],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.005-n-001",
+      "title": "State agency biennial compliance audit and report to the state auditor",
+      "citation": {
+        "section": "2256.005",
+        "subsection": "n"
+      },
+      "source_text": "Except as provided by Subsection (o), at least once every two years a state agency shall arrange for a compliance audit of management controls on investments and adherence to the agency's established investment policies.",
+      "source_version": {
+        "effective_date": "2003-09-01",
+        "last_amended_by": "Acts 2003, 78th Leg., ch. 785"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_IS_STATE_AGENCY"
+        ],
+        "include_classes": [
+          "STATE_AGENCY"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "At least biennially the agency arranges a compliance audit by its internal auditor or a private auditor employed under Sec. 321.020 and reports the results to the state auditor by January 1 of each even-numbered year.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires a compliance audit of management controls on investments at least once every two years.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "A compliance audit is arranged at least once every two years."
+            }
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires the audit to be performed by the agency's internal auditor or by a private auditor employed as provided by Sec. 321.020.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Performed by the agency's internal auditor or a private auditor employed as provided by Sec. 321.020."
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "The policy requires the results of the most recent audit to be reported to the state auditor not later than January 1 of each even-numbered year.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e3",
+              "assertion": "Results reported to the state auditor not later than January 1 of each even-numbered year."
+            }
+          }
+        }
+      ],
+      "exemptions": [
+        {
+          "cite": "2256.005(o)",
+          "predicate_ref": "P_COMPTROLLER_INVESTED_404_024",
+          "effect": "NOT_APPLICABLE",
+          "scope": "ASSETS_INVESTED_BY_COMPTROLLER",
+          "note": "The audit requirement does not reach agency assets invested by the comptroller under Sec. 404.024."
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "compliance audit",
+          "state auditor",
+          "internal auditor",
+          "even-numbered year"
+        ],
+        "anti_patterns": [
+          "annually reported to the state auditor"
+        ],
+        "anti_pattern_effect": "ADVISORY"
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The agency's policy does not reflect the biennial compliance audit and state auditor reporting required by Sec. 2256.005(n).",
+      "remediation_language": "Provide for a biennial compliance audit by the internal auditor or a private auditor under Sec. 321.020, with results reported to the state auditor by January 1 of each even-numbered year.",
+      "cross_references": [
+        "TX-PFIA-2256.005-m-001"
+      ],
+      "conditions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.006-a-001",
+      "title": "Standard of care - prudent person and priority of objectives",
+      "citation": {
+        "section": "2256.006",
+        "subsection": "a"
+      },
+      "source_text": "Investments shall be made with judgment and care, under prevailing circumstances, that a person of prudence, discretion, and intelligence would exercise in the management of the person's own affairs, not for speculation, but for investment, considering the probable safety of capital and the probable income to be derived.",
+      "source_version": {
+        "effective_date": "1995-09-01",
+        "last_amended_by": "Acts 1995, 74th Leg., ch. 402"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER",
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy recites the prudent person standard, the investment-not-speculation limitation, and the objectives in statutory priority order.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Prudent person standard recited: judgment and care a person of prudence, discretion and intelligence would exercise in managing the person's own affairs.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REBAND",
+            "note": "Standard of care binds by law; element-level band in Step 1."
+          },
+          "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED"
+        },
+        {
+          "id": "e2",
+          "assertion": "Investments are made not for speculation but for investment.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REBAND",
+            "note": "As e1."
+          },
+          "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED"
+        },
+        {
+          "id": "e3",
+          "assertion": "Objectives stated in priority order: preservation and safety of principal, liquidity, yield.",
+          "test_type": "ORDERED_SEQUENCE",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "QUERY",
+            "note": "Priority order verified in Sec. 2256.006(a); overlaps 2256.005-b-2-001 and 2256.005-d-001 e3 - decide the single owner."
+          }
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "prudence, discretion, and intelligence",
+          "person's own affairs",
+          "not for speculation",
+          "preservation and safety of principal"
+        ],
+        "anti_patterns": [
+          "prudent investor rule",
+          "modern portfolio theory",
+          "total return",
+          "Uniform Prudent Investor Act"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Texas applies the prudent person standard to public funds. Importing prudent investor or total return language from the trust context misstates the applicable standard and, under Sec. 2256.006(b)(2), imports the wrong benchmark into any later prudence determination."
+      },
+      "severity": "HIGH",
+      "interpretive_notes": "Sec. 2256.006 governs investment decisions rather than policy content, so the band is RECOMMENDED rather than REQUIRED. It stays in the statutory index because Sec. 2256.006(b)(2) makes the written policy the yardstick for the prudence determination.",
+      "deficiency_language": "The policy does not recite the Sec. 2256.006(a) standard of care and priority of objectives.",
+      "remediation_language": "Recite the prudent person standard verbatim and state the objectives in the order: preservation and safety of principal, liquidity, yield.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-2-001",
+        "TX-PFIA-2256.006-b-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Investments shall be made with judgment and care, under prevailing circumstances, that a person of prudence, discretion, and intelligence would exercise in the management of the person's own affairs, not for speculation, but for investment, considering the probable safety of capital and the probable income to be derived."
+    },
+    {
+      "control_id": "TX-PFIA-2256.006-b-001",
+      "title": "Prudence determination - portfolio level and policy consistency",
+      "citation": {
+        "section": "2256.006",
+        "subsection": "b"
+      },
+      "source_text": "In determining whether an investment officer has exercised prudence with respect to an investment decision, the determination shall be made taking into consideration:",
+      "source_version": {
+        "effective_date": "1995-09-01",
+        "last_amended_by": "Acts 1995, 74th Leg., ch. 402"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states that prudence is assessed across all funds under the officer's responsibility rather than on a single investment, and by reference to consistency with the written policy.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Prudence is assessed at the portfolio level rather than on a single investment."
+        },
+        {
+          "id": "e2",
+          "assertion": "Consistency with the written investment policy is part of the determination."
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "rather than a consideration as to the prudence of a single investment",
+          "all funds",
+          "consistent with the written investment policy",
+          "single investment",
+          "overall portfolio",
+          "prudence",
+          "considered in the context"
+        ],
+        "anti_patterns": [
+          "each investment shall be judged on its own merits"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Single-investment judgment is the opposite of the statutory test and exposes the officer to hindsight review of individual positions."
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy does not state the Sec. 2256.006(b) basis for determining whether prudence was exercised.",
+      "remediation_language": "State that prudence is determined across all funds under the officer's responsibility and by reference to consistency with this policy.",
+      "cross_references": [
+        "TX-PFIA-2256.006-a-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "audit": {
+        "status": "PROVISIONAL",
+        "ref": "EA-2026-09-27",
+        "verdict": "REBAND",
+        "note": "Adjudicative standard for prudence, not a policy-content duty."
+      },
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.007-a-001",
+      "title": "State agency board members and investment officer - initial training within six months",
+      "citation": {
+        "section": "2256.007",
+        "subsection": "a"
+      },
+      "source_text": "Each member of the governing board of a state agency and its investment officer shall attend at least one training session relating to the person's responsibilities under this chapter within six months after taking office or assuming duties.",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_IS_STATE_AGENCY"
+        ],
+        "include_classes": [
+          "STATE_AGENCY"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "Every board member and the investment officer attend at least one training session within six months of taking office or assuming duties, and the training covers the six statutory subjects.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Every member of the governing board, not only the investment officer, is covered."
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires initial training within six months after taking office or assuming duties.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Training occurs within six months after taking office or assuming duties."
+            },
+            "note": "Topic list (former e3) dropped: training content binds the training, not the policy."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.007(b)",
+          "text": "The Texas Higher Education Coordinating Board provides the training under this section; an independent source satisfies only the Subsection (d) biennial requirement.",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "training session",
+          "six months",
+          "governing board",
+          "Texas Higher Education Coordinating Board"
+        ],
+        "anti_patterns": [
+          "within 12 months"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "The local government regime under Sec. 2256.008 is frequently copied into state agency policies. It has different hours, a different deadline and a different approved provider, and it does not reach board members at all.",
+        "anti_pattern_anchors": [
+          "training"
+        ]
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy misstates the state agency initial training requirement of Sec. 2256.007(a).",
+      "remediation_language": "Require every governing board member and the investment officer to attend Coordinating Board training within six months of taking office or assuming duties.",
+      "cross_references": [
+        "TX-PFIA-2256.007-d-001",
+        "TX-PFIA-2256.008-a-2-001"
+      ],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.007-d-001",
+      "title": "State agency investment officer - biennial training and post-session report",
+      "citation": {
+        "section": "2256.007",
+        "subsection": "d"
+      },
+      "source_text": "An investment officer shall attend a training session not less than once each state fiscal biennium and may receive training from any independent source approved by the governing body of the state agency. The investment officer shall prepare a report on this subchapter and deliver the report to the governing body of the state agency not later than the 180th day after the last day of each regular session of the legislature.",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_IS_STATE_AGENCY"
+        ],
+        "include_classes": [
+          "STATE_AGENCY"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The investment officer trains at least once each state fiscal biennium from a governing-body-approved independent source, and delivers a report on the subchapter to the governing body within 180 days after each regular session.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Training at least once each state fiscal biennium.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "KEEP",
+            "note": "Independent-source approval (former e2) dropped: permissive ('may receive') for state agencies."
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "The policy requires the investment officer to prepare a report on the subchapter and deliver it to the governing body not later than the 180th day after the last day of each regular legislative session.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e3",
+              "assertion": "A report on the subchapter is delivered to the governing body not later than the 180th day after the last day of each regular session of the legislature."
+            }
+          }
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "fiscal biennium",
+          "independent source",
+          "180th day",
+          "regular session",
+          "report to the governing body"
+        ],
+        "anti_patterns": [
+          "two-year period that begins on the first day"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "The state agency cycle is the state fiscal biennium and the legislative session calendar, not the entity's own fiscal-year-anchored two-year period used by Sec. 2256.008."
+      },
+      "severity": "HIGH",
+      "interpretive_notes": "The post-session report is the element most often missing entirely; it has no counterpart in the local government regime.",
+      "deficiency_language": "The policy does not carry the biennial training and post-session reporting duties of Sec. 2256.007(d).",
+      "remediation_language": "Require training at least once each state fiscal biennium and delivery of a report on Subchapter A to the governing body within 180 days after each regular session.",
+      "cross_references": [
+        "TX-PFIA-2256.007-a-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.008-a-2-001",
+      "title": "Local government biennial investment training - 10 hours",
+      "citation": {
+        "section": "2256.008",
+        "subsection": "a",
+        "subdivision": "2"
+      },
+      "source_text": "attend an investment training session not less than once in a two-year period that begins on the first day of that local government's fiscal year and consists of the two consecutive fiscal years after that date, and receive not less than 10 hours of instruction relating to investment responsibilities under this subchapter from an independent source approved by the governing body of the local government or a designated investment committee advising the investment officer as provided for in the investment policy of the local government.",
+      "source_version": {
+        "effective_date": "2019-06-07",
+        "last_amended_by": "Acts 2019, 86th Leg., R.S., Ch. 477 (H.B. 293)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "TREASURER",
+        "CFO_IF_NOT_TREASURER",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "policy_text_expectation_note": "Sec. 2256.008 does not require the policy to restate the training mandate. Absence from the policy scores ADVISORY, never a statutory deficiency. Where a designated investment committee approves the training source, that committee must be provided for in the investment policy.",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_TRAINING_SEC_008_APPLIES"
+        ],
+        "include_classes": [
+          "LOCAL_GOV"
+        ],
+        "exclude_classes": [
+          "WATER_DISTRICT_36_49"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "Covered officers complete at least 10 hours of instruction from a governing-body- or committee-approved independent source in each two-fiscal-year period.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Hours threshold is at least 10 per two-year period."
+        },
+        {
+          "id": "e2a",
+          "assertion": "The policy requires training from an independent source.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The policy requires the training source to be approved by the governing body or a designated investment committee.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "The two-year period is measured from the first day of the fiscal year."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.008(a)(1)",
+          "text": "Initial training of at least 10 hours within 12 months of taking office is a separate obligation and is not displaced by the substitute tracks below.",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [
+        {
+          "cite": "2256.008(e)",
+          "predicate_ref": "P_TRAINING_SEC_008_APPLIES",
+          "negate": true,
+          "effect": "NOT_APPLICABLE",
+          "scope": "ENTIRE_SECTION",
+          "note": "Districts governed by Water Code ch. 36 or 49 are outside Sec. 2256.008 altogether, including the initial 10-hour requirement."
+        },
+        {
+          "cite": "2256.008(a-1)",
+          "predicate_ref": "P_TRAINING_8HR_TRACK",
+          "effect": "SUBSTITUTE_CONTROL",
+          "substitute_control_id": "TX-PFIA-2256.008-a1-001",
+          "note": "8 hours biennially in lieu of 10; the (a)(1) initial 10-hour requirement still applies."
+        },
+        {
+          "cite": "2256.008(b)",
+          "predicate_ref": "P_TRAINING_4HR_TRACK",
+          "effect": "SUBSTITUTE_CONTROL",
+          "substitute_control_id": "TX-PFIA-2256.008-b-001",
+          "note": "Satisfied by an officer of the governing body attending 4 hours per two-year period."
+        },
+        {
+          "cite": "2256.008(b-1)",
+          "predicate_ref": "P_TRAINING_5HR_TRACK",
+          "effect": "SUBSTITUTE_CONTROL",
+          "substitute_control_id": "TX-PFIA-2256.008-b1-001",
+          "note": "5 hours per two-year period."
+        },
+        {
+          "cite": "2256.008(f)",
+          "predicate_ref": "P_DEPOSIT_ONLY_CARVEOUT",
+          "effect": "NOT_APPLICABLE",
+          "scope": "SUBDIVISION_A2_ONLY"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "training",
+          "hours of instruction",
+          "independent source",
+          "investment committee"
+        ],
+        "anti_patterns": [
+          "8 hours",
+          "training approved by the Investment Officer"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Where the policy restates the mandate it must restate it correctly; a wrong hours threshold or wrong approver misdirects the officers who rely on it.",
+        "anti_pattern_anchors": [
+          "training",
+          "instruction"
+        ]
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy misstates the biennial investment training requirement of Sec. 2256.008(a)(2).",
+      "remediation_language": "Reference the 10-hour biennial requirement and identify the body that approves independent training sources.",
+      "cross_references": [
+        "TX-PFIA-2256.008-a1-001",
+        "TX-PFIA-2256.008-b-001",
+        "TX-PFIA-2256.008-b1-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.008-a1-001",
+      "title": "School district or municipality biennial investment training - 8 hours",
+      "citation": {
+        "section": "2256.008",
+        "subsection": "a-1"
+      },
+      "source_text": "shall attend an investment training session not less than once in a two-year period that begins on the first day of the school district's or municipality's fiscal year and consists of the two consecutive fiscal years after that date, and receive not less than eight hours of instruction relating to investment responsibilities under this subchapter from an independent source approved by the governing body of the school district or municipality, or by a designated investment committee advising the investment officer as provided for in the investment policy of the school district or municipality.",
+      "source_version": {
+        "effective_date": "2019-06-07",
+        "last_amended_by": "Acts 2019, 86th Leg., R.S., Ch. 477 (H.B. 293)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "TREASURER",
+        "CFO_IF_NOT_TREASURER",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_TRAINING_SEC_008_APPLIES",
+          "P_TRAINING_8HR_TRACK"
+        ],
+        "include_classes": [
+          "LOCAL_GOV"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "Covered officers complete at least 8 hours of instruction from an approved independent source in each two-fiscal-year period, in addition to the Sec. 2256.008(a)(1) initial 10 hours.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Hours threshold is at least 8 per two-year period."
+        },
+        {
+          "id": "e2a",
+          "assertion": "The policy requires training from an independent source.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The policy requires the training source to be approved by the governing body or a designated investment committee.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.008(a)(1)",
+          "text": "The initial 10-hour requirement within 12 months of assuming duties is unaffected by this substitute track.",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [
+        {
+          "cite": "2256.008(g)",
+          "predicate_ref": "P_SD_DEPOSIT_ONLY_CARVEOUT",
+          "effect": "NOT_APPLICABLE",
+          "scope": "SUBSECTION_A1_ONLY",
+          "note": "Requires the annual sworn affidavit; absent the affidavit the exemption does not attach."
+        },
+        {
+          "cite": "2256.008(f)",
+          "predicate_ref": "P_DEPOSIT_ONLY_CARVEOUT",
+          "effect": "NOT_APPLICABLE",
+          "scope": "SUBSECTION_A1_ONLY"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "eight hours",
+          "8 hours",
+          "training",
+          "independent source"
+        ]
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy misstates the biennial training requirement applicable under Sec. 2256.008(a-1).",
+      "remediation_language": "Reference the 8-hour biennial requirement for the treasurer, chief financial officer, and investment officer.",
+      "cross_references": [
+        "TX-PFIA-2256.008-a-2-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.008-b-001",
+      "title": "Small 52(b)/59 district substitute training - 4 hours by an officer of the governing body",
+      "citation": {
+        "section": "2256.008",
+        "subsection": "b"
+      },
+      "source_text": "An investing entity created under authority of Section 52(b), Article III, or Section 59, Article XVI, Texas Constitution, that has contracted with an investment management firm under Section 2256.003(b) and has fewer than five full-time employees or an investing entity that has contracted with another investing entity to invest the entity's funds may satisfy the training requirement provided by Subsection (a)(2) by having an officer of the governing body attend four hours of appropriate instruction in a two-year period that begins on the first day of that local government's fiscal year and consists of the two consecutive fiscal years after that date.",
+      "source_version": {
+        "effective_date": "2019-06-07",
+        "last_amended_by": "Acts 2019, 86th Leg., R.S., Ch. 477 (H.B. 293)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_TRAINING_SEC_008_APPLIES",
+          "P_TRAINING_4HR_TRACK"
+        ],
+        "include_classes": [
+          "LOCAL_GOV"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "An officer of the governing body attends at least 4 hours of appropriate instruction in each two-fiscal-year period, in substitution for the Sec. 2256.008(a)(2) requirement only.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "At least 4 hours of appropriate instruction per two-year period."
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy designates an officer of the governing body to attend the training.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Attendance is by an officer of the governing body."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.008(a)(1)",
+          "text": "Substitutes for (a)(2) only. The initial 10-hour requirement within 12 months of assuming duties is unaffected.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.008(b)",
+          "text": "The treasurer or CFO of a sub-five-FTE 52(b)/59 district is not required to attend unless that person is also the investment officer.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "four hours",
+          "4 hours",
+          "officer of the governing body",
+          "investment management firm"
+        ]
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy misstates the substitute training arrangement available under Sec. 2256.008(b).",
+      "remediation_language": "State that the Sec. 2256.008(a)(2) requirement is satisfied by an officer of the governing body attending four hours of appropriate instruction each two-year period.",
+      "cross_references": [
+        "TX-PFIA-2256.008-a-2-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.008-b1-001",
+      "title": "Housing authority substitute training - 5 hours",
+      "citation": {
+        "section": "2256.008",
+        "subsection": "b-1"
+      },
+      "source_text": "A housing authority created under Chapter 392, Local Government Code, may satisfy the training requirement provided by Subsection (a)(2) by requiring the following person to attend, in each two-year period that begins on the first day of that housing authority's fiscal year and consists of the two consecutive fiscal years after that date, at least five hours of appropriate instruction: (1) the treasurer, or the chief financial officer if the treasurer is not the chief financial officer, or the investment officer; or (2) if the authority does not have an officer described by Subdivision (1), another officer of the authority.",
+      "source_version": {
+        "effective_date": "2019-06-07",
+        "last_amended_by": "Acts 2019, 86th Leg., R.S., Ch. 477 (H.B. 293)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "TREASURER",
+        "CFO_IF_NOT_TREASURER",
+        "INVESTMENT_OFFICER",
+        "OTHER_AUTHORITY_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_TRAINING_SEC_008_APPLIES",
+          "P_TRAINING_5HR_TRACK"
+        ],
+        "include_classes": [
+          "HOUSING_AUTHORITY_392"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "A covered officer attends at least 5 hours of appropriate instruction in each two-fiscal-year period, in substitution for the Sec. 2256.008(a)(2) requirement only.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "At least 5 hours of appropriate instruction per two-year period."
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy designates the treasurer, chief financial officer or investment officer (or another officer where none exists) to attend the training.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Attendance by the treasurer, CFO, investment officer, or another officer where none of those exist."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.008(a)(1)",
+          "text": "Substitutes for (a)(2) only; the initial 10-hour requirement is unaffected.",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [
+        {
+          "cite": "2256.008(f)",
+          "predicate_ref": "P_DEPOSIT_ONLY_CARVEOUT",
+          "effect": "NOT_APPLICABLE",
+          "scope": "SUBDIVISION_A2_ONLY"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "five hours",
+          "5 hours",
+          "housing authority",
+          "appropriate instruction"
+        ]
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy misstates the substitute training arrangement available under Sec. 2256.008(b-1).",
+      "remediation_language": "State that the Sec. 2256.008(a)(2) requirement is satisfied by five hours of appropriate instruction each two-year period.",
+      "cross_references": [
+        "TX-PFIA-2256.008-a-2-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.017-001",
+      "title": "Existing investments - no forced liquidation of investments authorized at purchase",
+      "citation": {
+        "section": "2256.017"
+      },
+      "source_text": "Except as provided by Chapter 2270, an entity is not required to liquidate investments that were authorized investments at the time of purchase.",
+      "source_version": {
+        "effective_date": "2017-05-23",
+        "last_amended_by": "Acts 2017, 85th Leg., R.S., Ch. 96 (S.B. 253)"
+      },
+      "normative_force": "PERMISSIVE_ENABLING_WITH_CONDITIONS",
+      "obligation_bearer": [
+        "ENTITY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "Where the policy addresses legacy holdings, it limits the grandfather to investments that were authorized at the time of purchase and does not extend it to holdings that have lost a required rating.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The grandfather is limited to investments that were authorized investments at the time of purchase.",
+          "negative": true,
+          "contradicted_by": [
+            "existing investments are not required to be liquidated",
+            "may be held to maturity notwithstanding",
+            "all existing holdings are grandfathered",
+            "regardless of a subsequent downgrade"
+          ]
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy does not extend the grandfather to a holding that has since fallen below a rating the subchapter requires.",
+          "negative": true,
+          "contradicted_by": [
+            "may be held to maturity notwithstanding a downgrade",
+            "regardless of a subsequent downgrade"
+          ],
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "KEEP",
+            "note": "Removed 'grandfathered' and 'existing investments are not required to be liquidated' from contradicted_by: both restate Sec. 2256.017 itself."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.021",
+          "text": "Sec. 2256.017 and Sec. 2256.021 govern different facts. An investment lawful at purchase stays lawful; an investment that has lost a required rating ceases to be authorized and must be liquidated by prudent measures.",
+          "linked_control": "TX-PFIA-2256.021-001",
+          "severity": "CRITICAL"
+        },
+        {
+          "id": "c2",
+          "cite": "Ch. 2270",
+          "text": "The Chapter 2270 divestment statutes are an express exception and are outside this register.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "authorized investments at the time of purchase",
+          "not required to liquidate",
+          "existing investments",
+          "grandfather"
+        ],
+        "anti_patterns": [
+          "may be held to maturity notwithstanding a downgrade"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "An unqualified grandfather clause reads Sec. 2256.017 as overriding Sec. 2256.021. It does not: the section protects a holding that was authorized when bought, not a holding that has since lost a rating the subchapter requires."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy states the Sec. 2256.017 grandfather in terms that would excuse a holding which has lost a required rating.",
+      "remediation_language": "State that investments authorized at the time of purchase need not be liquidated, and that this does not apply to an investment that has ceased to carry a minimum rating required by the subchapter.",
+      "cross_references": [
+        "TX-PFIA-2256.021-001"
+      ],
+      "exemptions": [],
+      "audit": {
+        "status": "PROVISIONAL",
+        "ref": "EA-2026-09-27",
+        "verdict": "REBAND",
+        "note": "Permissive grandfather rule; silence forgoes nothing."
+      },
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "[Entity] is not required to liquidate investments that were authorized investments at the time of purchase, except as Section 2256.021 of the Act requires for an investment that does not have a required minimum rating."
+    },
+    {
+      "control_id": "TX-PFIA-2256.0208-001",
+      "title": "Bond proceeds and pledged revenue - investment constrained by the debt instrument and the policy",
+      "citation": {
+        "section": "2256.0208"
+      },
+      "source_text": "The investment officer of a local government may invest bond proceeds or pledged revenue only to the extent permitted by this chapter, in accordance with:",
+      "source_version": {
+        "effective_date": "2019-09-01",
+        "last_amended_by": "Acts 2019, 86th Leg., R.S., Ch. 1133 (H.B. 2706)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES",
+          "P_IS_LOCAL_GOV"
+        ],
+        "include_classes": [
+          "LOCAL_GOV"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy addresses bond proceeds and pledged revenue and subordinates their investment to the chapter, to the statutory provisions governing the debt issuance or agreement, and to the policy's own provisions for that debt.",
+      "required_elements": [
+        {
+          "id": "e1a",
+          "assertion": "The policy addresses the investment of bond proceeds.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e1",
+              "assertion": "Bond proceeds and pledged revenue are addressed as a distinct category."
+            },
+            "note": "QUERY: whether a 'distinct category' is required remains open."
+          }
+        },
+        {
+          "id": "e1b",
+          "assertion": "The policy addresses the investment of pledged revenue.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e1",
+              "assertion": "Bond proceeds and pledged revenue are addressed as a distinct category."
+            }
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "Their investment is subject to the statutory provisions governing the debt issuance or the agreement."
+        },
+        {
+          "id": "e3",
+          "assertion": "Their investment is subject to the entity's own investment policy provisions for that debt issuance or agreement."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.0208(a)",
+          "text": "Pledged revenue reaches money pledged to bonds, to lease and installment sale obligations, and to certificates of participation. A policy addressing bond proceeds alone does not reach the whole category.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.005(d)",
+          "text": "A separate strategy for bond proceeds and debt service funds is independently required.",
+          "linked_control": "TX-PFIA-2256.005-d-001",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "bond proceeds",
+          "pledged revenue",
+          "debt service",
+          "bond order",
+          "arbitrage"
+        ],
+        "anti_patterns": [
+          "bond proceeds are invested on the same basis as operating funds",
+          "no separate treatment"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Bond proceeds carry drawdown, arbitrage and covenant constraints that operating funds do not. Treating them identically is the practical failure Sec. 2256.0208 was added to address."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not constrain the investment of bond proceeds and pledged revenue as required by Sec. 2256.0208.",
+      "remediation_language": "State that bond proceeds and pledged revenue may be invested only as permitted by this chapter, by the statutory provisions governing the issuance or agreement, and by this policy's provisions for that debt.",
+      "cross_references": [
+        "TX-PFIA-2256.005-d-001",
+        "IS-2256.015-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Bond proceeds and pledged revenue shall be invested only in accordance with the Act, the statutory provisions governing the debt issuance or the agreement, as applicable, and this policy's provisions regarding the debt issuance or the agreement."
+    },
+    {
+      "control_id": "TX-PFIA-2256.021-001",
+      "title": "Effect of loss of a required rating",
+      "citation": {
+        "section": "2256.021"
+      },
+      "source_text": "An investment that requires a minimum rating under this subchapter does not qualify as an authorized investment during the period the investment does not have the minimum rating. An entity shall take all prudent measures that are consistent with its investment policy to liquidate an investment that does not have the minimum rating.",
+      "source_version": {
+        "effective_date": "1995-09-01",
+        "last_amended_by": "Acts 1995, 74th Leg., ch. 402"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY",
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "logic": {
+          "some": [
+            {
+              "var": "policy.authorized_instruments"
+            },
+            {
+              "in": [
+                {
+                  "var": ""
+                },
+                [
+                  "MUNI_OBLIGATIONS",
+                  "BANKERS_ACCEPTANCE",
+                  "COMMERCIAL_PAPER",
+                  "INVESTMENT_POOL",
+                  "ISD_CORPORATE_BOND",
+                  "SECURITIES_LENDING"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "activation_note": "Fires where the policy authorizes at least one instrument carrying a statutory minimum rating.",
+      "operative_clause": "The policy states that a downgraded holding ceases to be an authorized investment while below the minimum rating and that the entity will take all prudent measures consistent with the policy to liquidate it.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "A holding below its minimum rating is not an authorized investment for the period it lacks the rating."
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires all prudent measures consistent with the policy to liquidate an investment that does not have the minimum rating.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "The entity takes all prudent measures consistent with the policy to liquidate."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(b)(4)(F)",
+          "text": "The monitoring procedure that detects the downgrade is a separate content requirement.",
+          "linked_control": "TX-PFIA-2256.005-b-4-F-001",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "minimum rating",
+          "does not qualify as an authorized investment",
+          "prudent measures",
+          "liquidate"
+        ],
+        "anti_patterns": [
+          "may be held to maturity notwithstanding a downgrade",
+          "grandfathered",
+          "existing investments are not required to be liquidated"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Sec. 2256.017 grandfathers instruments that were authorized at the time of purchase; it does not excuse a holding that has since lost a rating the subchapter requires. Conflating the two is the most consequential misreading in this part of the chapter.",
+        "context_directives": [
+          "monitored",
+          "downgrade",
+          "liquidate",
+          "minimum rating"
+        ],
+        "anti_pattern_anchors": [
+          "rating",
+          "rated",
+          "downgrade"
+        ]
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not state the consequence of a holding falling below its required minimum rating under Sec. 2256.021.",
+      "remediation_language": "State that an investment lacking its required minimum rating is not an authorized investment for that period and that the entity will take all prudent measures consistent with this policy to liquidate it.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-4-F-001",
+        "IS-2256.013-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "An investment that requires a minimum rating does not qualify as an authorized investment during the period the investment does not have the minimum rating. [Entity] shall take all prudent measures consistent with this policy to liquidate an investment that does not have the minimum rating."
+    },
+    {
+      "control_id": "TX-PFIA-2256.023-a-001",
+      "title": "Quarterly investment report prepared and submitted to the governing body",
+      "citation": {
+        "section": "2256.023",
+        "subsection": "a"
+      },
+      "source_text": "Not less than quarterly, the investment officer shall prepare and submit to the governing body of the entity a written report of investment transactions for all funds covered by this chapter for the preceding reporting period.",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "A written report of investment transactions for all funds covered by the chapter is prepared not less than quarterly and presented to the governing body and the chief executive officer within a reasonable time after period end.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires a written report of investment transactions not less than quarterly.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "A written report is prepared not less than quarterly."
+            },
+            "note": "Policy-duty form; the reports are evidence request PBC-09."
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires the report to cover all funds subject to the chapter for the preceding reporting period.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "The report covers all funds subject to the chapter for the preceding reporting period."
+            }
+          }
+        },
+        {
+          "id": "e3a",
+          "assertion": "The policy requires the report to be presented to the governing body and the chief executive officer.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e3",
+              "assertion": "It is presented to the governing body and the chief executive officer within a reasonable time after period end."
+            },
+            "note": "Verified: Sec. 2256.023(c)."
+          }
+        },
+        {
+          "id": "e3b",
+          "assertion": "The policy requires the report to be presented within a reasonable time after the end of the period.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e3",
+              "assertion": "It is presented to the governing body and the chief executive officer within a reasonable time after period end."
+            },
+            "note": "Verified: Sec. 2256.023(c)."
+          }
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "not less than quarterly",
+          "quarterly report",
+          "governing body",
+          "chief executive officer",
+          "investment report",
+          "reported to the Board",
+          "quarterly investment report",
+          "presented to the Board"
+        ],
+        "anti_patterns": [
+          "reported annually",
+          "reported semiannually",
+          "provided upon request"
+        ],
+        "anti_pattern_effect": "DEFICIENT"
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not provide for the quarterly investment report required by Sec. 2256.023(a) and (c).",
+      "remediation_language": "Require the investment officer to prepare a written quarterly report covering all funds and present it to the governing body and the chief executive officer within a reasonable time after the end of the period.",
+      "cross_references": [
+        "TX-PFIA-2256.023-b-001",
+        "TX-PFIA-2256.023-d-001"
+      ],
+      "conditions": [],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "Not less than quarterly, the investment officer shall prepare and submit to the [Governing Body] a written report of investment transactions for all funds covered by the Act for the preceding reporting period, presented to the [Governing Body] and the chief executive officer within a reasonable time after the end of the period."
+    },
+    {
+      "control_id": "TX-PFIA-2256.023-b-001",
+      "title": "Quarterly report content and signature requirements",
+      "citation": {
+        "section": "2256.023",
+        "subsection": "b"
+      },
+      "source_text": "The report must: (1) describe in detail the investment position of the entity on the date of the report; (2) be prepared jointly by all investment officers of the entity; (3) be signed by each investment officer of the entity;",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONTENT",
+      "obligation_bearer": [
+        "INVESTMENT_OFFICER"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The quarterly report contains all eight statutory content elements and is prepared jointly by and signed by each investment officer.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires the report to describe in detail the investment position of the entity on the date of the report.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Describes in detail the investment position of the entity on the date of the report."
+            }
+          }
+        },
+        {
+          "id": "e2a",
+          "assertion": "The policy requires the report to be prepared jointly by all investment officers.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Prepared jointly by and signed by each investment officer of the entity."
+            }
+          }
+        },
+        {
+          "id": "e2b",
+          "assertion": "The policy requires the report to be signed by each investment officer.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "SPLIT",
+            "prior": {
+              "id": "e2",
+              "assertion": "Prepared jointly by and signed by each investment officer of the entity."
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "assertion": "The policy requires a summary statement for each pooled fund group stating beginning market value, ending market value and fully accrued interest for the period.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e3",
+              "assertion": "Summary statement per pooled fund group: beginning market value, ending market value, and fully accrued interest for the period."
+            },
+            "note": "Components verified complete against Sec. 2256.023(b)(4)."
+          }
+        },
+        {
+          "id": "e4",
+          "assertion": "The policy requires the report to state the book value and market value of each separately invested asset at period end by asset type and fund type.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e4",
+              "assertion": "Book value and market value of each separately invested asset at period end by asset type and fund type."
+            }
+          }
+        },
+        {
+          "id": "e5",
+          "assertion": "The policy requires the report to state the maturity date of each separately invested asset that has one.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e5",
+              "assertion": "Maturity date of each separately invested asset that has one."
+            }
+          }
+        },
+        {
+          "id": "e6",
+          "assertion": "The policy requires the report to state the account, fund or pooled fund group for which each investment was acquired.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e6",
+              "assertion": "The account, fund or pooled fund group for which each individual investment was acquired."
+            }
+          }
+        },
+        {
+          "id": "e7",
+          "assertion": "The policy requires the report to state compliance with the investment strategy expressed in the policy.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e7",
+              "assertion": "Statement of compliance with the investment strategy expressed in the policy."
+            }
+          }
+        },
+        {
+          "id": "e8",
+          "assertion": "The policy requires the report to state compliance with the relevant provisions of the chapter.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e8",
+              "assertion": "Statement of compliance with the relevant provisions of the chapter."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(b)(4)(D)",
+          "text": "The market value disclosures depend on the policy's market price monitoring method actually operating.",
+          "linked_control": "TX-PFIA-2256.005-b-4-D-001",
+          "severity": "HIGH"
+        }
+      ],
+      "test": {
+        "method": "STRUCTURED_EXTRACTION",
+        "requires_affirmative_span": false,
+        "extract_schema": {
+          "content_elements_present": [
+            "string"
+          ],
+          "signed_by_each_officer": "boolean"
+        },
+        "search_directives": [
+          "investment position",
+          "beginning market value",
+          "ending market value",
+          "fully accrued interest",
+          "book value and market value",
+          "maturity date",
+          "signed by each investment officer",
+          "compliance",
+          "accrued interest",
+          "signed by"
+        ],
+        "anti_patterns": [
+          "book value only",
+          "market value is reported annually",
+          "signed by the chief financial officer"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Subdivision (3) requires the signature of each investment officer; a single delegated signature does not satisfy it, and a book-value-only report omits four of the eight content elements."
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy's reporting provisions do not carry the content and signature requirements of Sec. 2256.023(b).",
+      "remediation_language": "Enumerate the eight statutory content elements in the reporting section and require joint preparation and signature by each investment officer.",
+      "cross_references": [
+        "TX-PFIA-2256.023-a-001",
+        "TX-PFIA-2256.005-b-4-D-001"
+      ],
+      "exemptions": [],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The report shall: (1) describe in detail the investment position of [Entity] on the date of the report; (2) be prepared jointly by all investment officers; (3) be signed by each investment officer; (4) contain a summary statement of each pooled fund group stating the beginning market value, ending market value and fully accrued interest for the reporting period; (5) state the book value and market value of each separately invested asset at the end of the period by asset type and fund type; (6) state the maturity date of each separately invested asset that has a maturity date; (7) state the account, fund or pooled group fund for which each investment was acquired; and (8) state the compliance of the investment portfolio with this policy's investment strategy and the Act."
+    },
+    {
+      "control_id": "TX-PFIA-2256.023-d-001",
+      "title": "Annual independent auditor review of quarterly investment reports",
+      "citation": {
+        "section": "2256.023",
+        "subsection": "d"
+      },
+      "source_text": "If an entity invests in other than money market mutual funds, investment pools or accounts offered by its depository bank in the form of certificates of deposit, or money market accounts or similar accounts, the reports prepared by the investment officers under this section shall be formally reviewed at least annually by an independent auditor, and the result of the review shall be reported to the governing body by that auditor.",
+      "source_version": {
+        "effective_date": "2011-06-17",
+        "last_amended_by": "Acts 2011, 82nd Leg., R.S., Ch. 1004 (H.B. 2226)"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "OPERATIONAL_ARTIFACT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "predicate_ref": "P_BEYOND_2256_023D_SAFE_HARBOR"
+      },
+      "activation_note": "Activates whenever the authorized-instrument set extends beyond the four safe-harbor vehicles. An entity authorizing Treasuries is inside this control.",
+      "operative_clause": "Quarterly reports are formally reviewed at least annually by an independent auditor who reports the result of that review to the governing body.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Annual formal review by an independent auditor is required."
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires the independent auditor to report the result of the review to the governing body.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "The auditor, not staff, reports the review result to the governing body."
+            },
+            "note": "The auditor's report itself is evidence request PBC-10."
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.005(m)",
+          "text": "Separate and additive for non-state agencies: a compliance audit of management controls and adherence to the policy in conjunction with the annual financial audit. Do not merge.",
+          "linked_control": "TX-PFIA-2256.005-m-001",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "independent auditor",
+          "formally reviewed",
+          "annual review of investment reports"
+        ],
+        "anti_patterns": [
+          "reviewed by the Finance Director",
+          "reviewed internally",
+          "included in the annual financial audit"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Folding the Sec. 2256.023(d) review into the general financial audit engagement conflates two scopes and typically leaves no auditor-to-board artifact.",
+        "anti_pattern_anchors": [
+          "report"
+        ]
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy does not provide for annual formal review of the quarterly investment reports by an independent auditor reporting to the governing body, as required by Sec. 2256.023(d).",
+      "remediation_language": "Provide that the quarterly reports be formally reviewed at least annually by an independent auditor who reports the result of the review directly to the governing body.",
+      "cross_references": [
+        "TX-PFIA-2256.023-a-001",
+        "TX-PFIA-2256.005-m-001"
+      ],
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    },
+    {
+      "control_id": "TX-PFIA-2256.025-001",
+      "title": "Annual review, revision and adoption of the qualified broker list",
+      "citation": {
+        "section": "2256.025"
+      },
+      "source_text": "The governing body of an entity subject to this subchapter or the designated investment committee of the entity shall, at least annually, review, revise, and adopt a list of qualified brokers that are authorized to engage in investment transactions with the entity.",
+      "source_version": {
+        "effective_date": "1997-09-01",
+        "last_amended_by": "Acts 1997, 75th Leg., ch. 1421"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "GOVERNING_BODY",
+        "INVESTMENT_COMMITTEE"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT",
+        "BOARD_RECORD"
+      ],
+      "policy_text_expectation": "RECOMMENDED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The governing body or designated investment committee reviews, revises and adopts the qualified broker list at least annually.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "The policy requires the list of qualified brokers to be adopted by the governing body or designated investment committee.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e1",
+              "assertion": "Broker list is adopted by the governing body or designated investment committee."
+            },
+            "note": "REBAND pending element-level band (Step 1)."
+          }
+        },
+        {
+          "id": "e2",
+          "assertion": "The policy requires the list to be reviewed, revised and adopted at least annually.",
+          "audit": {
+            "status": "PROVISIONAL",
+            "ref": "EA-2026-09-27",
+            "verdict": "REWORD",
+            "prior": {
+              "id": "e2",
+              "assertion": "Review, revision and adoption occur at least annually."
+            }
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "2256.009(a)(8)(A)(i), 2256.010(b)(1)(A)",
+          "text": "Brokered deposit and CD programs require the broker to be selected from this adopted list, making the list a precondition to those instruments.",
+          "severity": "HIGH"
+        }
+      ],
+      "exemptions": [],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": true,
+        "search_directives": [
+          "qualified brokers",
+          "broker list",
+          "authorized brokers",
+          "at least annually"
+        ],
+        "anti_patterns": [
+          "list maintained by the Investment Officer",
+          "approved by staff",
+          "as needed",
+          "maintained by the Investment Officer"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "Sec. 2256.025 vests adoption in the governing body or the designated investment committee; staff maintenance is not adoption.",
+        "anti_pattern_anchors": [
+          "broker",
+          "dealer"
+        ]
+      },
+      "severity": "HIGH",
+      "deficiency_language": "The policy does not require annual review, revision and adoption of the qualified broker list by the governing body or designated investment committee, as required by Sec. 2256.025.",
+      "remediation_language": "The governing body (or the designated investment committee) shall at least annually review, revise and adopt the list of qualified brokers authorized to engage in investment transactions with the entity.",
+      "cross_references": [
+        "TX-PFIA-2256.005-k-001",
+        "IS-2256.010-b-001"
+      ],
+      "relevance": "CORE",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      },
+      "proposed_text": "The [Governing Body or designated investment committee] shall, at least annually, review, revise, and adopt a list of qualified brokers that are authorized to engage in investment transactions with [Entity]."
+    },
+    {
+      "control_id": "TX-PFIA-2256.026-001",
+      "title": "Statutory compliance beyond this subchapter",
+      "citation": {
+        "section": "2256.026"
+      },
+      "source_text": "All investments made by entities must comply with this subchapter and all federal, state, and local statutes, rules, or regulations.",
+      "source_version": {
+        "effective_date": "1997-09-01",
+        "last_amended_by": "Acts 1997, 75th Leg., ch. 1421"
+      },
+      "normative_force": "MANDATORY_CONDUCT",
+      "obligation_bearer": [
+        "ENTITY"
+      ],
+      "evidence_locus": [
+        "POLICY_TEXT"
+      ],
+      "policy_text_expectation": "RECOMMENDED_NOT_REQUIRED",
+      "applicability": {
+        "predicate_refs": [
+          "P_SUBCH_A_APPLIES"
+        ],
+        "include_classes": [
+          "*"
+        ]
+      },
+      "activation": {
+        "always": true
+      },
+      "operative_clause": "The policy states that investments must comply with the subchapter and with all other applicable federal, state and local law.",
+      "required_elements": [
+        {
+          "id": "e1",
+          "assertion": "Compliance with Subchapter A is stated."
+        },
+        {
+          "id": "e2",
+          "assertion": "Compliance with other applicable federal, state and local statutes, rules and regulations is stated."
+        }
+      ],
+      "conditions": [
+        {
+          "id": "c1",
+          "cite": "Ch. 2257",
+          "text": "The Public Funds Collateral Act is the most commonly implicated other statute and is outside this register; its absence from the findings is not a determination about collateralization.",
+          "severity": "HIGH"
+        },
+        {
+          "id": "c2",
+          "cite": "2256.024(a)",
+          "text": "The subchapter neither prohibits an investment specifically authorized by other law nor authorizes one specifically prohibited by other law.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "test": {
+        "method": "SPAN_EXTRACTION",
+        "requires_affirmative_span": false,
+        "search_directives": [
+          "comply with",
+          "federal, state, and local",
+          "statutes, rules, or regulations",
+          "applicable law",
+          "applicable federal and state laws",
+          "in accordance with applicable",
+          "state law",
+          "Trust Agreement",
+          "all applicable"
+        ],
+        "anti_patterns": [
+          "governed solely by the Public Funds Investment Act",
+          "this policy is the sole authority"
+        ],
+        "anti_pattern_effect": "DEFICIENT",
+        "anti_pattern_rationale": "A policy that presents the subchapter as the only applicable authority writes the Public Funds Collateral Act, bond orders and local charter limits out of the compliance frame."
+      },
+      "severity": "MEDIUM",
+      "deficiency_language": "The policy does not acknowledge the Sec. 2256.026 duty to comply with other applicable law.",
+      "remediation_language": "State that all investments must comply with this subchapter and with all other applicable federal, state and local statutes, rules and regulations.",
+      "cross_references": [
+        "TX-PFIA-2256.005-b-4-A-001"
+      ],
+      "exemptions": [],
+      "audit": {
+        "status": "PROVISIONAL",
+        "ref": "EA-2026-09-27",
+        "verdict": "REBAND",
+        "note": "Statute binds investments; recital is boilerplate."
+      },
+      "relevance": "CONTEXT",
+      "relevance_review": {
+        "status": "ADOPTED",
+        "ref": "TIER-2026-09-27",
+        "source": "schedule-a-core-context-tiering.xlsx",
+        "source_sha256": "68208075082b6e66fc53a1ec687a78542d57142f3afc37936751b1c5ae09dccb"
+      }
+    }
+  ]
+}

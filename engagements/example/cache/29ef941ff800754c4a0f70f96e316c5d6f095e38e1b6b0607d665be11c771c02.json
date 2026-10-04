@@ -1,0 +1,24 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "Not less than\nq\nuarter\nly\n\nand within a reasonable time after the end of the quarter being reported, the\nInvestment Officer\n,\n\nassisted by the\nCounty Designees\n,\n\nshall prepare and submit to Commissioners\nCourt a written report of the investment transaction\ns",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "quote": "a written report of the investment transaction\ns\n\nfor all funds of the County from\n\nthe preceding\nreporting period.",
+      "supported": true
+    },
+    {
+      "id": "e3a",
+      "note": "The policy requires submission to Commissioners Court, but does not require presentation to the chief executive officer.",
+      "supported": false
+    },
+    {
+      "id": "e3b",
+      "quote": "within a reasonable time after the end of the quarter being reported, the\nInvestment Officer\n,\n\nassisted by the\nCounty Designees\n,\n\nshall prepare and submit to Commissioners\nCourt",
+      "supported": true
+    }
+  ]
+}

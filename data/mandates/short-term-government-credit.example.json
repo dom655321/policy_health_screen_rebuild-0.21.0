@@ -1,0 +1,102 @@
+{
+  "_note": "Example strategy parameters for `pfia mandate-fit`. One file per strategy, maintained by the firm. Instrument codes and condition IDs come from data/registers/instrument-conditions/register.json; a term is the strategy's own value for that condition. Illustrative figures only.",
+  "strategy": "Short-Term Government & Credit",
+  "version": "1.0",
+  "approved": "2026-09-30",
+  "instruments": {
+    "US_OBLIGATIONS": {
+      "summary": "Treasuries, agencies and FHLB, to 3 years",
+      "terms": {
+        "USO-01": [
+          "US_TREASURY",
+          "US_AGENCY_INSTRUMENTALITY",
+          "FHLB"
+        ]
+      }
+    },
+    "MUNI_OBLIGATIONS": {
+      "summary": "AA or better, to 2 years",
+      "terms": {
+        "MUN-02": "AA"
+      }
+    },
+    "COMMERCIAL_PAPER": {
+      "summary": "A-1/P-1, two agencies, to 270 days, up to 20%",
+      "target": "up to 20% of the account",
+      "terms": {
+        "CP-01": {
+          "value": 270,
+          "unit": "days"
+        },
+        "CP-02": "A-1",
+        "CP-03": [
+          "TWO_AGENCIES"
+        ]
+      }
+    },
+    "REPO": {
+      "summary": "Tri-party, 102% Treasury/agency collateral, primary dealers",
+      "terms": {
+        "REP-03": [
+          "CASH",
+          "OBLIGATIONS_2256_009A1"
+        ],
+        "REP-04": {
+          "value": 102,
+          "unit": "pct_of_principal"
+        },
+        "REP-08": [
+          "PRIMARY_DEALER_FRB"
+        ]
+      }
+    },
+    "INVESTMENT_POOL": {
+      "summary": "AAAm, rated continuously",
+      "terms": {
+        "POL-10": {
+          "value": "AAAm",
+          "basis": "CONTINUOUS"
+        }
+      }
+    },
+    "MMMF": {
+      "summary": "Government 2a-7 funds, at most 5% of any fund",
+      "terms": {
+        "MMF-05": {
+          "value": 5,
+          "unit": "pct_of_fund_assets"
+        }
+      }
+    },
+    "BROKERED_CD": {
+      "summary": "Fully insured, through Texas-office brokers",
+      "target": "liquidity sleeve",
+      "terms": {}
+    },
+    "DEPOSITORY_CD": {
+      "summary": "Texas banks, insured or collateralized",
+      "terms": {}
+    }
+  },
+  "portfolio": {
+    "max_stated_maturity": {
+      "label": "Maximum stated maturity",
+      "cite": "Sec. 2256.005(b)(4)(B)",
+      "value": 3,
+      "unit": "years",
+      "kind": "cap"
+    },
+    "max_wam_pooled": {
+      "label": "Dollar-weighted average maturity, pooled funds",
+      "cite": "Sec. 2256.005(b)(4)(C)",
+      "value": 365,
+      "unit": "days",
+      "kind": "cap"
+    },
+    "settlement": {
+      "label": "Settlement",
+      "cite": "Sec. 2256.005(b)(4)(E)",
+      "value": "DVP"
+    }
+  }
+}

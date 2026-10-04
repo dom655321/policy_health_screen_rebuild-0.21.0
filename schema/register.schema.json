@@ -1,0 +1,615 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wrld.tech/schema/tx-pfia/register.schema.json",
+  "title": "PFIA control register",
+  "type": "object",
+  "required": [
+    "$id",
+    "schedule",
+    "title",
+    "version",
+    "authority",
+    "law_in_force_as_of",
+    "canonical_source",
+    "controls"
+  ],
+  "properties": {
+    "$id": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "STATUTE",
+        "GTOT",
+        "LOCAL_CHARTER",
+        "BOND_ORDER"
+      ]
+    },
+    "authority_label": {
+      "type": "string"
+    },
+    "law_in_force_as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "canonical_source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "uses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "register_gate": {
+      "$ref": "#/$defs/gate"
+    },
+    "verdict_scale": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "label",
+          "cite"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "label": {
+            "type": "string"
+          },
+          "cite": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/control"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "adopted",
+        "paused",
+        "proposed"
+      ],
+      "description": "A proposed register is excluded from the default load. It is visible, schema-validated and tested, but it does not score a policy until adopted. A paused register is kept for a later expansion; it loads only when named explicitly (ADR 0011)."
+    }
+  },
+  "$defs": {
+    "gate": {
+      "type": "object",
+      "properties": {
+        "predicate_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "required": [
+        "section"
+      ],
+      "properties": {
+        "section": {
+          "type": "string"
+        },
+        "subsection": {
+          "type": "string"
+        },
+        "subdivision": {
+          "type": "string"
+        },
+        "paragraph": {
+          "type": "string"
+        }
+      }
+    },
+    "element": {
+      "type": "object",
+      "required": [
+        "id",
+        "assertion"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "assertion": {
+          "type": "string"
+        },
+        "test_type": {
+          "type": "string",
+          "enum": [
+            "PRESENCE",
+            "SET_COMPLETENESS",
+            "ORDERED_SEQUENCE",
+            "NUMERIC_BOUND"
+          ]
+        },
+        "fact_test": {
+          "type": "object"
+        },
+        "negative": {
+          "type": "boolean",
+          "description": "The element is a limit on what the policy may say rather than a requirement of what it must say. Satisfied by the absence of contradicting language; never put to a model."
+        },
+        "contradicted_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Literal phrases whose presence defeats a negative element. Required when negative is true."
+        },
+        "conditional": {
+          "type": "boolean",
+          "description": "The element tests a figure the policy may or may not state. Satisfied when the figure is absent; evaluated by fact_test when present. Requires fact_test."
+        },
+        "policy_text_expectation": {
+          "type": "string",
+          "enum": [
+            "REQUIRED",
+            "RECOMMENDED",
+            "RECOMMENDED_NOT_REQUIRED"
+          ],
+          "description": "Element-level band (ADR 0010). Defaults to the control's value. Set only where the element's band differs from the control's."
+        },
+        "audit": {
+          "type": "object",
+          "required": [
+            "status",
+            "ref",
+            "verdict"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "PROVISIONAL",
+                "ADOPTED"
+              ]
+            },
+            "ref": {
+              "type": "string"
+            },
+            "verdict": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "negative": {
+                "const": true
+              }
+            },
+            "required": [
+              "negative"
+            ]
+          },
+          "then": {
+            "required": [
+              "contradicted_by"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "conditional": {
+                "const": true
+              }
+            },
+            "required": [
+              "conditional"
+            ]
+          },
+          "then": {
+            "required": [
+              "fact_test"
+            ]
+          }
+        }
+      ]
+    },
+    "exemption": {
+      "type": "object",
+      "required": [
+        "cite",
+        "effect"
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        },
+        "effect": {
+          "type": "string",
+          "enum": [
+            "NOT_APPLICABLE",
+            "SUBSTITUTE_CONTROL",
+            "NARROWS_OPERATIVE_CLAUSE",
+            "SATISFIED_BY_REFERENCE"
+          ]
+        },
+        "predicate_ref": {
+          "type": "string"
+        },
+        "logic": {
+          "type": "object"
+        },
+        "negate": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "substitute_control_id": {
+          "type": "string"
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "effect": {
+                "const": "SUBSTITUTE_CONTROL"
+              }
+            },
+            "required": [
+              "effect"
+            ]
+          },
+          "then": {
+            "required": [
+              "substitute_control_id"
+            ]
+          }
+        }
+      ]
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "control_id",
+        "title",
+        "citation",
+        "source_text",
+        "source_version",
+        "normative_force",
+        "obligation_bearer",
+        "evidence_locus",
+        "applicability",
+        "activation",
+        "operative_clause",
+        "required_elements",
+        "severity",
+        "policy_text_expectation"
+      ],
+      "properties": {
+        "control_id": {
+          "type": "string",
+          "pattern": "^(TX-PFIA|IS|GTOT)-"
+        },
+        "instrument_code": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/$defs/citation"
+        },
+        "source_text": {
+          "type": "string",
+          "minLength": 20
+        },
+        "source_version": {
+          "type": "object",
+          "required": [
+            "effective_date"
+          ],
+          "properties": {
+            "effective_date": {
+              "type": "string",
+              "format": "date"
+            },
+            "last_amended_by": {
+              "type": "string"
+            }
+          }
+        },
+        "normative_force": {
+          "type": "string",
+          "enum": [
+            "MANDATORY_CONTENT",
+            "MANDATORY_CONDUCT",
+            "PROHIBITION",
+            "PERMISSIVE_ENABLING_WITH_CONDITIONS",
+            "DEFINITIONAL"
+          ]
+        },
+        "obligation_bearer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "evidence_locus": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "POLICY_TEXT",
+              "STRATEGY_DOCUMENT",
+              "BOARD_RECORD",
+              "OPERATIONAL_ARTIFACT",
+              "THIRD_PARTY_ATTESTATION"
+            ]
+          }
+        },
+        "policy_text_expectation": {
+          "type": "string",
+          "enum": [
+            "REQUIRED",
+            "RECOMMENDED",
+            "RECOMMENDED_NOT_REQUIRED"
+          ]
+        },
+        "applicability": {
+          "type": "object",
+          "properties": {
+            "predicate_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "include_classes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "exclude_classes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "activation": {
+          "type": "object",
+          "oneOf": [
+            {
+              "required": [
+                "always"
+              ]
+            },
+            {
+              "required": [
+                "predicate_ref"
+              ]
+            },
+            {
+              "required": [
+                "instrument_authorized"
+              ]
+            },
+            {
+              "required": [
+                "logic"
+              ]
+            }
+          ]
+        },
+        "inverted": {
+          "type": "boolean"
+        },
+        "operative_clause": {
+          "type": "string"
+        },
+        "required_elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/element"
+          }
+        },
+        "conditions": {
+          "type": "array"
+        },
+        "exemptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/exemption"
+          }
+        },
+        "test": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "SPAN_EXTRACTION",
+                "STRUCTURED_EXTRACTION"
+              ]
+            },
+            "requires_affirmative_span": {
+              "type": "boolean"
+            },
+            "search_directives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "anti_patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "anti_pattern_effect": {
+              "type": "string",
+              "enum": [
+                "DEFICIENT",
+                "ADVISORY"
+              ]
+            },
+            "anti_pattern_rationale": {
+              "type": "string"
+            },
+            "extract_schema": {
+              "type": "object"
+            },
+            "context_directives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Additional phrases whose windows are shown to the model but which do not count toward whether the subject was located. Use for sections a policy commonly cross-references, such as collateral or custody provisions. They must never make absence unprovable."
+            },
+            "anti_pattern_anchors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Subject terms. An anti-pattern or negative-element hit counts only when one appears in the same or preceding sentence (EA-2026-09-27)."
+            }
+          }
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "ADVISORY"
+          ]
+        },
+        "deficiency_language": {
+          "type": "string"
+        },
+        "remediation_language": {
+          "type": "string"
+        },
+        "interpretive_notes": {
+          "type": "string"
+        },
+        "cross_references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_text_variants": {
+          "type": "array",
+          "description": "Set only where the official code carries unreconciled amendments to the same subsection. Requires interpretive=true.",
+          "items": {
+            "type": "object",
+            "required": [
+              "amended_by",
+              "text"
+            ],
+            "properties": {
+              "amended_by": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "interpretive": {
+          "type": "boolean",
+          "description": "The controlling text is contested or unreconciled. Report as a flag, not a scored deficiency, unless the entity has acted on the ambiguity."
+        },
+        "activation_note": {
+          "type": "string"
+        },
+        "policy_text_expectation_note": {
+          "type": "string"
+        },
+        "relevance": {
+          "enum": [
+            "CORE",
+            "CONTEXT"
+          ],
+          "description": "Business relevance (ADR 0011). CORE: full element review. CONTEXT: one addressed/not addressed line in the policy governance summary unless the evaluator runs at full depth."
+        },
+        "proposed_text": {
+          "type": "string",
+          "description": "Statute-derived policy language for the redline (Core controls). Brackets mark what the entity decides. Unreviewed until adopted by the team."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "source_text_variants"
+            ]
+          },
+          "then": {
+            "properties": {
+              "interpretive": {
+                "const": true
+              }
+            },
+            "required": [
+              "interpretive"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

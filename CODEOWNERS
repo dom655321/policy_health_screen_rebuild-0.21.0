@@ -1,0 +1,23 @@
+# Ownership is about who must approve, not who may.
+#
+# The register is a legal document that happens to be JSON. A change to a control, an
+# element assertion, an anti-pattern or a band is a change to what the firm asserts about
+# a client's statutory position, and it needs a named reviewer who reads statutes - not
+# whoever happens to be free. Replace the placeholders below with real handles before
+# enabling branch protection; an unresolvable CODEOWNERS entry silently approves nothing.
+
+# Everything, by default
+*                               @REPLACE-WITH-LEAD
+
+# The register itself: control text, elements, predicates, bands, lexicon, coverage
+/data/registers/                @REPLACE-WITH-LEAD @REPLACE-WITH-SECOND-REVIEWER
+/data/profiles/fields.json      @REPLACE-WITH-LEAD @REPLACE-WITH-SECOND-REVIEWER
+
+# Statute snapshots. A diff here is an amendment, and it forces a register review.
+/data/sources/                  @REPLACE-WITH-LEAD @REPLACE-WITH-SECOND-REVIEWER
+
+# Architecture decisions. Changing one of these changes how findings are classified.
+/docs/adr/                      @REPLACE-WITH-LEAD @REPLACE-WITH-SECOND-REVIEWER
+
+# The client-facing surface. Compliance and legal sign off on page one.
+/src/pfia/report/templates/     @REPLACE-WITH-LEAD @REPLACE-WITH-COMPLIANCE

@@ -1,0 +1,301 @@
+{
+  "$id": "tx-pfia/instrument-lexicon",
+  "version": "2026.09.14",
+  "note": "Terms that identify an authorized-investment type in policy prose. Detection proposes; it never concludes. Blanket-incorporation phrasing is not duplicated here - it is read from the anti-pattern library of TX-PFIA-2256.005-b-4-A-001 so the two cannot drift.",
+  "section_directives": [
+    "authorized investments",
+    "authorized investment",
+    "authorized and suitable investments",
+    "authorized investment types",
+    "authorized investment instruments",
+    "authorized securities",
+    "authorized investment options",
+    "eligible investments",
+    "eligible investment",
+    "eligible securities",
+    "permitted investments",
+    "permitted investment",
+    "permissible investments",
+    "approved investments",
+    "approved investment",
+    "investment types",
+    "investment instruments",
+    "types of investments",
+    "the following investments are authorized",
+    "investments authorized by this policy",
+    "investments authorized",
+    "suitable and authorized investments",
+    "authorized * investments",
+    "the following investment types",
+    "following investment types",
+    "* investments are authorized",
+    "authorized * system investments"
+  ],
+  "authorization_cues": [
+    "authorized",
+    "eligible",
+    "may invest",
+    "may be invested",
+    "permitted",
+    "shall be limited to",
+    "are limited to",
+    "the entity may purchase",
+    "may purchase"
+  ],
+  "exclusion_cues": [
+    "not authorized",
+    "are not permitted",
+    "is not permitted",
+    "shall not be",
+    "may not be purchased",
+    "is prohibited",
+    "are prohibited",
+    "not an authorized investment",
+    "shall not purchase",
+    "will not invest"
+  ],
+  "instruments": {
+    "US_OBLIGATIONS": {
+      "terms": [
+        "obligations of the united states",
+        "united states treasury",
+        "u.s. treasury",
+        "treasury bills",
+        "treasury notes",
+        "agencies and instrumentalities",
+        "federal agency",
+        "federal home loan",
+        "government agency securities",
+        "senior obligations of the u.s.",
+        "direct and senior obligations",
+        "u.s. treasury",
+        "obligations of the u.s."
+      ]
+    },
+    "MUNI_OBLIGATIONS": {
+      "terms": [
+        "political subdivisions",
+        "municipal obligations",
+        "municipal bonds",
+        "obligations of states",
+        "state and local government obligations",
+        "obligations of the state of texas",
+        "counties, cities",
+        "any u.s. state"
+      ]
+    },
+    "INTEREST_BEARING_DEPOSIT": {
+      "terms": [
+        "interest-bearing banking deposits",
+        "interest bearing banking deposits",
+        "interest-bearing deposit",
+        "interest bearing deposit",
+        "interest bearing bank savings deposit",
+        "interest-bearing bank savings deposit",
+        "bank savings deposits",
+        "savings deposits",
+        "demand deposits",
+        "interest-bearing accounts",
+        "interest bearing accounts",
+        "money market accounts"
+      ]
+    },
+    "BROKERED_DEPOSIT": {
+      "terms": [
+        "banking deposits placed through",
+        "deposit placement program",
+        "insured cash sweep",
+        "placed through a broker",
+        "reciprocal deposit"
+      ]
+    },
+    "DEPOSITORY_CD": {
+      "terms": [
+        "certificates of deposit",
+        "certificate of deposit",
+        "share certificates",
+        "share certificate"
+      ]
+    },
+    "BROKERED_CD": {
+      "terms": [
+        "brokered certificates of deposit",
+        "brokered certificate of deposit",
+        "cdars",
+        "certificate of deposit account registry"
+      ]
+    },
+    "REPO": {
+      "terms": [
+        "repurchase agreement",
+        "repurchase agreements",
+        "repo"
+      ]
+    },
+    "REVERSE_REPO": {
+      "terms": [
+        "reverse repurchase",
+        "reverse security repurchase",
+        "reverse repo"
+      ]
+    },
+    "SECURITIES_LENDING": {
+      "terms": [
+        "securities lending",
+        "security lending program"
+      ]
+    },
+    "BANKERS_ACCEPTANCE": {
+      "terms": [
+        "bankers' acceptance",
+        "banker's acceptance",
+        "bankers acceptances",
+        "banker's acceptances"
+      ]
+    },
+    "COMMERCIAL_PAPER": {
+      "terms": [
+        "commercial paper"
+      ]
+    },
+    "MMMF": {
+      "terms": [
+        "money market mutual fund",
+        "money market funds",
+        "no-load money market"
+      ]
+    },
+    "MUTUAL_FUND": {
+      "terms": [
+        "no-load mutual fund",
+        "mutual funds",
+        "mutual fund"
+      ]
+    },
+    "GIC": {
+      "terms": [
+        "guaranteed investment contract",
+        "guaranteed investment contracts",
+        "gic"
+      ]
+    },
+    "INVESTMENT_POOL": {
+      "terms": [
+        "investment pool",
+        "investment pools",
+        "local government investment pool",
+        "public funds investment pool"
+      ]
+    },
+    "ISD_CORPORATE_BOND": {
+      "terms": [
+        "corporate bond",
+        "corporate bonds",
+        "corporate obligations"
+      ]
+    },
+    "CMO_IO_PO_INVERSE": {
+      "terms": [
+        "interest-only strip",
+        "interest only strips",
+        "interest-only strips",
+        "principal-only strip",
+        "principal only strips",
+        "principal-only strips",
+        "inverse floating rate",
+        "inverse floater",
+        "inverse floaters"
+      ],
+      "note": "Prohibited under Sec. 2256.009(b). The generic phrase 'collateralized mortgage obligation' is deliberately absent: Sec. 2256.009(a)(4) permits agency-issued CMOs, so the bare term cannot distinguish a lawful holding from a prohibited one. Only the specifically prohibited forms are detectable by name. The over-ten-year CMO limb is a maturity condition rather than a term, and is left to the anti-pattern library of IS-2256.009-b-001."
+    },
+    "IHE_CASH_MGMT_FUND": {
+      "terms": [
+        "cash management and fixed income fund",
+        "cash management fund",
+        "501(f)"
+      ]
+    },
+    "NEGOTIABLE_CD": {
+      "terms": [
+        "negotiable certificate of deposit",
+        "negotiable certificates of deposit",
+        "negotiable cd"
+      ],
+      "note": "Distinct from the Sec. 2256.010 depository certificate. The lexicon lists the negotiable form explicitly so a policy naming both does not collapse into one code."
+    },
+    "IHE_CORPORATE_BOND": {
+      "terms": [
+        "debenture",
+        "debentures",
+        "similar debt obligations"
+      ],
+      "note": "The bare phrase 'corporate bond' maps to ISD_CORPORATE_BOND; only an institution of higher education can hold the Sec. 2256.020(3) form, and entity-class gating on the control settles which applies."
+    },
+    "MUNICIPAL_UTILITY_HEDGE": {
+      "terms": [
+        "hedging contract",
+        "fuel hedging",
+        "hedging transaction"
+      ]
+    },
+    "MINERAL_RIGHTS_TRUST_INVESTMENT": {
+      "terms": [
+        "mineral development",
+        "oil, gas, or other mineral",
+        "mineral rights lease"
+      ]
+    },
+    "DECOMMISSIONING_TRUST_INVESTMENT": {
+      "terms": [
+        "decommissioning trust"
+      ]
+    },
+    "ELIGIBLE_ENTITY_HEDGE": {
+      "terms": [
+        "eligible entity",
+        "hedging transactions"
+      ]
+    }
+  },
+  "section_directive_note": "Headings vary between policies more than any other element of a Texas IPS. Both singular and plural forms are listed because literal matching does not stem, and a heading that reads 'Authorized Investment Instruments' will not match 'authorized investments'. When a real policy produces state=section_not_located, read directive_trace in the detection report: it names every directive tried and where it hit, and adding the heading actually used is a one-line change here.",
+  "list_stem_cues": [
+    "are authorized",
+    "is authorized",
+    "may be invested in",
+    "may invest in",
+    "are eligible",
+    "are permitted",
+    "shall be limited to",
+    "are limited to",
+    "the following investment types",
+    "the following investments",
+    "the following are authorized"
+  ],
+  "scope_phrases": [
+    "for bond proceeds",
+    "for reserves",
+    "for debt service",
+    "for funds held for debt service",
+    "for operating funds",
+    "restricted to use for",
+    "except for",
+    "other than for",
+    "for the investment of bond proceeds",
+    "for any fund other than"
+  ],
+  "polarity_note": "Polarity is decided per sentence, then inherited from an enumerated list's stem. The dominant Texas drafting pattern puts the authorization once - 'only the following investment types ... are authorized:' - and then lists the instruments as bare noun phrases with no cue of their own. Deciding polarity sentence by sentence reads that entire list as indeterminate and authorizes nothing.",
+  "incorporation_cues": [
+    "as further defined by the pfia",
+    "as further defined by the public funds investment act",
+    "as defined by the pfia",
+    "as described by the pfia",
+    "as authorized by the pfia",
+    "as further limited by the pfia",
+    "in accordance with the pfia",
+    "subject to the requirements of the pfia",
+    "as further defined by chapter 2256",
+    "as provided by the public funds investment act",
+    "as further defined by such trust agreement"
+  ],
+  "incorporation_note": "An incorporation clause attached to a closed list of types - 'only the following investment types, as further defined by the PFIA, are authorized' - is not blanket incorporation and must not be confused with it. Blanket incorporation leaves the set of types open, which is a Sec. 2256.005(b)(4)(A) failure. This clause closes the set of types and incorporates each type's statutory conditions by reference, which is a deliberate drafting device: the conditions then track amendments to the chapter without a policy rewrite. It is a complete answer for instrument conditions and no answer at all for the content Sec. 2256.005(b) requires the policy itself to decide."
+}

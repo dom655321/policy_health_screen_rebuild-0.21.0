@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tx-pfia/evidence-requests.schema",
+  "title": "Evidence request list (prepared-by-client); never scored",
+  "type": "object",
+  "required": [
+    "$id",
+    "status",
+    "version",
+    "requests"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "proposed",
+        "adopted"
+      ]
+    },
+    "requests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "request",
+          "evidence",
+          "cadence",
+          "cite",
+          "binds",
+          "derived_from",
+          "scope"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^PBC-\\d{2}$"
+          },
+          "evidence": {
+            "enum": [
+              "BOARD_RECORD",
+              "OPERATIONAL_ARTIFACT",
+              "THIRD_PARTY_ATTESTATION"
+            ]
+          },
+          "derived_from": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "active",
+              "paused"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

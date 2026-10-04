@@ -1,0 +1,929 @@
+{
+  "ref": "EA-2026-09-27",
+  "status": "PROVISIONAL",
+  "scope": "Schedule A (policy-content). Schedule B 0.18.0 is superseded by instrument-conditions (ADR 0009) and left unchanged apart from anti-patterns.",
+  "rule": "Observational elements keep a policy-duty form here; the conduct question is in data/registers/evidence-requests.",
+  "changes": [
+    {
+      "control": "TX-PFIA-2256.003-b-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy limits any investment management contract to a term of not more than two years.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Contract term does not exceed two years."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.003-b-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires any renewal or extension of the contract to be made by order, ordinance or resolution of the governing body.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Renewal or extension is made by order, ordinance or resolution of the governing body."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-a-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy identifies the governing body that adopted it.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Policy is in writing and identifies the adopting governing body."
+      },
+      "note": "'In writing' dropped as tautological for any document under review."
+    },
+    {
+      "control": "TX-PFIA-2256.005-a-001",
+      "element": "e2",
+      "change": "SPLIT",
+      "assertion": "The policy states the rule, order, ordinance or resolution by which it was adopted.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Policy or attached record identifies the adoption vehicle and adoption date."
+      },
+      "note": "Adoption date dropped as a scored element (not required by the statute); the adopting instrument itself is evidence request PBC-01."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-2-001",
+      "element": "e3",
+      "change": "DROP",
+      "prior": "Yield is expressly subordinated to safety and liquidity."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-A-001",
+      "element": "e2",
+      "change": "QUERY",
+      "note": "Interacts with ADR 0007: confirm a blanket incorporation clause is not a list of types."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-B-001",
+      "element": "e2",
+      "change": "SPLIT",
+      "assertion": "The maximum is expressed on a stated-maturity basis.",
+      "prior": {
+        "id": "e2",
+        "assertion": "The limit is expressed on a stated maturity basis, and where differentiated by fund group a maximum is given for each."
+      },
+      "note": "Per-fund-group maximum dropped: the statute speaks of any individual investment owned by the entity."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-D-001",
+      "element": "e2",
+      "change": "DROP",
+      "prior": "A recognized market pricing source independent of the selling counterparty is identified."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-D-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy states a method to monitor the market price of investments acquired with public funds.",
+      "prior": {
+        "id": "e1",
+        "assertion": "A monitoring method and cadence are stated."
+      },
+      "note": "Cadence and pricing-source independence dropped: neither is in Sec. 2256.005(b)(4)(D)."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-F-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy states a procedure to monitor rating changes in investments acquired with public funds.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Monitoring procedure for rating changes is stated, with an owner and a cadence."
+      },
+      "note": "Owner and cadence dropped: not in Sec. 2256.005(b)(4)(F)."
+    },
+    {
+      "control": "TX-PFIA-2256.005-b-4-F-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy states a procedure for liquidating investments that do not have the minimum rating, consistent with Sec. 2256.021.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Liquidation procedure for downgraded holdings is stated and references prudent measures under Sec. 2256.021."
+      },
+      "note": "Tests consistency with Sec. 2256.021, not a citation to it."
+    },
+    {
+      "control": "TX-PFIA-2256.005-c-001",
+      "element": "e1",
+      "change": "QUERY",
+      "note": "Enabling provision; consider informational only."
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "A written investment strategy is stated for each fund or group of funds the policy identifies.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Strategies are fund-specific, not a single global strategy."
+      },
+      "note": "The statute permits a strategy for a group of funds; 'not a single global strategy' removed."
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses understanding of the suitability of the investment to the financial requirements of the entity.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses preservation and safety of principal.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2c",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses liquidity.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2d",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses marketability of the investment if the need arises to liquidate the investment before maturity.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2e",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses diversification of the investment portfolio.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e2f",
+      "change": "SPLIT",
+      "assertion": "Each strategy addresses yield.",
+      "prior": {
+        "id": "e2",
+        "assertion": "All six statutory objectives appear in each strategy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "element": "e3",
+      "change": "KEEP",
+      "assertion": "Objectives are presented in the statutory sequence 1-6.",
+      "note": "Evaluate over the objectives present."
+    },
+    {
+      "control": "TX-PFIA-2256.005-e-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The annual review covers the investment policy.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Review scope expressly covers both the policy and the investment strategies."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-e-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The annual review covers the investment strategies.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Review scope expressly covers both the policy and the investment strategies."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-e-001",
+      "element": "e3",
+      "change": "REWORD",
+      "assertion": "The policy requires the annual review to be recorded in a written instrument adopted by rule, order, ordinance or resolution that records any changes to the policy or strategies.",
+      "prior": {
+        "id": "e3",
+        "assertion": "A written instrument adopted by rule/order/ordinance/resolution records the review and any changes."
+      },
+      "note": "Policy-duty form of a NOT_TESTABLE element; the instrument itself is evidence request PBC-02."
+    },
+    {
+      "control": "TX-PFIA-2256.005-f-001",
+      "element": "e3",
+      "change": "DROP",
+      "prior": "The officer exercises the judgment and care a prudent person would exercise in managing the person's own affairs."
+    },
+    {
+      "control": "TX-PFIA-2256.005-f-001",
+      "element": "e1a",
+      "change": "SPLIT",
+      "assertion": "The policy designates one or more officers or employees as investment officer.",
+      "prior": {
+        "id": "e1",
+        "assertion": "One or more officers or employees are designated as investment officer by rule, order, ordinance or resolution."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-f-001",
+      "element": "e1b",
+      "change": "SPLIT",
+      "assertion": "The policy states that the designation is made by rule, order, ordinance or resolution.",
+      "prior": {
+        "id": "e1",
+        "assertion": "One or more officers or employees are designated as investment officer by rule, order, ordinance or resolution."
+      },
+      "note": "The designating instrument itself is evidence request PBC-03."
+    },
+    {
+      "control": "TX-PFIA-2256.005-f-001",
+      "element": "e2",
+      "change": "REBAND_PENDING",
+      "assertion": "Authority runs until rescinded, until the officer's term or employment ends, or until an investment management contract expires.",
+      "note": "Operates by law; moves to the advisory band when band becomes element-level (Step 1)."
+    },
+    {
+      "control": "TX-PFIA-2256.005-f-001",
+      "element": "e4",
+      "change": "REBAND_PENDING",
+      "assertion": "The governing body expressly retains ultimate responsibility as fiduciary of the entity's assets.",
+      "note": "Operates by law; moves to the advisory band when band becomes element-level (Step 1)."
+    },
+    {
+      "control": "TX-PFIA-2256.005-h-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy states that an officer or employee of a Local Government Code ch. 391 commission is ineligible to be the commission's investment officer if the person is an investment officer designated for another local government.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Designation excludes a person barred by Subsection (h) from serving as investment officer."
+      },
+      "note": "Corrected against the statute snapshot: the bar applies only where the person is an investment officer for another local government."
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "element": "e4",
+      "change": "DROP",
+      "prior": "The three statutory thresholds are stated: 10 percent of voting stock or $5,000 of fair market value; more than 10 percent of prior-year gross income; $2,500 or more of book value acquired for the officer's personal account in the previous year."
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires an investment officer who has a personal business relationship with a business organization offering to engage in an investment transaction with the entity to file a statement disclosing that relationship.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Disclosure duty for a personal business relationship with an offering business organization."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "element": "e3a",
+      "change": "SPLIT",
+      "assertion": "The policy requires the disclosure statement to be filed with the Texas Ethics Commission.",
+      "prior": {
+        "id": "e3",
+        "assertion": "The statement is filed with both the Texas Ethics Commission and the governing body."
+      },
+      "note": "Policy-duty form; filed statements are evidence request PBC-04."
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "element": "e3b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the disclosure statement to be filed with the governing body.",
+      "prior": {
+        "id": "e3",
+        "assertion": "The statement is filed with both the Texas Ethics Commission and the governing body."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-k-001",
+      "element": "e1",
+      "change": "KEEP",
+      "assertion": "Policy delivery to the business organization is provided for.",
+      "note": "Band question (k)/(l) resolved with element-level band in Step 1."
+    },
+    {
+      "control": "TX-PFIA-2256.005-k-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The policy requires a written instrument by which the business organization acknowledges that it has received and reviewed the investment policy.",
+      "prior": {
+        "id": "e2",
+        "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-k-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the written instrument to acknowledge that the business organization has implemented reasonable procedures and controls to preclude investment transactions not authorized by the policy.",
+      "prior": {
+        "id": "e2",
+        "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-k-001",
+      "element": "e2c",
+      "change": "SPLIT",
+      "assertion": "The policy requires the written instrument to be executed by a qualified representative of the business organization.",
+      "prior": {
+        "id": "e2",
+        "assertion": "A written instrument executed by a qualified representative is required, covering receipt/review and implementation of reasonable procedures and controls."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-m-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires a compliance audit of management controls on investments.",
+      "prior": {
+        "id": "e1",
+        "assertion": "A compliance audit of management controls on investments is performed."
+      },
+      "note": "Policy-duty form; the audit itself is evidence request PBC-05."
+    },
+    {
+      "control": "TX-PFIA-2256.005-m-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The policy requires the compliance audit to be performed in conjunction with the annual financial audit.",
+      "prior": {
+        "id": "e2",
+        "assertion": "It is performed in conjunction with the annual financial audit and covers adherence to the established investment policies."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-m-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the compliance audit to cover adherence to the entity's established investment policies.",
+      "prior": {
+        "id": "e2",
+        "assertion": "It is performed in conjunction with the annual financial audit and covers adherence to the established investment policies."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-n-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires a compliance audit of management controls on investments at least once every two years.",
+      "prior": {
+        "id": "e1",
+        "assertion": "A compliance audit is arranged at least once every two years."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-n-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires the audit to be performed by the agency's internal auditor or by a private auditor employed as provided by Sec. 321.020.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Performed by the agency's internal auditor or a private auditor employed as provided by Sec. 321.020."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.005-n-001",
+      "element": "e3",
+      "change": "REWORD",
+      "assertion": "The policy requires the results of the most recent audit to be reported to the state auditor not later than January 1 of each even-numbered year.",
+      "prior": {
+        "id": "e3",
+        "assertion": "Results reported to the state auditor not later than January 1 of each even-numbered year."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.006-a-001",
+      "element": "e1",
+      "change": "REBAND_PENDING",
+      "note": "Standard of care binds by law; element-level band in Step 1."
+    },
+    {
+      "control": "TX-PFIA-2256.006-a-001",
+      "element": "e2",
+      "change": "REBAND_PENDING",
+      "note": "As e1."
+    },
+    {
+      "control": "TX-PFIA-2256.006-a-001",
+      "element": "e3",
+      "change": "QUERY",
+      "note": "Priority order verified in Sec. 2256.006(a); overlaps 2256.005-b-2-001 and 2256.005-d-001 e3 - decide the single owner."
+    },
+    {
+      "control": "TX-PFIA-2256.006-b-001",
+      "change": "REBAND",
+      "from": "RECOMMENDED",
+      "to": "RECOMMENDED_NOT_REQUIRED",
+      "reason": "Adjudicative standard for prudence, not a policy-content duty."
+    },
+    {
+      "control": "TX-PFIA-2256.007-a-001",
+      "element": "e3",
+      "change": "DROP",
+      "prior": "Training covers investment controls, security risks, strategy risks, market risks, diversification and compliance with the chapter."
+    },
+    {
+      "control": "TX-PFIA-2256.007-a-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires initial training within six months after taking office or assuming duties.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Training occurs within six months after taking office or assuming duties."
+      },
+      "note": "Topic list (former e3) dropped: training content binds the training, not the policy."
+    },
+    {
+      "control": "TX-PFIA-2256.007-d-001",
+      "element": "e2",
+      "change": "DROP",
+      "prior": "Independent source approved by the governing body of the state agency."
+    },
+    {
+      "control": "TX-PFIA-2256.007-d-001",
+      "element": "e1",
+      "change": "KEEP",
+      "assertion": "Training at least once each state fiscal biennium.",
+      "note": "Independent-source approval (former e2) dropped: permissive ('may receive') for state agencies."
+    },
+    {
+      "control": "TX-PFIA-2256.007-d-001",
+      "element": "e3",
+      "change": "REWORD",
+      "assertion": "The policy requires the investment officer to prepare a report on the subchapter and deliver it to the governing body not later than the 180th day after the last day of each regular legislative session.",
+      "prior": {
+        "id": "e3",
+        "assertion": "A report on the subchapter is delivered to the governing body not later than the 180th day after the last day of each regular session of the legislature."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-a-2-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The policy requires training from an independent source.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-a-2-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the training source to be approved by the governing body or a designated investment committee.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-a1-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The policy requires training from an independent source.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-a1-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the training source to be approved by the governing body or a designated investment committee.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Training source is independent and approved by the governing body or designated investment committee."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-b-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy designates an officer of the governing body to attend the training.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Attendance is by an officer of the governing body."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.008-b1-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy designates the treasurer, chief financial officer or investment officer (or another officer where none exists) to attend the training.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Attendance by the treasurer, CFO, investment officer, or another officer where none of those exist."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.017-001",
+      "change": "REBAND",
+      "from": "RECOMMENDED",
+      "to": "RECOMMENDED_NOT_REQUIRED",
+      "reason": "Permissive grandfather rule; silence forgoes nothing."
+    },
+    {
+      "control": "TX-PFIA-2256.0208-001",
+      "element": "e1a",
+      "change": "SPLIT",
+      "assertion": "The policy addresses the investment of bond proceeds.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Bond proceeds and pledged revenue are addressed as a distinct category."
+      },
+      "note": "QUERY: whether a 'distinct category' is required remains open."
+    },
+    {
+      "control": "TX-PFIA-2256.0208-001",
+      "element": "e1b",
+      "change": "SPLIT",
+      "assertion": "The policy addresses the investment of pledged revenue.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Bond proceeds and pledged revenue are addressed as a distinct category."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.021-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires all prudent measures consistent with the policy to liquidate an investment that does not have the minimum rating.",
+      "prior": {
+        "id": "e2",
+        "assertion": "The entity takes all prudent measures consistent with the policy to liquidate."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-a-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires a written report of investment transactions not less than quarterly.",
+      "prior": {
+        "id": "e1",
+        "assertion": "A written report is prepared not less than quarterly."
+      },
+      "note": "Policy-duty form; the reports are evidence request PBC-09."
+    },
+    {
+      "control": "TX-PFIA-2256.023-a-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to cover all funds subject to the chapter for the preceding reporting period.",
+      "prior": {
+        "id": "e2",
+        "assertion": "The report covers all funds subject to the chapter for the preceding reporting period."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-a-001",
+      "element": "e3a",
+      "change": "SPLIT",
+      "assertion": "The policy requires the report to be presented to the governing body and the chief executive officer.",
+      "prior": {
+        "id": "e3",
+        "assertion": "It is presented to the governing body and the chief executive officer within a reasonable time after period end."
+      },
+      "note": "Verified: Sec. 2256.023(c)."
+    },
+    {
+      "control": "TX-PFIA-2256.023-a-001",
+      "element": "e3b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the report to be presented within a reasonable time after the end of the period.",
+      "prior": {
+        "id": "e3",
+        "assertion": "It is presented to the governing body and the chief executive officer within a reasonable time after period end."
+      },
+      "note": "Verified: Sec. 2256.023(c)."
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to describe in detail the investment position of the entity on the date of the report.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Describes in detail the investment position of the entity on the date of the report."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e2a",
+      "change": "SPLIT",
+      "assertion": "The policy requires the report to be prepared jointly by all investment officers.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Prepared jointly by and signed by each investment officer of the entity."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e2b",
+      "change": "SPLIT",
+      "assertion": "The policy requires the report to be signed by each investment officer.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Prepared jointly by and signed by each investment officer of the entity."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e3",
+      "change": "REWORD",
+      "assertion": "The policy requires a summary statement for each pooled fund group stating beginning market value, ending market value and fully accrued interest for the period.",
+      "prior": {
+        "id": "e3",
+        "assertion": "Summary statement per pooled fund group: beginning market value, ending market value, and fully accrued interest for the period."
+      },
+      "note": "Components verified complete against Sec. 2256.023(b)(4)."
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e4",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to state the book value and market value of each separately invested asset at period end by asset type and fund type.",
+      "prior": {
+        "id": "e4",
+        "assertion": "Book value and market value of each separately invested asset at period end by asset type and fund type."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e5",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to state the maturity date of each separately invested asset that has one.",
+      "prior": {
+        "id": "e5",
+        "assertion": "Maturity date of each separately invested asset that has one."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e6",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to state the account, fund or pooled fund group for which each investment was acquired.",
+      "prior": {
+        "id": "e6",
+        "assertion": "The account, fund or pooled fund group for which each individual investment was acquired."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e7",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to state compliance with the investment strategy expressed in the policy.",
+      "prior": {
+        "id": "e7",
+        "assertion": "Statement of compliance with the investment strategy expressed in the policy."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-b-001",
+      "element": "e8",
+      "change": "REWORD",
+      "assertion": "The policy requires the report to state compliance with the relevant provisions of the chapter.",
+      "prior": {
+        "id": "e8",
+        "assertion": "Statement of compliance with the relevant provisions of the chapter."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.023-d-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires the independent auditor to report the result of the review to the governing body.",
+      "prior": {
+        "id": "e2",
+        "assertion": "The auditor, not staff, reports the review result to the governing body."
+      },
+      "note": "The auditor's report itself is evidence request PBC-10."
+    },
+    {
+      "control": "TX-PFIA-2256.025-001",
+      "element": "e1",
+      "change": "REWORD",
+      "assertion": "The policy requires the list of qualified brokers to be adopted by the governing body or designated investment committee.",
+      "prior": {
+        "id": "e1",
+        "assertion": "Broker list is adopted by the governing body or designated investment committee."
+      },
+      "note": "REBAND pending element-level band (Step 1)."
+    },
+    {
+      "control": "TX-PFIA-2256.025-001",
+      "element": "e2",
+      "change": "REWORD",
+      "assertion": "The policy requires the list to be reviewed, revised and adopted at least annually.",
+      "prior": {
+        "id": "e2",
+        "assertion": "Review, revision and adoption occur at least annually."
+      }
+    },
+    {
+      "control": "TX-PFIA-2256.026-001",
+      "change": "REBAND",
+      "from": "RECOMMENDED",
+      "to": "RECOMMENDED_NOT_REQUIRED",
+      "reason": "Statute binds investments; recital is boilerplate."
+    }
+  ],
+  "anti_patterns_removed": [
+    {
+      "control": "TX-PFIA-2256.005-d-001",
+      "pattern": "safety, liquidity, and yield",
+      "reason": "Matches the compliant Sec. 2256.005(b)(2)/2256.006 priority statement."
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "pattern": "filed with the governing body",
+      "reason": "Matches compliant text naming both filees."
+    },
+    {
+      "control": "TX-PFIA-2256.005-i-001",
+      "pattern": "annual conflict of interest questionnaire",
+      "reason": "Additive (ch. 176), not a substitute."
+    },
+    {
+      "control": "TX-PFIA-2256.007-a-001",
+      "pattern": "10 hours",
+      "reason": "Stricter than the statute (no hour floor for state agencies); ADR 0008."
+    },
+    {
+      "control": "TX-PFIA-2256.007-a-001",
+      "pattern": "independent source approved by the governing body",
+      "reason": "Statutory wording of Sec. 2256.007(d)."
+    },
+    {
+      "control": "TX-PFIA-2256.007-d-001",
+      "pattern": "annually",
+      "reason": "Bare cadence word; matches any annual duty and stricter cadences."
+    },
+    {
+      "control": "TX-PFIA-2256.008-a-2-001",
+      "pattern": "10 hours annually",
+      "reason": "Stricter than the statute; ADR 0008."
+    },
+    {
+      "control": "TX-PFIA-2256.008-a1-001",
+      "pattern": "10 hours in a two-year period",
+      "reason": "Stricter than the 8-hour floor; ADR 0008."
+    },
+    {
+      "control": "TX-PFIA-2256.008-a1-001",
+      "pattern": "annually",
+      "reason": "Bare cadence word; matches any annual duty and stricter cadences."
+    },
+    {
+      "control": "TX-PFIA-2256.008-b-001",
+      "pattern": "four hours annually",
+      "reason": "Stricter than the statute; ADR 0008."
+    },
+    {
+      "control": "TX-PFIA-2256.008-b1-001",
+      "pattern": "five hours annually",
+      "reason": "Stricter than the statute; ADR 0008."
+    },
+    {
+      "control": "TX-PFIA-2256.017-001",
+      "pattern": "existing investments are not required to be liquidated",
+      "reason": "Restates Sec. 2256.017."
+    },
+    {
+      "control": "TX-PFIA-2256.017-001",
+      "pattern": "holdings are grandfathered",
+      "reason": "Restates Sec. 2256.017."
+    },
+    {
+      "control": "IS-2256.0204-001",
+      "pattern": "five years",
+      "reason": "Common portfolio or agency maturity limit."
+    },
+    {
+      "control": "IS-2256.0204-002",
+      "pattern": "five years",
+      "reason": "Common portfolio or agency maturity limit."
+    },
+    {
+      "control": "IS-2256.020-2-001",
+      "pattern": "insured by the Federal Deposit Insurance Corporation",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.020-2-001",
+      "pattern": "main office or a branch office in this state",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.020-2-002",
+      "pattern": "insured by the Federal Deposit Insurance Corporation",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.020-2-002",
+      "pattern": "main office or a branch office in this state",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.0203-001",
+      "pattern": "insured by the Federal Deposit Insurance Corporation",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.0203-001",
+      "pattern": "main office or a branch office in this state",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.0203-002",
+      "pattern": "insured by the Federal Deposit Insurance Corporation",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.0203-002",
+      "pattern": "main office or a branch office in this state",
+      "reason": "Sec. 2256.010(a) CD condition."
+    },
+    {
+      "control": "IS-2256.020-3-001",
+      "pattern": "AA-",
+      "reason": "Substring of AAA-m; AA- is inside the two highest categories."
+    },
+    {
+      "control": "IS-2256.020-3-002",
+      "pattern": "AA-",
+      "reason": "Substring of AAA-m; AA- is inside the two highest categories."
+    }
+  ],
+  "anti_pattern_scope": "Anti-patterns and negative-element phrases match document-wide by default. Controls whose remaining patterns are generic qualifiers declare `test.anti_pattern_anchors`; a hit counts only when an anchor term appears in the same or the preceding sentence (adapter/payload.py: anchored). Confining matches to retrieval windows was tried and rejected: a deficient policy that avoids the statutory wording produces no windows, so its wrong language was lost (DEFICIENT fell to ABSENT on 9 controls in the city-deficient-deposits fixture).",
+  "anti_patterns_retained_after_scoping": [
+    {
+      "control": "TX-PFIA-2256.021-001",
+      "pattern": "existing investments are not required to be liquidated",
+      "reason": "In the rating/liquidation context this is the grandfathering misread (Sec. 2256.017 applied to a downgrade), which the control should catch. Kept with anchors (rating, rated, downgrade) so a restatement of Sec. 2256.017 elsewhere does not trip it. Removed from TX-PFIA-2256.017-001, where it restates the statute."
+    },
+    {
+      "control": "IS-2256.009-a-5-001",
+      "pattern": "investment grade",
+      "reason": "'Municipal obligations rated investment grade' admits BBB where the Act requires A: a true deficiency. Kept with municipal anchors so the Sec. 2256.014(b)(3)(B) use of the term does not trip it."
+    },
+    {
+      "control": "IS-2256.009-a-5-002",
+      "pattern": "investment grade",
+      "reason": "'Municipal obligations rated investment grade' admits BBB where the Act requires A: a true deficiency. Kept with municipal anchors so the Sec. 2256.014(b)(3)(B) use of the term does not trip it."
+    }
+  ],
+  "anchored_controls": [
+    "IS-2256.009-a-5-001",
+    "IS-2256.009-a-5-002",
+    "IS-2256.011-c-001",
+    "IS-2256.011-c-002",
+    "IS-2256.013-001",
+    "IS-2256.013-002",
+    "IS-2256.019-001",
+    "IS-2256.019-002",
+    "IS-2256.020-3-001",
+    "IS-2256.020-3-002",
+    "IS-2256.0201-001",
+    "IS-2256.0201-002",
+    "IS-2256.0204-001",
+    "IS-2256.0204-002",
+    "IS-2256.0205-001",
+    "IS-2256.0205-002",
+    "IS-2256.0207-001",
+    "IS-2256.0207-002",
+    "TX-PFIA-2256.005-b-4-E-001",
+    "TX-PFIA-2256.005-e-001",
+    "TX-PFIA-2256.007-a-001",
+    "TX-PFIA-2256.008-a-2-001",
+    "TX-PFIA-2256.021-001",
+    "TX-PFIA-2256.023-d-001",
+    "TX-PFIA-2256.025-001"
+  ],
+  "anti_patterns_added": [
+    {
+      "control": "TX-PFIA-2256.025-001",
+      "pattern": "maintained by the Investment Officer",
+      "reason": "The existing 'list maintained by the Investment Officer' missed 'the broker list is maintained by the Investment Officer' (policy_deficient.txt). Anchored to broker/dealer."
+    }
+  ]
+}

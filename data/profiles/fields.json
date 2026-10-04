@@ -1,0 +1,124 @@
+{
+  "$id": "tx-pfia/profile-fields",
+  "version": "2026.09.07",
+  "note": "One entry per entity fact the register consumes. The required set is derived from the predicates at load time; this file supplies the question a reviewer is actually asked. A derived field with no entry here fails the build, and an entry here with no consumer fails too, so the questionnaire cannot drift from the register.",
+  "fields": [
+    {
+      "path": "entity.classes",
+      "type": "class_list",
+      "nullable": false,
+      "question": "Which entity classes describe this entity? Select every class that applies; parent classes are added automatically.",
+      "cite": "2256.002",
+      "help": "A river authority created under art. XVI sec. 59 and governed by Water Code ch. 49 is both DISTRICT_ART3_52B_ART16_59 and WATER_DISTRICT_36_49. Getting this wrong changes which training and audit controls apply."
+    },
+    {
+      "path": "entity.invests_funds",
+      "type": "boolean",
+      "question": "Does the entity invest funds, as opposed to holding them only in deposit accounts?",
+      "cite": "2256.008(f), 2256.008(g)"
+    },
+    {
+      "path": "entity.deposits_only_interest_bearing_or_2256_010_cds",
+      "type": "boolean",
+      "question": "Are all funds held solely in interest-bearing deposit accounts or in certificates of deposit under Sec. 2256.010?",
+      "cite": "2256.008(f), 2256.008(g)",
+      "help": "This is the deposit-only carve-out from the biennial training requirement. It is narrower than it sounds: authorizing Treasuries defeats it."
+    },
+    {
+      "path": "entity.files_2256_008g_affidavit",
+      "type": "boolean",
+      "question": "Does the school district file the annual sworn affidavit required to claim the Sec. 2256.008(g) training exemption?",
+      "cite": "2256.008(g)",
+      "help": "Without the affidavit the exemption does not attach, whatever the deposit position."
+    },
+    {
+      "path": "entity.has_2256_003b_management_contract",
+      "type": "boolean",
+      "question": "Has the entity contracted with a registered investment management firm under Sec. 2256.003(b)?",
+      "cite": "2256.003(b), 2256.008(b)"
+    },
+    {
+      "path": "entity.funds_invested_by_other_investing_entity",
+      "type": "boolean",
+      "question": "Are the entity's funds invested by another investing entity under contract?",
+      "cite": "2256.008(b)"
+    },
+    {
+      "path": "entity.full_time_employees",
+      "type": "integer",
+      "question": "How many full-time employees does the entity have?",
+      "cite": "2256.008(b)",
+      "help": "Only the fewer-than-five threshold matters, and only for a 52(b)/59 district with a management contract."
+    },
+    {
+      "path": "entity.has_pooled_fund_groups",
+      "type": "boolean",
+      "question": "Does the entity maintain one or more pooled fund groups?",
+      "cite": "2256.002(9), 2256.005(b)(4)(C)",
+      "help": "Sec. 2256.002(9): an internally created fund in which one or more institutional accounts are invested. An entity holding only separately invested assets is outside the dollar-weighted average maturity requirement."
+    },
+    {
+      "path": "entity.investment_function_assigned_by_law",
+      "type": "boolean",
+      "question": "Is an officer of the entity assigned the function of investing its funds by law, rather than by designation of the governing body?",
+      "cite": "2256.005(g)"
+    },
+    {
+      "path": "entity.assets_invested_by_comptroller_404_024",
+      "type": "boolean",
+      "question": "For a state agency: are the assets in question invested by the comptroller under Sec. 404.024?",
+      "cite": "2256.005(o)"
+    },
+    {
+      "path": "entity.endowment_book_value_2017_09_01",
+      "type": "number",
+      "question": "For an institution of higher education: what was the book value of its endowment funds on 1 September 2017?",
+      "cite": "2256.004(a)(3)",
+      "help": "At or above $150,000,000 the institution falls outside Subchapter A entirely. Enter 0 for entities with no endowment."
+    },
+    {
+      "path": "entity.exclusions.public_retirement_system_802_001",
+      "type": "boolean",
+      "question": "Is the entity a public retirement system as defined by Sec. 802.001?",
+      "cite": "2256.004(a)(1)"
+    },
+    {
+      "path": "entity.exclusions.state_funds_invested_by_comptroller",
+      "type": "boolean",
+      "question": "Are these state funds invested by the comptroller?",
+      "cite": "2256.004(a)(2)"
+    },
+    {
+      "path": "entity.exclusions.vlb_ch_161_162_164",
+      "type": "boolean",
+      "question": "Are these funds managed by the Veterans' Land Board under Natural Resources Code ch. 161, 162 or 164?",
+      "cite": "2256.004(a)(4)"
+    },
+    {
+      "path": "entity.exclusions.registry_funds_ch_117",
+      "type": "boolean",
+      "question": "Are these registry funds deposited under Local Government Code ch. 117?",
+      "cite": "2256.004(a)(5)"
+    },
+    {
+      "path": "entity.exclusions.deferred_comp_401k_457",
+      "type": "boolean",
+      "question": "Are these funds held in a 401(k) or 457 deferred compensation plan not subject to Subchapter A?",
+      "cite": "2256.004(a)(6)"
+    },
+    {
+      "path": "entity.long_term_debt_principal",
+      "type": "number",
+      "question": "What is the principal amount of the entity's outstanding long-term indebtedness, plus any long-term indebtedness proposed to be issued?",
+      "cite": "2256.0206(a)(1)(A)",
+      "help": "At or above $250,000,000, and with the rating test below satisfied, the entity is an eligible entity for hedging transactions under Sec. 2256.0206. Enter 0 if the entity has no long-term debt."
+    },
+    {
+      "path": "entity.long_term_debt_rated_top_four",
+      "type": "boolean",
+      "question": "Is the entity's outstanding long-term indebtedness rated in one of the four highest long-term rating categories by a nationally recognized municipal rating agency?",
+      "cite": "2256.0206(a)(1)(B)",
+      "help": "Judged without regard to any credit agreement or credit enhancement entered into in connection with the obligation."
+    }
+  ]
+}

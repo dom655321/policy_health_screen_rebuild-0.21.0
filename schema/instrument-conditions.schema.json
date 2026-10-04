@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tx-pfia/instrument-conditions.schema",
+  "title": "Schedule B v2 authorized-investment condition catalogue",
+  "type": "object",
+  "required": [
+    "$id",
+    "schedule",
+    "status",
+    "version",
+    "authority",
+    "law_in_force_as_of",
+    "snapshot",
+    "instruments"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "proposed",
+        "adopted"
+      ]
+    },
+    "authority": {
+      "const": "STATUTE"
+    },
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/instrument"
+      }
+    }
+  },
+  "$defs": {
+    "instrument": {
+      "type": "object",
+      "required": [
+        "code",
+        "label",
+        "authority",
+        "entity_classes",
+        "conditions"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "authority": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "entity_classes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "inherits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "retired_conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          },
+          "description": "Conditions removed in team review; kept for the audit trail, never evaluated."
+        },
+        "scope": {
+          "type": "object",
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "NOT_REVIEWED"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "required": [
+        "id",
+        "cite",
+        "component",
+        "binds",
+        "requirement",
+        "test",
+        "quote"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,4}-\\d{2}$"
+        },
+        "cite": {
+          "type": "string",
+          "pattern": "2256\\.\\d+"
+        },
+        "component": {
+          "type": "string"
+        },
+        "binds": {
+          "enum": [
+            "ENTITY",
+            "POOL",
+            "FUND",
+            "INVESTMENT_MANAGER",
+            "COUNTERPARTY",
+            "SECURITY"
+          ]
+        },
+        "requirement": {
+          "type": "string",
+          "minLength": 10
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 10
+        },
+        "test": {
+          "type": "object",
+          "required": [
+            "mode",
+            "fact"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "CAP",
+                "FLOOR",
+                "RATING_FLOOR",
+                "SUBSET",
+                "REQUIRED",
+                "PROHIBITED",
+                "ANY_OF"
+              ]
+            }
+          }
+        },
+        "activation": {
+          "type": "object",
+          "required": [
+            "fact"
+          ]
+        },
+        "review": {
+          "type": "object",
+          "required": [
+            "ref",
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "ADOPTED",
+                "NO_VERDICT"
+              ]
+            },
+            "verdict": {
+              "enum": [
+                "KEEP",
+                "REWORD",
+                "SPLIT",
+                "DROP",
+                "REBAND",
+                "NOT_TESTABLE",
+                "ADD",
+                "QUERY",
+                null
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

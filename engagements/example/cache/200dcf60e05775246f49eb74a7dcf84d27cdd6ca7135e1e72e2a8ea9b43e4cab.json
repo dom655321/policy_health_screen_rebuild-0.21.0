@@ -1,0 +1,9 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "The text requires reporting market values, but does not state a method or pricing source to monitor the market price of investments.",
+      "supported": false
+    }
+  ]
+}

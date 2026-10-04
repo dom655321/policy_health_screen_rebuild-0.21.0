@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "quote": "An investment that requires a minimum credit rating does not qualify as an authorized investment during the period the investment does not have the minimum credit rating, even if the investment had the appropriate rating at the time of purchase.",
+      "supported": true
+    },
+    {
+      "id": "e2",
+      "quote": "The Investment Officer shall take all prudent measures that are consistent with this Policy to liquidate an investment that does not have the minimum rating.",
+      "supported": true
+    }
+  ]
+}

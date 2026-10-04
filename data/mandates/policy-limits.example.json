@@ -1,0 +1,6 @@
+{
+  "_note": "Per-client, reviewer-entered policy figures that the review does not yet extract. Copy to engagements/<client>/policy_limits.json. Keys match the strategy file's portfolio keys; units must match to compare.",
+  "max_stated_maturity": {"value": 2, "unit": "years", "source": "Policy section [x.x]"},
+  "max_wam_pooled": {"value": 270, "unit": "days", "source": "Policy section [x.x]"},
+  "settlement": {"value": "DVP", "source": "Policy section [x.x]"}
+}

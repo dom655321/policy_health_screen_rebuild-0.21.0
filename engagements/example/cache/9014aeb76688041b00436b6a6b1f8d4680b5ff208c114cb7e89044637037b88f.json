@@ -1,0 +1,21 @@
+{
+  "elements": {
+    "e1": {
+      "supported": true,
+      "text": "Commercial paper with a stated maturity of 270 days or less from the date of issuance"
+    },
+    "e2": {
+      "supported": true,
+      "text": "rated A-\n1 or P-1 or an equivalent rating"
+    },
+    "e3": {
+      "note": "The policy requires at least two rating agencies and does not mention an irrevocable letter of credit alternative.",
+      "supported": false
+    }
+  },
+  "extracted_values": {
+    "max_maturity_days": 270,
+    "min_rating": "A-1 or P-1",
+    "rating_agency_count": 2
+  }
+}

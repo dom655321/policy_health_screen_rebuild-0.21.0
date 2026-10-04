@@ -1,0 +1,10 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "The provided text only defines Delivery vs. Payment without stating a mandatory settlement requirement.",
+      "quote": null,
+      "supported": false
+    }
+  ]
+}

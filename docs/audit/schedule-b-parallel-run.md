@@ -1,0 +1,120 @@
+# Schedule B parallel run: 0.18.0 beside v2 (proposed)
+
+Offline adapters on both sides (keyword heuristic; condition stand-in). v2 UNKNOWN conditions are what the stand-in could not read, not policy gaps; a recorded model run replaces them before 0.18.0 is retired.
+
+## city-deficient-deposits
+
+0.18.0 section: REVISIONS_RECOMMENDED · v2 if adopted: REVISIONS_RECOMMENDED
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| BROKERED_CD | CONFLICTS | CONFLICTS | BCD-04 |  |
+| BROKERED_DEPOSIT | CONFLICTS | CONFLICTS | BRD-04 | BRD-03 |
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| DEPOSITORY_CD | CONFLICTS | CONFLICTS | DCD-01 | DCD-02 |
+| INTEREST_BEARING_DEPOSIT | ALIGNED | REVIEW_REQUIRED |  | IBD-01 |
+| INVESTMENT_POOL | CONFLICTS | REVIEW_REQUIRED |  | POL-01, POL-02, POL-04, POL-05, POL-06, POL-11 |
+| MMMF | CONFLICTS | CONFLICTS | MMF-04 |  |
+| MUNI_OBLIGATIONS | CONFLICTS | CONFLICTS | MUN-02 |  |
+| REPO | ALIGNED | REVIEW_REQUIRED |  | REP-04 |
+| REVERSE_REPO | CONFLICTS | CONFLICTS | RRP-02 | REP-04 |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+
+## city-detected-instruments
+
+0.18.0 section: REVIEW_IN_PROGRESS · v2 if adopted: REVISIONS_RECOMMENDED
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| BROKERED_CD | CONFLICTS | CONFLICTS | BCD-04 |  |
+| CMO_IO_PO_INVERSE | - | ALIGNED |  |  |
+| DEPOSITORY_CD | CONFLICTS | CONFLICTS | DCD-01 | DCD-02 |
+| MMMF | CONFLICTS | CONFLICTS | MMF-04 |  |
+| MUNI_OBLIGATIONS | CONFLICTS | CONFLICTS | MUN-02 |  |
+
+## isd-corporate-bonds
+
+0.18.0 section: REVISIONS_RECOMMENDED · v2 if adopted: REVIEW_IN_PROGRESS
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| DEPOSITORY_CD | ALIGNED | REVIEW_REQUIRED |  | DCD-02 |
+| INVESTMENT_POOL | ALIGNED | ALIGNED |  |  |
+| ISD_CORPORATE_BOND | CONFLICTS | NOT_REVIEWED |  |  |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+
+## tollway-enumerated-list
+
+0.18.0 section: ADDRESSES_PROVISIONS_REVIEWED · v2 if adopted: REVIEW_IN_PROGRESS
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| BANKERS_ACCEPTANCE | ALIGNED | ALIGNED |  |  |
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| COMMERCIAL_PAPER | ALIGNED | REVIEW_REQUIRED |  | CP-02 |
+| DEPOSITORY_CD | ALIGNED | REVIEW_REQUIRED |  | DCD-02, DCD-03, DCD-04 |
+| GIC | ALIGNED | REVIEW_REQUIRED |  | GIC-03, GIC-04, GIC-07 |
+| INTEREST_BEARING_DEPOSIT | ALIGNED | ALIGNED |  |  |
+| INVESTMENT_POOL | ALIGNED | ALIGNED |  |  |
+| MMMF | ALIGNED | ALIGNED |  |  |
+| MUNI_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | MUN-01, MUN-02 |
+| MUTUAL_FUND | ALIGNED | REVIEW_REQUIRED |  | MF-03, MF-05 |
+| REPO | ALIGNED | REVIEW_REQUIRED |  | REP-04, REP-08 |
+| REVERSE_REPO | ALIGNED | REVIEW_REQUIRED |  | RRP-01, REP-04, REP-08 |
+| TX_OBLIGATIONS | - | REVIEW_REQUIRED |  | TXO-01 |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+
+## tollway-unindented
+
+0.18.0 section: ADDRESSES_PROVISIONS_REVIEWED · v2 if adopted: REVIEW_IN_PROGRESS
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| BANKERS_ACCEPTANCE | ALIGNED | ALIGNED |  |  |
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| COMMERCIAL_PAPER | ALIGNED | REVIEW_REQUIRED |  | CP-02 |
+| DEPOSITORY_CD | ALIGNED | REVIEW_REQUIRED |  | DCD-02, DCD-03, DCD-04 |
+| GIC | ALIGNED | REVIEW_REQUIRED |  | GIC-03, GIC-04, GIC-07 |
+| INTEREST_BEARING_DEPOSIT | ALIGNED | ALIGNED |  |  |
+| INVESTMENT_POOL | ALIGNED | ALIGNED |  |  |
+| MMMF | ALIGNED | ALIGNED |  |  |
+| MUNI_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | MUN-01, MUN-02 |
+| MUTUAL_FUND | ALIGNED | REVIEW_REQUIRED |  | MF-03, MF-05 |
+| REPO | ALIGNED | REVIEW_REQUIRED |  | REP-04, REP-08 |
+| REVERSE_REPO | ALIGNED | REVIEW_REQUIRED |  | RRP-01, REP-04, REP-08 |
+| TX_OBLIGATIONS | - | REVIEW_REQUIRED |  | TXO-01 |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+
+## water-authority-conforming
+
+0.18.0 section: REVISIONS_RECOMMENDED · v2 if adopted: REVISIONS_RECOMMENDED
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| AGENCY_CMO | - | REVIEW_REQUIRED |  | CMO-03 |
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| COMMERCIAL_PAPER | CONFLICTS | CONFLICTS | CP-03 |  |
+| DEPOSITORY_CD | ALIGNED | REVIEW_REQUIRED |  | DCD-02, DCD-03, DCD-04 |
+| GUARANTEED_OBLIGATIONS | - | ALIGNED |  |  |
+| INVESTMENT_POOL | ALIGNED | ALIGNED |  |  |
+| REPO | ALIGNED | REVIEW_REQUIRED |  | REP-03, REP-04 |
+| TX_OBLIGATIONS | - | REVIEW_REQUIRED |  | TXO-01 |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+
+## water-authority-pdf
+
+0.18.0 section: REVISIONS_RECOMMENDED · v2 if adopted: REVISIONS_RECOMMENDED
+
+| Instrument | 0.18.0 conformity | v2 status | v2 conflicts | v2 undetermined |
+|---|---|---|---|---|
+| AGENCY_CMO | - | REVIEW_REQUIRED |  | CMO-03 |
+| CMO_IO_PO_INVERSE | ALIGNED | ALIGNED |  |  |
+| COMMERCIAL_PAPER | CONFLICTS | CONFLICTS | CP-03 |  |
+| DEPOSITORY_CD | ALIGNED | REVIEW_REQUIRED |  | DCD-02, DCD-03, DCD-04 |
+| GUARANTEED_OBLIGATIONS | - | ALIGNED |  |  |
+| INVESTMENT_POOL | ALIGNED | ALIGNED |  |  |
+| REPO | ALIGNED | REVIEW_REQUIRED |  | REP-03, REP-04 |
+| TX_OBLIGATIONS | - | REVIEW_REQUIRED |  | TXO-01 |
+| US_OBLIGATIONS | ALIGNED | REVIEW_REQUIRED |  | USO-01 |
+

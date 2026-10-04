@@ -1,0 +1,16 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "The document does not state a procedure to monitor rating changes in investments.",
+      "quote": null,
+      "supported": false
+    },
+    {
+      "id": "e2",
+      "note": null,
+      "quote": "The Investment Officer shall take all prudent measures that are consistent with this Policy to liquidate an investment that does not have the minimum rating.",
+      "supported": true
+    }
+  ]
+}

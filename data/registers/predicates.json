@@ -1,0 +1,470 @@
+{
+  "$id": "tx-pfia/predicates",
+  "version": "2026.09.14",
+  "note": "Evaluation context is {entity: <profile>, policy: <extracted policy facts>}. Predicates are pure; they never read extraction spans.",
+  "predicates": [
+    {
+      "id": "P_SUBCH_A_APPLIES",
+      "cite": "2256.004(a)",
+      "label": "Subchapter A applies to the entity",
+      "note": "2256.004(b) excludes donated investments at the asset level, not the entity level. Do not fold it in here.",
+      "logic": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "entity.exclusions.public_retirement_system_802_001"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "entity.exclusions.state_funds_invested_by_comptroller"
+              },
+              false
+            ]
+          },
+          {
+            "!": {
+              "and": [
+                {
+                  "in": [
+                    "IHE",
+                    {
+                      "var": "entity.classes"
+                    }
+                  ]
+                },
+                {
+                  ">=": [
+                    {
+                      "var": "entity.endowment_book_value_2017_09_01"
+                    },
+                    150000000
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "==": [
+              {
+                "var": "entity.exclusions.vlb_ch_161_162_164"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "entity.exclusions.registry_funds_ch_117"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "entity.exclusions.deferred_comp_401k_457"
+              },
+              false
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_IS_LOCAL_GOV",
+      "logic": {
+        "in": [
+          "LOCAL_GOV",
+          {
+            "var": "entity.classes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_IS_STATE_AGENCY",
+      "logic": {
+        "in": [
+          "STATE_AGENCY",
+          {
+            "var": "entity.classes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_TRAINING_SEC_008_APPLIES",
+      "cite": "2256.008(e)",
+      "label": "Sec. 2256.008 reaches the entity at all",
+      "logic": {
+        "and": [
+          {
+            "in": [
+              "LOCAL_GOV",
+              {
+                "var": "entity.classes"
+              }
+            ]
+          },
+          {
+            "!": {
+              "in": [
+                "WATER_DISTRICT_36_49",
+                {
+                  "var": "entity.classes"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_TRAINING_8HR_TRACK",
+      "cite": "2256.008(a-1)",
+      "label": "School district or municipality biennial 8-hour track",
+      "logic": {
+        "or": [
+          {
+            "in": [
+              "SCHOOL_DISTRICT",
+              {
+                "var": "entity.classes"
+              }
+            ]
+          },
+          {
+            "in": [
+              "MUNICIPALITY",
+              {
+                "var": "entity.classes"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_TRAINING_4HR_TRACK",
+      "cite": "2256.008(b)",
+      "label": "Small 52(b)/59 district with management contract, or entity whose funds are invested by another investing entity",
+      "logic": {
+        "and": [
+          {
+            "in": [
+              "DISTRICT_ART3_52B_ART16_59",
+              {
+                "var": "entity.classes"
+              }
+            ]
+          },
+          {
+            "or": [
+              {
+                "and": [
+                  {
+                    "==": [
+                      {
+                        "var": "entity.has_2256_003b_management_contract"
+                      },
+                      true
+                    ]
+                  },
+                  {
+                    "<": [
+                      {
+                        "var": "entity.full_time_employees"
+                      },
+                      5
+                    ]
+                  }
+                ]
+              },
+              {
+                "==": [
+                  {
+                    "var": "entity.funds_invested_by_other_investing_entity"
+                  },
+                  true
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_TRAINING_5HR_TRACK",
+      "cite": "2256.008(b-1)",
+      "logic": {
+        "in": [
+          "HOUSING_AUTHORITY_392",
+          {
+            "var": "entity.classes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_DEPOSIT_ONLY_CARVEOUT",
+      "cite": "2256.008(f)",
+      "label": "Municipality or housing authority that does not invest, or deposits only in interest-bearing accounts or 2256.010 CDs",
+      "logic": {
+        "and": [
+          {
+            "or": [
+              {
+                "in": [
+                  "MUNICIPALITY",
+                  {
+                    "var": "entity.classes"
+                  }
+                ]
+              },
+              {
+                "in": [
+                  "HOUSING_AUTHORITY_392",
+                  {
+                    "var": "entity.classes"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "or": [
+              {
+                "==": [
+                  {
+                    "var": "entity.invests_funds"
+                  },
+                  false
+                ]
+              },
+              {
+                "==": [
+                  {
+                    "var": "entity.deposits_only_interest_bearing_or_2256_010_cds"
+                  },
+                  true
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_SD_DEPOSIT_ONLY_CARVEOUT",
+      "cite": "2256.008(g)",
+      "label": "School district that does not invest or deposits only in interest-bearing accounts or 2256.010 CDs, and files the annual sworn affidavit",
+      "logic": {
+        "and": [
+          {
+            "in": [
+              "SCHOOL_DISTRICT",
+              {
+                "var": "entity.classes"
+              }
+            ]
+          },
+          {
+            "or": [
+              {
+                "==": [
+                  {
+                    "var": "entity.invests_funds"
+                  },
+                  false
+                ]
+              },
+              {
+                "==": [
+                  {
+                    "var": "entity.deposits_only_interest_bearing_or_2256_010_cds"
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "entity.files_2256_008g_affidavit"
+              },
+              true
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_BEYOND_2256_023D_SAFE_HARBOR",
+      "cite": "2256.023(d)",
+      "label": "Authorized instruments extend beyond MMMF, pools, depository CDs and money market accounts",
+      "logic": {
+        "some": [
+          {
+            "var": "policy.authorized_instruments"
+          },
+          {
+            "!": {
+              "in": [
+                {
+                  "var": ""
+                },
+                [
+                  "MMMF",
+                  "MUTUAL_FUND",
+                  "INVESTMENT_POOL",
+                  "DEPOSITORY_CD",
+                  "MONEY_MARKET_ACCOUNT"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_NON_STATE_AGENCY_INVESTING_ENTITY",
+      "cite": "2256.005(m)",
+      "logic": {
+        "!": {
+          "in": [
+            "STATE_AGENCY",
+            {
+              "var": "entity.classes"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "P_HAS_IM_FIRM_CONTRACT",
+      "cite": "2256.003(b)",
+      "label": "Entity has contracted with a registered investment management firm",
+      "logic": {
+        "==": [
+          {
+            "var": "entity.has_2256_003b_management_contract"
+          },
+          true
+        ]
+      }
+    },
+    {
+      "id": "P_IS_COMMISSION_391",
+      "cite": "2256.005(h)",
+      "logic": {
+        "in": [
+          "COMMISSION_391",
+          {
+            "var": "entity.classes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_OFFICER_ASSIGNED_BY_LAW",
+      "cite": "2256.005(g)",
+      "label": "An officer of the entity is assigned by law the function of investing its funds",
+      "logic": {
+        "==": [
+          {
+            "var": "entity.investment_function_assigned_by_law"
+          },
+          true
+        ]
+      }
+    },
+    {
+      "id": "P_COMPTROLLER_INVESTED_404_024",
+      "cite": "2256.005(o)",
+      "label": "State agency assets invested by the comptroller under Sec. 404.024",
+      "logic": {
+        "==": [
+          {
+            "var": "entity.assets_invested_by_comptroller_404_024"
+          },
+          true
+        ]
+      }
+    },
+    {
+      "id": "P_HAS_POOLED_FUND_GROUP",
+      "cite": "2256.005(b)(4)(C)",
+      "label": "Entity maintains one or more pooled fund groups",
+      "note": "Sec. 2256.002(9): an internally created fund in which one or more institutional accounts are invested. An entity holding only separately invested assets is outside (b)(4)(C).",
+      "logic": {
+        "==": [
+          {
+            "var": "entity.has_pooled_fund_groups"
+          },
+          true
+        ]
+      }
+    },
+    {
+      "id": "P_HEDGING_ELIGIBLE_ENTITY",
+      "cite": "2256.0206(a)(1)",
+      "label": "Political subdivision meeting the hedging eligibility test",
+      "note": "Both limbs are required: the debt-size threshold and the rating floor. Sec. 2256.0206 prevails over conflicting law and municipal charter, so this test is the operative limit.",
+      "logic": {
+        "and": [
+          {
+            ">=": [
+              {
+                "var": "entity.long_term_debt_principal"
+              },
+              250000000
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "entity.long_term_debt_rated_top_four"
+              },
+              true
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P_INCORPORATES_STATUTORY_CONDITIONS",
+      "cite": "2256.024(a)",
+      "label": "The policy incorporates each authorized type's statutory conditions by reference",
+      "note": "Detected from the authorizing stem or an authorized-investment section, never from a recital. Distinct from blanket incorporation, which leaves the set of types open and fails Sec. 2256.005(b)(4)(A); this clause closes the types and floats the conditions.",
+      "logic": {
+        "==": [
+          {
+            "var": "policy.incorporates_statutory_conditions"
+          },
+          true
+        ]
+      }
+    },
+    {
+      "id": "P_NO_INCORPORATION_CLAUSE",
+      "cite": "2256.024(a)",
+      "label": "The policy has no clause incorporating statutory conditions by reference",
+      "logic": {
+        "!": {
+          "==": [
+            {
+              "var": "policy.incorporates_statutory_conditions"
+            },
+            true
+          ]
+        }
+      }
+    }
+  ]
+}

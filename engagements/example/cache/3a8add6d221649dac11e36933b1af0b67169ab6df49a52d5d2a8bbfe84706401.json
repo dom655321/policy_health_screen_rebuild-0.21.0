@@ -1,0 +1,22 @@
+{
+  "elements": [
+    {
+      "id": "e1",
+      "note": "no keyword overlap in the supplied windows",
+      "quote": "",
+      "supported": false
+    },
+    {
+      "id": "e2a",
+      "note": "no keyword overlap in the supplied windows",
+      "quote": "",
+      "supported": false
+    },
+    {
+      "id": "e2b",
+      "note": "",
+      "quote": "Section 5.06 Maturity Fund investment may not exceed the following maturities , or as restricted by specific bond indentures:",
+      "supported": true
+    }
+  ]
+}

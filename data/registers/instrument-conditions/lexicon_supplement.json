@@ -1,0 +1,60 @@
+{
+  "$id": "tx-pfia/instrument-conditions-lexicon",
+  "version": "0.1.0-proposed",
+  "note": "Detection supplement for Schedule B v2. Applied on top of instrument_lexicon.json for the v2 run only, so the 0.18.0 schedule and its goldens are unaffected. Terms are matched by the same authorization-polarity machinery as the base lexicon.",
+  "supplement_terms": {
+    "TX_OBLIGATIONS": [
+      "obligations of this state",
+      "obligations of the state of texas",
+      "direct obligations of the state",
+      "state of texas obligations"
+    ],
+    "GUARANTEED_OBLIGATIONS": [
+      "unconditionally guaranteed",
+      "backed by the full faith and credit",
+      "principal and interest of which are unconditionally guaranteed"
+    ],
+    "AGENCY_CMO": [
+      "collateralized mortgage obligations",
+      "collateralized mortgage obligation",
+      "cmos"
+    ],
+    "ISRAEL_BONDS": [
+      "state of israel",
+      "israel bonds"
+    ]
+  },
+  "aliases": {
+    "DECOMMISSIONING_TRUST": "DECOMMISSIONING_TRUST_INVESTMENT"
+  },
+  "by_entity_class": {
+    "MINERAL_RIGHTS_TRUST_INVESTMENT": {
+      "MUNICIPALITY": "MINERAL_RIGHTS_MUNI",
+      "PUBLIC_JUNIOR_COLLEGE": "MINERAL_RIGHTS_JUCO"
+    }
+  },
+  "activation_cues": {
+    "broker_path_authorized": [
+      "broker"
+    ],
+    "obligation_secured_path_authorized": [
+      "secured by",
+      "collateralized by",
+      "collateral"
+    ],
+    "joint_account_via_manager_authorized": [
+      "joint account"
+    ],
+    "loc_collateral_authorized": [
+      "letter of credit"
+    ],
+    "cash_collateral_authorized": [
+      "cash collateral"
+    ],
+    "amortized_cost_pool": [
+      "amortized cost",
+      "stable net asset value",
+      "$1.00 net asset value"
+    ]
+  }
+}
