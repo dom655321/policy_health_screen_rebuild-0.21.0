@@ -1,0 +1,6 @@
+{
+  "description": "The same tollway policy with every line at column zero, as PDF extraction produces it. Pins that layout does not change the authorized set - the failure that truncated a real twelve-item list to its first item.",
+  "policy": "policy_unindented_list.txt",
+  "profile": "EXAMPLE-tollway-authority",
+  "ingest_backend": "plaintext"
+}

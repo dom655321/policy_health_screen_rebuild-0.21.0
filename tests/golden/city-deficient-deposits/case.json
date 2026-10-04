@@ -1,0 +1,7 @@
+{
+  "description": "Municipality authorizing the full deposit program with a defective policy. Pins the anti-pattern library and the brokered deposit / brokered CD split.",
+  "policy": "policy_deficient.txt",
+  "profile": "city",
+  "facts": "facts_deposit_program.json",
+  "ingest_backend": "plaintext"
+}

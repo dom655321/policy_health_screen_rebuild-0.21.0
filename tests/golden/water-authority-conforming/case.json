@@ -1,0 +1,7 @@
+{
+  "description": "Water Code ch. 36/49 district, conforming policy. Pins the training exemptions, the commercial paper conditions miss, and the advisory-band separation.",
+  "policy": "policy_conforming.txt",
+  "profile": "water_authority",
+  "facts": "facts_water_authority.json",
+  "ingest_backend": "plaintext"
+}

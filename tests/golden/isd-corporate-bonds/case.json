@@ -1,0 +1,7 @@
+{
+  "description": "ISD 1371 issuer authorizing corporate bonds with wrong rating floor, maturity and caps. Pins the fact-test path and the class-gated Sec. 2256.0204 control.",
+  "policy": "policy_isd.txt",
+  "profile": "isd",
+  "facts": "facts_isd.json",
+  "ingest_backend": "plaintext"
+}

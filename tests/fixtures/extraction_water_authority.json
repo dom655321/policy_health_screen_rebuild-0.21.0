@@ -1,0 +1,12 @@
+{
+  "IS-2256.013-001": {
+    "elements_satisfied": {},
+    "facts": { "max_maturity_days": 270, "min_rating": "A-1", "rating_agency_count": 1, "loc_alternative_permitted": false },
+    "retrieval_trace": ["located the commercial paper clause in section V"]
+  },
+  "IS-2256.013-002": {
+    "elements_satisfied": { "e1": true, "e2": true, "e3": false },
+    "facts": { "max_maturity_days": 270, "rating_agency_count": 1 },
+    "retrieval_trace": ["conditions restated in part: maturity and rating floor only"]
+  }
+}

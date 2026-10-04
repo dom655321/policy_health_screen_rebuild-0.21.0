@@ -1,0 +1,7 @@
+{
+  "description": "The same conforming policy delivered as a PDF, extracted with the zero-dependency backend. Pins dehyphenation, running-head removal and the page map, and asserts that ingestion is score-neutral against the text case.",
+  "policy": "policy_conforming.pdf",
+  "profile": "water_authority",
+  "facts": "facts_water_authority.json",
+  "ingest_backend": "stdlib-pdf"
+}

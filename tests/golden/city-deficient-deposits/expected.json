@@ -1,0 +1,638 @@
+{
+  "adapter": "heuristic-offline",
+  "case": "city-deficient-deposits",
+  "coverage": {
+    "covered": 22,
+    "testable": 22,
+    "uncovered": []
+  },
+  "extraction": {
+    "context_summary_answers": 2,
+    "controls_extracted": 51,
+    "failures": [],
+    "model_calls": 17,
+    "resolved_without_a_call": 32
+  },
+  "ingest": {
+    "backend": "plaintext",
+    "pages": 1,
+    "quality": "OK",
+    "text_sha256": "bed47dc579a422cd04882198443a99be30bb51612188ce58d3dc1c2e3808a460",
+    "transforms": {}
+  },
+  "instruments": null,
+  "profile": {
+    "complete": true,
+    "unanswered": []
+  },
+  "sections": {
+    "AUTHORIZED_INVESTMENTS": {
+      "additions": [],
+      "conflicts": [
+        "IS-2256.009-a-5-001",
+        "IS-2256.009-a-8-001",
+        "IS-2256.010-a-001",
+        "IS-2256.010-b-001",
+        "IS-2256.011-c-001",
+        "IS-2256.014-a-001",
+        "IS-2256.019-001"
+      ],
+      "counts": {
+        "CONDITIONS_RESTATED": {
+          "CONFLICTS": 7,
+          "NOT_ADDRESSED": 3,
+          "PARTIALLY_ADDRESSED": 1
+        },
+        "INSTRUMENT_TERMS": {
+          "ALIGNED": 5,
+          "CONFLICTS": 7
+        }
+      },
+      "status": "REVISIONS_RECOMMENDED",
+      "unresolved": []
+    },
+    "PFIA_REQUIREMENTS": {
+      "additions": [
+        "TX-PFIA-2256.005-b-3-001",
+        "TX-PFIA-2256.005-k-001",
+        "TX-PFIA-2256.0208-001"
+      ],
+      "conflicts": [
+        "TX-PFIA-2256.005-b-2-001",
+        "TX-PFIA-2256.005-b-4-A-001",
+        "TX-PFIA-2256.005-b-4-B-001",
+        "TX-PFIA-2256.005-b-4-C-001",
+        "TX-PFIA-2256.005-b-4-D-001",
+        "TX-PFIA-2256.005-b-4-E-001",
+        "TX-PFIA-2256.005-b-4-F-001",
+        "TX-PFIA-2256.005-d-001",
+        "TX-PFIA-2256.005-l-001",
+        "TX-PFIA-2256.006-a-001",
+        "TX-PFIA-2256.021-001",
+        "TX-PFIA-2256.025-001"
+      ],
+      "counts": {
+        "COMMONLY_RESTATED": {
+          "CONFLICTS": 3,
+          "NOT_ADDRESSED": 1
+        },
+        "REQUIRED_CONTENT": {
+          "CONFLICTS": 12,
+          "NOT_ADDRESSED": 2,
+          "PARTIALLY_ADDRESSED": 1
+        }
+      },
+      "status": "REVISIONS_RECOMMENDED",
+      "unresolved": []
+    },
+    "POLICY_GOVERNANCE": {
+      "additions": [],
+      "conflicts": [],
+      "counts": {
+        "SUMMARY": {
+          "ALIGNED": 2,
+          "NOT_ADDRESSED": 8
+        }
+      },
+      "status": "SUMMARIZED",
+      "unresolved": []
+    }
+  },
+  "statuses": {
+    "IS-2256.009-a-1-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "IS-2256.009-a-1-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "IS-2256.009-a-5-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.009-a-5-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.009-a-7-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "IS-2256.009-a-7-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "IS-2256.009-a-8-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.009-a-8-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.009-b-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "IS-2256.010-a-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.010-a-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.010-b-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.010-b-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.011-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "IS-2256.011-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "PARTIALLY_ADDRESSED",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.011-c-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.011-c-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.0115-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0115-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.012-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.012-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.013-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.013-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.014-a-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.014-a-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.014-b-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.014-b-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.015-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.015-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.016-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "IS-2256.016-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "IS-2256.019-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.019-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "IS-2256.020-1-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.020-1-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.020-2-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.020-2-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.020-3-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.020-3-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0201-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0201-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0202-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0202-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0203-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0203-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0204-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0204-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0205-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0205-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0206-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0206-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0207-001": {
+      "band": "STATUTORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "IS-2256.0207-002": {
+      "band": "ADVISORY",
+      "section": "AUTHORIZED_INVESTMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.003-b-001": {
+      "band": "ADVISORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.005-a-001": {
+      "band": "STATUTORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-b-2-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-3-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "PARTIALLY_ADDRESSED",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-A-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-B-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-C-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-D-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-E-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-b-4-F-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-c-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-d-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-e-001": {
+      "band": "STATUTORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-f-001": {
+      "band": "STATUTORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "TX-PFIA-2256.005-h-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.005-i-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-k-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-l-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.005-m-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.005-n-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.006-a-001": {
+      "advisory_status": "NOT_ADDRESSED",
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.006-b-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "ALIGNED",
+      "verdict": "CONFORMING"
+    },
+    "TX-PFIA-2256.007-a-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.007-d-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.008-a-2-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.008-a1-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.008-b-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.008-b1-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_APPLICABLE",
+      "verdict": "NOT_APPLICABLE"
+    },
+    "TX-PFIA-2256.017-001": {
+      "band": "ADVISORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.0208-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.021-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.023-a-001": {
+      "band": "ADVISORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.023-b-001": {
+      "band": "ADVISORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.023-d-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    },
+    "TX-PFIA-2256.025-001": {
+      "band": "STATUTORY",
+      "section": "PFIA_REQUIREMENTS",
+      "status": "CONFLICTS",
+      "verdict": "DEFICIENT"
+    },
+    "TX-PFIA-2256.026-001": {
+      "band": "ADVISORY",
+      "section": "POLICY_GOVERNANCE",
+      "status": "NOT_ADDRESSED",
+      "verdict": "ABSENT"
+    }
+  }
+}

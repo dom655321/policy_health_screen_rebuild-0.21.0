@@ -1,0 +1,6 @@
+{
+  "description": "A tollway authority policy using the dominant Texas drafting pattern: one authorizing stem followed by an enumerated list of instruments (a)-(k), a scoped exclusion inside one item, and a prohibited-investments section past the end of the list. No facts file, so the authorized set is read from the document.",
+  "policy": "policy_enumerated_list.txt",
+  "profile": "EXAMPLE-tollway-authority",
+  "ingest_backend": "plaintext"
+}

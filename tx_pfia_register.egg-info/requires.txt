@@ -1,0 +1,7 @@
+
+[dev]
+jsonschema>=4.21
+
+[report]
+jinja2>=3.1
+weasyprint>=62

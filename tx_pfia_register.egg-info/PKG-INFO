@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: tx-pfia-register
+Version: 0.20.1
+Summary: Texas PFIA control register and deterministic investment policy evaluator
+Requires-Python: >=3.11
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: jsonschema>=4.21; extra == "dev"
+Provides-Extra: report
+Requires-Dist: jinja2>=3.1; extra == "report"
+Requires-Dist: weasyprint>=62; extra == "report"
+Dynamic: license-file
